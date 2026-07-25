@@ -14,11 +14,6 @@ public:
         static constexpr int fps = 60;
     };
 
-    static MWindowHandler* getInstance(){
-        static MWindowHandler instance;
-        return &instance;
-    }
-
     void init(){
         SetConfigFlags(FLAG_WINDOW_RESIZABLE);
         InitWindow(DefaultData::width, DefaultData::height, DefaultData::title);
@@ -33,13 +28,6 @@ public:
     void process(){
         processMWindow(_commands);
     }
-
-    MWindowHandler(const MWindowHandler&) = delete;
-    MWindowHandler& operator=(const MWindowHandler&) = delete;
-
-private:
-    MWindowHandler(){}
-    ~MWindowHandler(){}
 
 private:
     std::queue<MWindowCommand> _commands;

@@ -1,8 +1,8 @@
-#include "../include/GameApp/GameApp.h"
+#include "../include/GameSystem/GameSystem.h"
 
 int main() {
-    GameApp app;
-    app.Run();
+    GameSystem game;
+    game.Run();
 
     
     return 0;

@@ -5,11 +5,6 @@
 
 class MCamera2DHandler{
 public:
-    static MCamera2DHandler* getInstance(){
-        static MCamera2DHandler instance;
-        return &instance;
-    }
-
     void init(){
         _camera.offset = {GetRenderWidth() / 2.f, GetRenderHeight() / 2.f};
     }
@@ -20,17 +15,13 @@ public:
 
     void process(){
         processCamera(_camera, _commands);
+
+        addCommand(MCExecutor::UpdateViewport{});
     }
 
     Camera2D getData(){
         return _camera;
     }
-
-    MCamera2DHandler(const MCamera2DHandler&) = delete;
-    MCamera2DHandler& operator=(const MCamera2DHandler&) = delete;
-private:
-    MCamera2DHandler(){}
-    ~MCamera2DHandler(){}
 
 private:
     Camera2D _camera{

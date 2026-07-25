@@ -118,7 +118,8 @@ using CameraCommand = std::variant<
     MCExecutor::AddRotation,
     MCExecutor::SetZoom,
     MCExecutor::AddZoom,
-    MCExecutor::ImpactZoom
+    MCExecutor::ImpactZoom,
+    MCExecutor::UpdateViewport
 >;
 
 inline void processCamera(Camera2D& cam, std::queue<CameraCommand>& cmds){

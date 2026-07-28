@@ -1,42 +1,48 @@
 #ifndef _I_ENTITY_H_
 #define _I_ENTITY_H_
 
+#include <memory>
 #include <raylib.h>
+#include <raymath.h>
 
 #include <vector>
+#include <memory.h>
 
 #include "../Effect/ActiveEffect.h"
 #include "../CollisionSystem/Collider.h"
 
-class EntityBase{
+#include "MovingStrategy/IMovingStrategy.h"
+#include "MovingStrategy/BlankMovingStrategy.h"
+#include "Intent/MovingIntent.h"
+
+class EntityBase {
 public:
     virtual ~EntityBase() = default;
 
     virtual void draw() const = 0;
     virtual void update(const float dt) = 0;
+    virtual void init() = 0;
 
     virtual bool isAlive() const = 0;
     
-    Vector2 getPosition() const { return _position; }
-    Collider::Variant getCollider() const { return _collider; }
-    float getRotation() const { return _rotation; }
+    void internalInit(){
+        _moving_strategy = std::make_unique<BlankMovingStrategy>(); 
 
-    void setPosition(const Vector2 new_pos){ _position = new_pos; }
-    void setRotation(const float new_rot) { _rotation = new_rot; }
-
-    void addPosition(const Vector2 add_pos) { 
-        _position = {
-            _position.x + add_pos.x, 
-            _position.y + add_pos.y
-        };
+        init();
     }
-    void addRotation(const float add_rot){ _rotation += add_rot; }
+
+    void internalUpdate(const float dt){
+        _move_update(dt);
+        _effect_update(dt);
+
+        update(dt);
+    }
 
     void addEffect(ActiveEffect effect){
         _effects.push_back(std::move(effect));
     }
-
-    void effectUpdate(float dt){
+private:
+    void _effect_update(const float dt){
         for(auto& effect : _effects){
             effect.elapsed += dt;
 
@@ -46,7 +52,12 @@ public:
             }
         }
 
-        std::erase_if(_effects, [](const ActiveEffect& effect){ return effect.elapsed >= effect.duration; });
+        std::erase_if(_effects, [](const ActiveEffect& effect){ return effect.elapsed > effect.duration; });
+    }
+
+    void _move_update(const float dt){
+        const Vector2 ds = _moving_strategy->process(_moving_intent, dt);
+        _position = Vector2Add(_position, ds);
     }
 
 private:
@@ -56,6 +67,9 @@ private:
     float _rotation;
     
     std::vector<ActiveEffect> _effects;
+    
+    std::unique_ptr<IMovingStrategy> _moving_strategy;
+    MovingIntent _moving_intent;
 };
 
 #endif // !_I_ENTITY_H_

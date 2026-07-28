@@ -13,6 +13,7 @@ public:
 	void Run(){
 		init();
 		process();
+		close();
 	}
 
 private:
@@ -27,6 +28,10 @@ private:
 		BeginMode2D(_main_camera.getData());
 
 		ClearBackground(BLANK);
+
+		DrawCircle(0, 0, 10, RED);
+
+		DrawFPS(0, 100);
 
 		EndMode2D();
 		EndDrawing();
@@ -51,7 +56,6 @@ private:
 
 			draw();
 		}
-		close();
 	}
 
 	void simulate(float dt)

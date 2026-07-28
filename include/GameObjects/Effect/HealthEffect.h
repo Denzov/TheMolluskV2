@@ -11,7 +11,7 @@ struct HealthEffect :
     int64_t hp;
 
     void apply(EntityBase& entity) override{
-        if(auto* d = dynamic_cast<IDamageable*>(&entity)){
+        if(auto* d = dynamic_cast<EntityModule::IDamageable*>(&entity)){
             d->takeHp(hp);
         }
     }

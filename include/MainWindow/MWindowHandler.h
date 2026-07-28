@@ -11,7 +11,7 @@ public:
         static constexpr const char* title = "TheMollusk";
         static constexpr int width = 1000;
         static constexpr int height = 1000;
-        static constexpr int fps = 60;
+        static constexpr int fps = 120;
     };
 
     void init(){

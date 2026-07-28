@@ -3,12 +3,14 @@
 
 #include "EntityBase.h"
 #include "Module/HealthModule.h"
-#include <cstdint>
 
 class LivingEntity:
     public EntityBase, 
-    public IDamageable
+    public EntityModule::IDamageable
 {
+public:
+    virtual ~LivingEntity() = default;
+
     int64_t getHp() const override { 
         return _health.hp; 
     }
@@ -18,7 +20,6 @@ class LivingEntity:
 
     void takeHp(const int64_t delta_hp) override { 
         _health.hp += delta_hp;
-
     }
 
     bool isAlive() const override { 
@@ -26,7 +27,7 @@ class LivingEntity:
     }
 
 private:
-    Health _health;
+    EntityModule::Health _health;
 };
 
 #endif // !_LIVING_ENTITY_H_

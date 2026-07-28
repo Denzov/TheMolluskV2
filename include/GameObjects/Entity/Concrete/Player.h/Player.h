@@ -1,12 +1,12 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
-#include "../../Module/HealthModule.h"
+#include "../../LivingEntity.h"
 
 class Player :
-    public Health, public IDamageable
+    public LivingEntity
 {
-
+    
 };
 
 #endif // !_PLAYER_H_

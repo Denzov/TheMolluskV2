@@ -13,7 +13,7 @@ struct DamageEffect :
     int64_t damage;
 
     void apply(EntityBase& entity) override{
-        if(auto* d = dynamic_cast<IDamageable*>(&entity)){
+        if(auto* d = dynamic_cast<EntityModule::IDamageable*>(&entity)){
             damage = -abs(damage);
             d->takeHp(damage);
         }

@@ -11,11 +11,6 @@ namespace InteractionSource
         const std::shared_ptr<EntityBase> entity2;
     };
 
-    // struct timer{
-    //     EntityBasePtr entity;
-    //     float cur_time;
-    // };
-
     struct internal{};    
 };
 
@@ -30,16 +25,9 @@ struct InteractionSourceValidator
         return is_collide;
     }
 
-    // bool operator()(InteractionSource::timer &t){
-    //     // if(t.cur_time >= t.finish_time){
-    //     //     return true;
-    //     // }
-    // }
-
     bool operator()(InteractionSource::internal &t){
         return true;
     }
-    
 };
 
 #endif // !_I_INTERACTION_SOURCE_

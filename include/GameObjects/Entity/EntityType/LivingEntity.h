@@ -1,8 +1,8 @@
 #ifndef _LIVING_ENTITY_H_
 #define _LIVING_ENTITY_H_
 
-#include "EntityBase.h"
-#include "Module/HealthModule.h"
+#include "../EntityBase.h"
+#include "../Module/HealthModule.h"
 
 class LivingEntity:
     public EntityBase, 
@@ -23,7 +23,7 @@ public:
     }
 
     bool isAlive() const override { 
-        return _health.hp <= 0;
+        return _health.hp > 0;
     }
 
 private:

@@ -1,6 +1,7 @@
 #ifndef _TIME_SYSTEM_H_
 #define _TIME_SYSTEM_H_
 
+#include <algorithm>
 #include <cmath>
 #include <cstdint>
 #include <raylib.h>
@@ -10,12 +11,12 @@
 class TickSystem
 {
 public:
-    float getTickPeriod(){
+    constexpr float getTickPeriod() const {
         return TICK_PERIOD;
     }
 
     bool consumeTick(){
-        if(_accumulator <= TICK_PERIOD){
+        if(_accumulator < TICK_PERIOD){
             return false;
         }
 
@@ -24,17 +25,17 @@ public:
     }
     
     void update(){
-        const float cur_time = GetTime();
+        const float dt = GetFrameTime();
 
-        if(cur_time - _last_update_time > TICK_PERIOD){
-            _accumulator += TICK_PERIOD;
-            _last_update_time = cur_time;
-        }
+        _accumulator += dt;
+        _accumulator = std::min(
+            _accumulator, 
+            TICK_PERIOD * MAX_ACCUMULATED_TICK);
     }
 private:
-    static constexpr float TICK_PERIOD = 0.01; // period in ms
+    static constexpr float TICK_PERIOD = 0.01; // period in s
+    static constexpr float MAX_ACCUMULATED_TICK = 10;
 
-    float _last_update_time = 0;
     float _accumulator = 0;
 };
 

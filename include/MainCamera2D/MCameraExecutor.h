@@ -3,6 +3,7 @@
 
 #include <raylib.h>
 #include <queue>
+#include <raymath.h>
 #include <variant>
 
 namespace MCExecutor{
@@ -38,15 +39,25 @@ namespace MCExecutor{
         const float zoom;
     };
 
+    struct ZoomAt{
+        const float zoom;
+        const Vector2 anchor;
+    };
+
     struct AddZoom{
         const float dzoom;
     }; 
 
-    struct ImpactZoom{
+    struct RelativeZoom{
         const float dzoom;
     };
 
-    struct UpdateViewport{};
+    struct RelativeZoomAt{
+        const float dzoom;
+        const Vector2 anchor;
+    };
+
+    struct CenterCameraOffset{};
 };
 
 struct MCameraExecutor{
@@ -80,14 +91,22 @@ struct MCameraExecutor{
 
     void operator()(const MCExecutor::SetZoom& t){
         camera.zoom = t.zoom;
+    }
 
+    void operator()(const MCExecutor::ZoomAt& t){
+        const Vector2 before = GetScreenToWorld2D(t.anchor, camera);
+        camera.zoom = t.zoom;
+        const Vector2 after = GetScreenToWorld2D(t.anchor, camera);
+
+        camera.target.x += before.x - after.x;
+        camera.target.y += before.y - after.y;
     }
 
     void operator()(const MCExecutor::AddZoom& t){
         camera.zoom += t.dzoom;
     }
 
-    void operator()(const MCExecutor::ImpactZoom& t){
+    void operator()(const MCExecutor::RelativeZoom& t){
         Vector2 screen_center = {
             GetRenderWidth() / 2.f, 
             GetRenderHeight() / 2.f
@@ -101,7 +120,16 @@ struct MCameraExecutor{
         camera.target.y += before.y - after.y;
     }
 
-    void operator()(const MCExecutor::UpdateViewport& t){
+    void operator()(const MCExecutor::RelativeZoomAt& t){
+        const Vector2 before = GetScreenToWorld2D(t.anchor, camera);
+        camera.zoom *= (1 + t.dzoom);
+        const Vector2 after  = GetScreenToWorld2D(t.anchor, camera);
+
+        camera.target.x += before.x - after.x;
+        camera.target.y += before.y - after.y;
+    }
+
+    void operator()(const MCExecutor::CenterCameraOffset& t){
         camera.offset = {
             .x = GetRenderWidth() / 2.f, 
             .y = GetRenderHeight() / 2.f
@@ -118,8 +146,10 @@ using CameraCommand = std::variant<
     MCExecutor::AddRotation,
     MCExecutor::SetZoom,
     MCExecutor::AddZoom,
-    MCExecutor::ImpactZoom,
-    MCExecutor::UpdateViewport
+    MCExecutor::ZoomAt,
+    MCExecutor::RelativeZoom,
+    MCExecutor::RelativeZoomAt,
+    MCExecutor::CenterCameraOffset
 >;
 
 inline void processCamera(Camera2D& cam, std::queue<CameraCommand>& cmds){

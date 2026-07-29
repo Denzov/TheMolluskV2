@@ -16,11 +16,15 @@ public:
     void process(){
         processCamera(_camera, _commands);
 
-        addCommand(MCExecutor::UpdateViewport{});
+        addCommand(MCExecutor::CenterCameraOffset{});
     }
 
     Camera2D getData(){
         return _camera;
+    }
+
+    Vector2 screenToWorld(Vector2 screen) const {
+        return GetScreenToWorld2D(screen, _camera);
     }
 
 private:

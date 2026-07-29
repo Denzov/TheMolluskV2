@@ -7,8 +7,8 @@
 namespace InteractionSource
 {
     struct collision{ 
-        const std::shared_ptr<EntityBase> entity1;
-        const std::shared_ptr<EntityBase> entity2;
+        const EntityBase& entity1;
+        const EntityBase& entity2;
     };
 
     struct internal{};    
@@ -16,16 +16,16 @@ namespace InteractionSource
 
 struct InteractionSourceValidator
 {
-    bool operator()(InteractionSource::collision &t){
-        const bool is_collide = Collider::intersect(
-            t.entity1.get()->getCollider(), t.entity1.get()->getPosition(), 
-            t.entity2.get()->getCollider(), t.entity2.get()->getPosition()
+    bool operator()(InteractionSource::collision &t) const {
+        const bool is_collide = Shape::intersect(
+            t.entity1.getShape(), t.entity1.getPosition(), 
+            t.entity2.getShape(), t.entity2.getPosition()
         );
 
         return is_collide;
     }
 
-    bool operator()(InteractionSource::internal &t){
+    bool operator()(InteractionSource::internal &t) const {
         return true;
     }
 };

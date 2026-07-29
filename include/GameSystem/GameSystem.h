@@ -8,6 +8,9 @@
 #include "../MainWindow/MWindowHandler.h"
 #include "../MainCamera2D/MCamera2DHandler.h"
 
+#include "../GameObjects/Entity/Concrete/Body/Body.h"
+#include "GameContext.h"
+
 class GameSystem {
 public:
 	void Run(){
@@ -20,6 +23,8 @@ private:
 	void init(){
 		_main_window.init();
 		_main_camera.init();
+
+		body.internalInit(_context);
 	}
 
 	void draw()
@@ -29,9 +34,7 @@ private:
 
 		ClearBackground(BLANK);
 
-		DrawCircle(0, 0, 10, RED);
-
-		DrawFPS(0, 100);
+		body.draw();
 
 		EndMode2D();
 		EndDrawing();
@@ -60,7 +63,7 @@ private:
 
 	void simulate(float dt)
 	{
-		
+		body.internalUpdate(_context, dt);
 	}
 
 private:
@@ -68,6 +71,10 @@ private:
 
 	MWindowHandler _main_window;
 	MCamera2DHandler _main_camera;
+
+	GameContext _context{_main_camera, _tick_system};
+
+	Body body;
 };
 
 #endif // !_APP_H_

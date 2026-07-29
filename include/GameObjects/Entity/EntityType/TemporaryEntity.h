@@ -1,8 +1,8 @@
 #ifndef _TEMPORARY_ENTITY_H_
 #define _TEMPORARY_ENTITY_H_
 
-#include "EntityBase.h"
-#include "Module/TimerModule.h"
+#include "../EntityBase.h"
+#include "../Module/TimerModule.h"
 
 
 class TemporaryEntity : 
@@ -17,7 +17,7 @@ public:
     }
 
     float getDuration() const override {
-        return _timer.elapsed;
+        return _timer.duration;
     }
 
     void elapse(const float time) override{

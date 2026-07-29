@@ -1,7 +1,7 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
-#include "../../LivingEntity.h"
+#include "../../EntityType/LivingEntity.h"
 
 class Player :
     public LivingEntity

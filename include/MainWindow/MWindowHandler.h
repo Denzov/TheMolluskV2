@@ -1,8 +1,6 @@
 #ifndef _MAIN_WINDOW_HANDLER_H_
 #define _MAIN_WINDOW_HANDLER_H_
 
-#include <string>
-#include <string_view>
 #include "MWindowExecutor.h"
 
 class MWindowHandler{
@@ -11,7 +9,7 @@ public:
         static constexpr const char* title = "TheMollusk";
         static constexpr int width = 1000;
         static constexpr int height = 1000;
-        static constexpr int fps = 120;
+        static constexpr int fps = 60;
     };
 
     void init(){

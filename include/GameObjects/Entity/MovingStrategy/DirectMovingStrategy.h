@@ -18,8 +18,8 @@ public:
 
     Vector2 process(MovingIntent intent, const float dt) override {
         const Vector2 ds = {
-            .x = static_cast<float>(intent.move_west.status - intent.move_west.status),
-            .y = static_cast<float>(intent.move_north.status - intent.move_south.status)
+            .x = static_cast<float>(intent.move_east.status  - intent.move_west.status),
+            .y = static_cast<float>(intent.move_south.status - intent.move_north.status)
         };
 
         const float ds_len = dt * _property.speed;

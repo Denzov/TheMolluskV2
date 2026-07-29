@@ -24,7 +24,7 @@ public:
                   const Vector2 base, 
                   const float rot, const float dt) override 
     {
-        if(!intent.target_valid) return 0;
+        if(!intent.is_aim) return 0;
 
         const Vector2 d = Vector2Subtract(intent.target, base);
         const float target_rot = std::atan2(d.y, d.x);

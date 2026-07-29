@@ -1,6 +1,7 @@
 #ifndef _KEYBOARD_MOVING_INTENT_SOURCE_H_
 #define _KEYBOARD_MOVING_INTENT_SOURCE_H_
 
+#include <cmath>
 #include <raylib.h>
 #include "IMovingIntentSource.h"
 
@@ -27,16 +28,23 @@ public:
     }
 
     MovingIntent get() override{
-        const MovingIntent intent {
-            .move_north = { IsKeyDown(_layout.north) },
-            .move_east  = { IsKeyDown(_layout.east ) },
-            .move_west  = { IsKeyDown(_layout.west ) },
-            .move_south = { IsKeyDown(_layout.south) }
+        const bool dirs[] = {
+            IsKeyDown(_layout.north),
+            IsKeyDown(_layout.east ),
+            IsKeyDown(_layout.west ),
+            IsKeyDown(_layout.south)
         };
 
-        // std::cout << intent.move_east.status ;
+        const Vector2 v = {
+            .x = static_cast<float>(dirs[1] - dirs[2]),
+            .y = static_cast<float>(dirs[3] - dirs[0])
+        };
 
-        return intent;
+        if(v.x == 0.f && v.y == 0.f) return {0.f, false};
+        
+        const float angle = std::atan2(v.y, v.x);
+
+        return {.angle = angle, .is_moving = true};
     }
 
 

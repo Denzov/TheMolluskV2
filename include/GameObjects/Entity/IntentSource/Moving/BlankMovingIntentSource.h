@@ -9,10 +9,8 @@ class BlankMovingIntentSource :
 public:
     MovingIntent get() override{
         const MovingIntent blank = {
-            .move_north = { false },
-            .move_east  = { false },
-            .move_west  = { false },
-            .move_south = { false }
+            .angle = 0.f,
+            .is_moving = false
         };
 
         return blank;

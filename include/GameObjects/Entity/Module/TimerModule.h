@@ -15,6 +15,9 @@ namespace EntityModule {
         virtual float getDuration() const = 0;
         
         virtual void elapse(const float time) = 0;
+
+        virtual void setDuration(const float time) = 0;
+        virtual void addDuration(const float time) = 0;
     };
 }
 #endif // !_TIMER_MODULE_H_

@@ -17,6 +17,9 @@ namespace EntityModule {
         virtual int64_t getMaxHp() const = 0;
 
         virtual void takeHp(const int64_t delta_hp) = 0;
+
+        virtual void setMaxHp(const int64_t hp) = 0;
+        virtual void addMaxHp(const int64_t hp) = 0;
     };
 }
 

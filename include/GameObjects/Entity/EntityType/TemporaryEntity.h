@@ -24,6 +24,14 @@ public:
         _timer.elapsed += time;
     }
 
+    void setDuration(const float time) override{
+        _timer.duration = time;
+    }
+
+    void addDuration(const float time) override{
+        _timer.duration += time;
+    }
+
     bool isAlive() const override {
         return _timer.elapsed <= _timer.duration;
     }

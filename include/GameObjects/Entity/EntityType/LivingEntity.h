@@ -22,6 +22,14 @@ public:
         _health.hp += delta_hp;
     }
 
+    void setMaxHp(const int64_t hp) override {
+        _health.max_hp = hp;
+    }
+
+    void addMaxHp(const int64_t hp) override {
+        _health.max_hp += hp;
+    }
+
     bool isAlive() const override { 
         return _health.hp > 0;
     }

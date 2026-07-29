@@ -17,15 +17,12 @@ public:
     DirectMovingStrategy(DirectMovingProperty property) : _property(property){}
 
     Vector2 process(MovingIntent intent, const float dt) override {
-        const Vector2 ds = {
-            .x = static_cast<float>(intent.move_east.status  - intent.move_west.status),
-            .y = static_cast<float>(intent.move_south.status - intent.move_north.status)
-        };
+        if(!intent.is_moving) return {};
 
         const float ds_len = dt * _property.speed;
 
-        const Vector2 normalize_ds = Vector2Normalize(ds);
-        const Vector2 scaled_ds = Vector2Scale(normalize_ds, ds_len);
+        const Vector2 ds = {cos(intent.angle), sin(intent.angle)};
+        const Vector2 scaled_ds = Vector2Scale(ds, ds_len);
 
         return scaled_ds;
     }

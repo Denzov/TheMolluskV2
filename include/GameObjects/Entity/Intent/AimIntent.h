@@ -5,7 +5,7 @@
 
 struct AimIntent{
     Vector2 target;
-    bool target_valid;
+    bool is_aim;
 };
 
 #endif // !_AIM_INTENT_H_

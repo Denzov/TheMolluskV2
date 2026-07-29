@@ -2,7 +2,6 @@
 #define _I_INTERACTION_SOURCE_
 
 #include "../Entity/EntityBase.h"
-#include <memory>
 
 namespace InteractionSource
 {

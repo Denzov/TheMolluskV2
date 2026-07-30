@@ -33,7 +33,7 @@ public:
     virtual ~EntityBase() = default;
 
     virtual void draw() const = 0;
-    virtual void update(const GameContext& context, const float dt) = 0;
+    virtual void update(const GameContext& context) = 0;
     virtual void init(const GameContext& context) = 0;
 
     virtual bool isAlive() const = 0;
@@ -48,12 +48,14 @@ public:
         init(context);
     }
 
-    void internalUpdate(const GameContext& context, const float dt){
+    void internalUpdate(const GameContext& context){
+        const float dt = context.tick.getTickPeriod();
+
         _move_update(dt);
         _aim_update(dt);
         _effect_update(dt);
 
-        update(context, dt);
+        update(context);
     }
 
     Vector2 getPosition() const { return _position; }
@@ -62,8 +64,8 @@ public:
     float getRotation() const { return _rotation; }
     void setRotation(const float rotation) { _rotation = rotation; }
 
-    Shape::Variant getShape() const { return _Shape; }
-    void setShape(Shape::Variant Shape){ _Shape = Shape; }
+    Shape::Variant getShape() const { return _shape; }
+    void setShape(Shape::Variant shape){ _shape = shape; }
 
     void addEffect(ActiveEffect effect){
         _effects.push_back(std::move(effect));
@@ -113,7 +115,7 @@ private:
     }
 
 private:
-    Shape::Variant _Shape;
+    Shape::Variant _shape;
     
     Vector2 _position;
     float _rotation;

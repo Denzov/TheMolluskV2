@@ -6,15 +6,16 @@
 #include <raylib.h>
 #include <raymath.h>
 
-#include "../../MovingStrategy/DirectMovingStrategy.h"
+#include "../../MovingStrategy/FirstOrderMovingStrategy.h"
+#include "../../MovingStrategy/SecondOrderMovingStrategy.h"
+#include "../../IntentSource/Moving/LineTargetMovingIntentSource.h"
 #include "../../IntentSource/Moving/KeyboardMovingIntentSource.h"
 
 #include "../../IntentSource/Aim/MouseAimIntentSource.h"
-#include "../../RotationStrategy/DelayedRotationStrategy.h"
-#include "../../RotationStrategy/PRegRotationStrategy.h"
 #include "../../RotationStrategy/PIRegRotationStrategy.h"
-#include "../../RotationStrategy/InstaRotationStrategy.h"
 
+#include "../../IntentSource/Vector2Source/EntityVector2Source.h"
+#include "../../IntentSource/Vector2Source/MouseVector2Source.h"
 
 #include "../../EntityType/LivingEntity.h"
 
@@ -25,26 +26,30 @@ public:
     void init(const GameContext& context) override{
         setPosition({0, 0});
 
-        Shape::Circle shape {.radius = 15};
-        setShape(shape);
+        setShape(Shape::Circle{
+            .radius = 15.f
+        });
 
-        setMovingIntentSource(std::make_unique<KeyboardMovingIntentSource>());
+        setMovingIntentSource(std::make_unique<LineMovingIntentSource>(
+            std::make_unique<EntityVector2Source>(*this), 
+            std::make_unique<MouseVector2Source>(context)
+        ));
 
-        DirectMovingProperty moving_property {.speed = 1000 };
-        setMovingStrategy(std::make_unique<DirectMovingStrategy>(moving_property));
+        setMovingStrategy(std::make_unique<FirstOrderMovingStrategy>(
+            FirstOrderMovingProperty{
+                .desired_velocity = 100,
+                .T = 0.3
+            }
+        ));
 
         setAimIntentSource(std::make_unique<MouseAimIntentSource>(context));
-
-        DelayedRotationProperty rotation_property {.w = 100 };
-        setRotationStrategy(std::make_unique<DelayedRotationStrategy>(rotation_property));
-
-        PRegRotationProperty preg1 {.kp = 10, .max_w = 100};
-        setRotationStrategy(std::make_unique<PRegRotationStrategy>(preg1));
-        
-        PIRegRotationProperty preg2 {.kp = 4, .ki = 14.0, .max_w = 10 };
-        setRotationStrategy(std::make_unique<PIRegRotationStrategy>(preg2));
-
-        // setRotationStrategy(std::make_unique<InstaRotationStrategy>());
+        setRotationStrategy(std::make_unique<PIRegRotationStrategy>(
+            PIRegRotationProperty{
+                .kp = 4, 
+                .ki = 14.0, 
+                .max_w = 10 
+            }
+        ));
     }
 
     void draw() const override{
@@ -59,7 +64,7 @@ public:
         DrawLineV(pos, b_add, WHITE);
     }
 
-    void update(const GameContext& constext, const float dt) override{
+    void update(const GameContext& constext) override{
 
     }
 };

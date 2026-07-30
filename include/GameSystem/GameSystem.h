@@ -49,7 +49,7 @@ private:
 		while (!WindowShouldClose())
 		{
 			while(_tick_system.consumeTick()){
-				simulate(_tick_system.getTickPeriod());
+				simulate();
 			}
 
 			_tick_system.update();
@@ -61,9 +61,9 @@ private:
 		}
 	}
 
-	void simulate(float dt)
+	void simulate()
 	{
-		body.internalUpdate(_context, dt);
+		body.internalUpdate(_context);
 	}
 
 private:

@@ -3,7 +3,7 @@
 
 #include "../Entity/EntityBase.h"
 
-namespace InteractionSource
+namespace Interaction
 {
     struct collision{ 
         const EntityBase& entity1;
@@ -15,7 +15,7 @@ namespace InteractionSource
 
 struct InteractionSourceValidator
 {
-    bool operator()(InteractionSource::collision &t) const {
+    bool operator()(Interaction::collision &t) const {
         const bool is_collide = Shape::intersect(
             t.entity1.getShape(), t.entity1.getPosition(), 
             t.entity2.getShape(), t.entity2.getPosition()
@@ -24,7 +24,7 @@ struct InteractionSourceValidator
         return is_collide;
     }
 
-    bool operator()(InteractionSource::internal &t) const {
+    bool operator()(Interaction::internal &t) const {
         return true;
     }
 };

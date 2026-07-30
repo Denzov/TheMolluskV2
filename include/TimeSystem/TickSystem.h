@@ -1,11 +1,9 @@
 #ifndef _TIME_SYSTEM_H_
 #define _TIME_SYSTEM_H_
 
-#include <algorithm>
-#include <cmath>
-#include <cstdint>
 #include <raylib.h>
 
+#include <algorithm>
 #include <stdint.h>
 
 class TickSystem
@@ -28,13 +26,14 @@ public:
         const float dt = GetFrameTime();
 
         _accumulator += dt;
+
         _accumulator = std::min(
             _accumulator, 
             TICK_PERIOD * MAX_ACCUMULATED_TICK);
     }
 private:
-    static constexpr float TICK_PERIOD = 0.01; // period in s
-    static constexpr float MAX_ACCUMULATED_TICK = 10;
+    static constexpr float TICK_PERIOD = 0.005; // period in s
+    static constexpr float MAX_ACCUMULATED_TICK = 25;
 
     float _accumulator = 0;
 };

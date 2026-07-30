@@ -9,4 +9,7 @@ find_package(raylib 5.5 REQUIRED)
 file(GLOB SOURCES src/*.cpp include/*.h)
 
 add_executable(TheMollusk ${SOURCES})
+
+target_include_directories(TheMollusk PUBLIC include)
+
 target_link_libraries(TheMollusk PRIVATE raylib)

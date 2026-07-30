@@ -32,7 +32,7 @@ public:
             TICK_PERIOD * MAX_ACCUMULATED_TICK);
     }
 private:
-    static constexpr float TICK_PERIOD = 0.005; // period in s
+    static constexpr float TICK_PERIOD = 0.01; // period in s
     static constexpr float MAX_ACCUMULATED_TICK = 25;
 
     float _accumulator = 0;

@@ -110,7 +110,8 @@ private:
 
     void _aim_update(const float dt){
         const AimIntent intent = _aim_intent_source->get();
-        const float drot = _rotation_strategy->process(intent, _position, _rotation, dt);
+        const float drot = _rotation_strategy->process(
+            intent, _position, _rotation, dt);
         _rotation += drot;
     }
 

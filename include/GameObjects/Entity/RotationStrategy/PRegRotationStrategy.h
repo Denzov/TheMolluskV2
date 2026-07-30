@@ -29,7 +29,7 @@ public:
         const Vector2 d = Vector2Subtract(intent.target, base);
         const float target_rot = std::atan2(d.y, d.x);
 
-        const float err = std::remainder(target_rot - rot, 2.0f * PI);;
+        const float err = std::remainder(target_rot - rot, 2.0f * PI);
 
         const float P = err * _property.kp;
 

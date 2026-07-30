@@ -3,6 +3,8 @@
 
 #include <cmath>
 #include <raylib.h>
+#include <raymath.h>
+
 #include "IMovingIntentSource.h"
 
 class KeyboardMovingIntentSource :
@@ -40,7 +42,8 @@ public:
             .y = static_cast<float>(dirs[3] - dirs[0])
         };
 
-        if(v.x == 0.f && v.y == 0.f) return {0.f, false};
+        if(abs(v.x) < EPSILON && abs(v.y) < EPSILON) 
+            return {0.f, false};
         
         const float angle = std::atan2(v.y, v.x);
 

@@ -4,8 +4,8 @@
 #include <raylib.h>
 
 struct AimIntent{
-    Vector2 target;
-    bool is_aim;
+    const Vector2 target;
+    const bool is_aim;
 };
 
 #endif // !_AIM_INTENT_H_

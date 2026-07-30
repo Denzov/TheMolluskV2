@@ -5,7 +5,7 @@
 
 #include "IAimIntentSource.h"
 
-#include "../../../../GameSystem/GameContext.h"
+#include "GameSystem/GameContext.h"
 
 class MouseAimIntentSource :
     public IAimIntentSource 
@@ -15,6 +15,8 @@ public:
         _context(context) {}
 
     AimIntent get() override {
+        if(IsMouseButtonDown(MOUSE_LEFT_BUTTON)) return {{}, false};
+
         const Vector2 mouse_pos = GetMousePosition();
         const Vector2 target = GetScreenToWorld2D(
             mouse_pos, _context.camera.getData());

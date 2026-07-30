@@ -4,6 +4,9 @@
 #include <raylib.h>
 #include <cmath>
 
+#include <iostream>
+
+
 #include "IRotationStrategy.h"
 
 class InstaRotationStrategy :
@@ -15,7 +18,10 @@ public:
                   const Vector2 base, 
                   const float rot, const float dt) override 
     {
+        // std::cout << intent.target.x << ' ' << intent.target.y << std::endl;
+        
         if(!intent.is_aim) return 0;
+        
 
         const Vector2 abs_target = {
             .x = intent.target.x - base.x,

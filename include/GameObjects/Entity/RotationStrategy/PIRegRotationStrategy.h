@@ -11,6 +11,7 @@
 struct PIRegRotationProperty{
     const float kp;
     const float ki;
+    const float i_deccel;
     const float max_w;
 };
 
@@ -25,12 +26,12 @@ public:
                   const Vector2 base, 
                   const float rot, const float dt) override 
     {
-        if(!intent.is_aim) return 0;
-
         const Vector2 d = Vector2Subtract(intent.target, base);
         const float target_rot = std::atan2(d.y, d.x);
 
-        const float err = std::remainder(target_rot - rot, 2.0f * PI);;
+        const float err = intent.is_aim?
+            std::remainder(target_rot - rot, 2.0f * PI) :
+            0;
 
         const float P = err * _property.kp;
         const float I = integrator;
@@ -40,6 +41,8 @@ public:
         if(abs(u) < _property.max_w){
             integrator += err * dt * _property.ki;
         }
+
+        if(!intent.is_aim) integrator *= _property.i_deccel;
 
         const float w = std::clamp(
             u,

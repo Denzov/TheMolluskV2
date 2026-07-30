@@ -25,7 +25,7 @@ public:
 
         const float sq_len = Vector2LengthSqr(sub);
 
-        if(sq_len < 1.f) return {0.f, false};
+        if(sq_len < EPSILON) return {0.f, false};
 
         const float angle = std::atan2(sub.y, sub.x);
         return {angle, true};

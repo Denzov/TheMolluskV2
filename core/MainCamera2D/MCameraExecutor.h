@@ -1,64 +1,11 @@
 #ifndef _MCAMERA_EXECUTOR_H_
 #define _MCAMERA_EXECUTOR_H_
 
-#include <raylib.h>
+#include "MCameraCommand.h"
+
 #include <queue>
 #include <raymath.h>
-#include <variant>
 
-namespace MCExecutor{
-    struct SetTarget{
-        const float x;
-        const float y;
-    };
-
-    struct AddTarget{
-        const float x;
-        const float y;
-    };
-
-    struct SetOffset{
-        const float x;
-        const float y;
-    };
-
-    struct AddOffset{
-        const float x;
-        const float y;
-    };
-
-    struct SetRotation{
-        const float rotation;
-    };
-
-    struct AddRotation{
-        const float rotation;
-    };
-    
-    struct SetZoom{
-        const float zoom;
-    };
-
-    struct ZoomAt{
-        const float zoom;
-        const Vector2 anchor;
-    };
-
-    struct AddZoom{
-        const float dzoom;
-    }; 
-
-    struct RelativeZoom{
-        const float dzoom;
-    };
-
-    struct RelativeZoomAt{
-        const float dzoom;
-        const Vector2 anchor;
-    };
-
-    struct CenterCameraOffset{};
-};
 
 struct MCameraExecutor{
     Camera2D& camera;
@@ -137,29 +84,14 @@ struct MCameraExecutor{
     }
 };
 
-using CameraCommand = std::variant<
-    MCExecutor::SetTarget,
-    MCExecutor::AddTarget,
-    MCExecutor::SetOffset,
-    MCExecutor::AddOffset,
-    MCExecutor::SetRotation,
-    MCExecutor::AddRotation,
-    MCExecutor::SetZoom,
-    MCExecutor::AddZoom,
-    MCExecutor::ZoomAt,
-    MCExecutor::RelativeZoom,
-    MCExecutor::RelativeZoomAt,
-    MCExecutor::CenterCameraOffset
->;
-
-inline void processCamera(Camera2D& cam, std::queue<CameraCommand>& cmds){
+inline void processCamera(Camera2D& cam, std::queue<MCameraCommand>& cmds){
     if(cmds.empty()){
         return;
     }
     
     MCameraExecutor exec{cam};
     while (!cmds.empty()) {
-        const CameraCommand cmd = std::move(cmds.front());
+        const MCameraCommand cmd = std::move(cmds.front());
         
         std::visit(exec, cmd);
         cmds.pop();

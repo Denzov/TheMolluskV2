@@ -1,31 +1,17 @@
 #ifndef _MAIN_CAMERA_2D_HANDLER_H_
 #define _MAIN_CAMERA_2D_HANDLER_H_
 
-#include "MCameraExecutor.h"
+#include <queue>
+
+#include "MCameraCommand.h"
 
 class MCamera2DHandler{
 public:
-    void init(){
-        _camera.offset = {GetRenderWidth() / 2.f, GetRenderHeight() / 2.f};
-    }
+    void init();
+    void addCommand(MCameraCommand cmd);
+    void process();
 
-    void addCommand(CameraCommand cmd){
-        _commands.push(cmd);
-    }
-
-    void process(){
-        processCamera(_camera, _commands);
-
-        addCommand(MCExecutor::CenterCameraOffset{});
-    }
-
-    Camera2D getData(){
-        return _camera;
-    }
-
-    Vector2 screenToWorld(Vector2 screen) const {
-        return GetScreenToWorld2D(screen, _camera);
-    }
+    Camera2D getData();
 
 private:
     Camera2D _camera{
@@ -35,7 +21,7 @@ private:
         .zoom = 1.f
     };
 
-    std::queue<CameraCommand> _commands;
+    std::queue<MCameraCommand> _commands;
 };
 
 #endif // !_MAIN_CAMERA_2D_HANDLER_H_

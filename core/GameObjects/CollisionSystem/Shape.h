@@ -2,7 +2,6 @@
 #define _SHAPE_H_
 
 #include <raylib.h>
-
 #include <variant>
 
 namespace Shape {
@@ -38,7 +37,7 @@ namespace Shape {
             );
         }
 
-        bool operator()(const Shape::Circle& form1, const Shape::AABB& form2) const {
+        bool operator()(const Shape::Circle& form1, const Shape::AABB& form2) const {            
             return CheckCollisionCircleRec(
                 pos1, form1.radius, 
                 {pos2.x, pos2.y, form2.width, form2.height}
@@ -53,7 +52,10 @@ namespace Shape {
         }
     };
 
-    inline bool intersect(const Variant& form1, const Vector2& pos1, const Variant& form2, const Vector2& pos2) {
+    inline bool intersect(
+        const Variant& form1, const Vector2& pos1, 
+        const Variant& form2, const Vector2& pos2) 
+    {
         return std::visit(Collision{pos1, pos2}, form1, form2);
     }
 

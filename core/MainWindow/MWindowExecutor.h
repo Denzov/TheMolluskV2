@@ -2,16 +2,9 @@
 #define _MAIN_WINDOW_EXECUTOR_H_
 
 #include <raylib.h>
-#include <variant>
 #include <queue>
 
-namespace MWExecutor{
-    struct SetWidth{ int width; };
-    struct SetHeight{ int height; };
-    struct SetFps{ int fps; };
-    struct SetFullscreen{ bool fullscreen; };
-    struct ToggleFullscreen{};
-};
+#include "MWindowCommand.h"
 
 struct MWindowExecutor{
     void operator()(const MWExecutor::SetWidth& w){
@@ -37,13 +30,6 @@ struct MWindowExecutor{
     }
 };
 
-using MWindowCommand = std::variant<
-    MWExecutor::SetWidth,
-    MWExecutor::SetHeight,
-    MWExecutor::SetFps,
-    MWExecutor::SetFullscreen,
-    MWExecutor::ToggleFullscreen
->;
 
 inline void processMWindow(std::queue<MWindowCommand>& cmds){
     if(cmds.empty()){
@@ -52,7 +38,7 @@ inline void processMWindow(std::queue<MWindowCommand>& cmds){
 
     MWindowExecutor exec;
     while (!cmds.empty()) {
-        const MWindowCommand cmd = std::move(cmds.front());
+        MWindowCommand cmd = std::move(cmds.front());
         
         std::visit(exec, cmd);
         cmds.pop();

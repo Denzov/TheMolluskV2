@@ -8,63 +8,19 @@
 #include "../MainWindow/MWindowHandler.h"
 #include "../MainCamera2D/MCamera2DHandler.h"
 
-#include "../GameObjects/Entity/Concrete/Body/Body.h"
+#include "GameObjects/EntityObjects/Concrete/Body/Body.h"
 #include "GameContext.h"
 
 class GameSystem {
 public:
-	void Run(){
-		init();
-		process();
-		close();
-	}
+	void Run();
 
 private:
-	void init(){
-		_main_window.init();
-		_main_camera.init();
-
-		body.internalInit(_context);
-	}
-
-	void draw()
-	{
-		BeginDrawing();
-		BeginMode2D(_main_camera.getData());
-
-		ClearBackground(BLANK);
-
-		body.draw();
-
-		EndMode2D();
-		EndDrawing();
-	}
-
-	void close(){
-		CloseWindow();
-	}
-
-	void process()
-	{
-		while (!WindowShouldClose())
-		{
-			while(_tick_system.consumeTick()){
-				simulate();
-			}
-
-			_tick_system.update();
-
-			_main_window.process();
-			_main_camera.process();
-
-			draw();
-		}
-	}
-
-	void simulate()
-	{
-		body.internalUpdate(_context);
-	}
+	void init();
+	void draw();
+	void close();
+	void process();
+	void simulate();	
 
 private:
 	TickSystem _tick_system;

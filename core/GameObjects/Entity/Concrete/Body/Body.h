@@ -39,11 +39,11 @@ public:
             .radius = 15.f
         });
 
-        // setMovingIntentSource(std::make_unique<LineMovingIntentSource>(
-        //     std::make_unique<EntityVector2Source>(*this),
-        //     std::make_unique<MouseVector2Source>(context)
-        // ));
-        setMovingIntentSource(std::make_unique<KeyboardMovingIntentSource>());
+        setMovingIntentSource(std::make_unique<LineMovingIntentSource>(
+            std::make_unique<EntityVector2Source>(*this),
+            std::make_unique<MouseVector2Source>(context)
+        ));
+        // setMovingIntentSource(std::make_unique<KeyboardMovingIntentSource>());
 
         // setMovingStrategy(std::unique_ptr<IMovingStrategy> strategy)
         setMovingStrategy(std::make_unique<FirstOrderMovingStrategy>(
@@ -65,10 +65,10 @@ public:
             RegRotationProperty{
                 .kp_rot = 10,
                 
-                .kp_speed = 0.1,
-                .ki_speed = 1.f,
+                .kp_speed = 0.3,
+                .ki_speed = 5.f,
 
-                .max_w = 3
+                .max_w = 100
             }
         ));
     }

@@ -7,7 +7,7 @@ class IMovingCueSource {
 public:
     virtual ~IMovingCueSource() = default;
 
-    virtual MovingCue get() = 0;
+    virtual MovingCue get() const = 0;
 };
 
 #endif // !_I_MOVING_CUE_SOURCE_H_

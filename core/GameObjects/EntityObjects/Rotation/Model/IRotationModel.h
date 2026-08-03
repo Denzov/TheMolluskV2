@@ -1,5 +1,5 @@
-#ifndef _I_ROTATION_STRATEGY_H_
-#define _I_ROTATION_STRATEGY_H_
+#ifndef _I_ROTATION_MODEL_H_
+#define _I_ROTATION_MODEL_H_
 
 #include "../RotationCue.h"
 
@@ -10,4 +10,4 @@ public:
     virtual float process(RotationCue, Vector2 base, const float rot, const float dt) = 0;
 };
 
-#endif // !_I_ROTATION_STRATEGY_H_
+#endif // !_I_ROTATION_MODEL_H_

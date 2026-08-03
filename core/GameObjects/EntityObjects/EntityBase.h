@@ -6,7 +6,6 @@
 #include <raymath.h>
 
 #include <vector>
-#include <memory.h>
 
 #include "../../GameSystem/GameContext.h"
 
@@ -17,16 +16,16 @@
 #include "Moving/MovingCue.h"
 
 #include "Moving/Model/IMovingModel.h"
-#include "Moving/Model/BlankMovingModel.h"
+#include "Moving/Model/BlankMoving/BlankMovingModel.h"
 
 #include "Moving/Source/IMovingCueSource.h"
-#include "Moving/Source/BlankMovingCueSource.h"
+#include "Moving/Source/BlankMoving/BlankMovingCueSource.h"
 
 #include "Rotation/Model/IRotationModel.h"
-#include "Rotation/Model/BlankRotationModel.h"
+#include "Rotation/Model/BlankRotation/BlankRotationModel.h"
 
 #include "Rotation/Source/IRotationCueSource.h"
-#include "Rotation/Source/BlankRotationCueSource.h"
+#include "Rotation/Source/BlankRotation/BlankRotationCueSource.h"
 
 
 class EntityBase {
@@ -40,11 +39,11 @@ public:
     virtual bool isAlive() const = 0;
     
     void internalInit(const GameContext& context){
-        _moving_strategy = std::make_unique<BlankMovingModel>(); 
-        _rotation_strategy = std::make_unique<BlankRotationModel>();
+        _moving_model = std::make_unique<BlankMovingModel>(); 
+        _rotation_model = std::make_unique<BlankRotationModel>();
 
-        _moving_intent_source = std::make_unique<BlankMovingCueSource>();
-        _aim_intent_source = std::make_unique<BlankRotationCueSource>();
+        _moving_cue_source = std::make_unique<BlankMovingCueSource>();
+        _rotation_cue_source = std::make_unique<BlankRotationCueSource>();
 
         init(context);
     }
@@ -73,19 +72,19 @@ public:
     }
 
     void setMovingCueSource(std::unique_ptr<IMovingCueSource> source){
-        _moving_intent_source = std::move(source);
+        _moving_cue_source = std::move(source);
     }
     
-    void setMovingModel(std::unique_ptr<IMovingModel> strategy){
-        _moving_strategy = std::move(strategy);
+    void setMovingModel(std::unique_ptr<IMovingModel> model){
+        _moving_model = std::move(model);
     }
 
     void setRotationCueSource(std::unique_ptr<IRotationCueSource> source){
-        _aim_intent_source = std::move(source);
+        _rotation_cue_source = std::move(source);
     }
 
-    void setRotationModel(std::unique_ptr<IRotationModel> strategy){
-        _rotation_strategy = std::move(strategy);
+    void setRotationModel(std::unique_ptr<IRotationModel> model){
+        _rotation_model = std::move(model);
     }
 
 private:
@@ -104,15 +103,15 @@ private:
     }
 
     void _move_update(const float dt){
-        const MovingCue intent = _moving_intent_source->get();
-        const Vector2 ds = _moving_strategy->process(intent, dt);
+        const MovingCue cue = _moving_cue_source->get();
+        const Vector2 ds = _moving_model->process(cue, dt);
         _position = Vector2Add(_position, ds);
     }
 
     void _aim_update(const float dt){
-        const RotationCue intent = _aim_intent_source->get();
-        const float drot = _rotation_strategy->process(
-            intent, _position, _rotation, dt);
+        const RotationCue cue = _rotation_cue_source->get();
+        const float drot = _rotation_model->process(
+            cue, _position, _rotation, dt);
         _rotation += drot;
     }
 
@@ -124,11 +123,11 @@ private:
     
     std::vector<ActiveEffect> _effects;
         
-    std::unique_ptr<IMovingModel> _moving_strategy;
-    std::unique_ptr<IRotationModel> _rotation_strategy;
+    std::unique_ptr<IMovingModel  > _moving_model;
+    std::unique_ptr<IRotationModel> _rotation_model;
 
-    std::unique_ptr<IMovingCueSource> _moving_intent_source;
-    std::unique_ptr<IRotationCueSource> _aim_intent_source;
+    std::unique_ptr<IMovingCueSource  > _moving_cue_source;
+    std::unique_ptr<IRotationCueSource> _rotation_cue_source;
 };
 
 #endif // !_I_ENTITY_H_

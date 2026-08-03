@@ -1,17 +1,15 @@
 #ifndef _BLANK_MOVING_MODEL_H_
 #define _BLANK_MOVING_MODEL_H_
 
-#include <raylib.h>
+#include "../IMovingModel.h"
 
-#include "IMovingModel.h"
+#include <raylib.h>
 
 class BlankMovingModel :
     public IMovingModel
 {
 public:
-    Vector2 process(MovingCue intent, const float dt) override {
-        return {0, 0};
-    }
+    Vector2 process(MovingCue cue, const float dt) override;
 };
 
 #endif // !_BLANK_MOVING_MODEL_H_

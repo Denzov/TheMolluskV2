@@ -11,6 +11,6 @@ file(GLOB_RECURSE SOURCES
 
 add_executable(TheMollusk ${SOURCES})
 
-target_include_directories(TheMollusk PUBLIC core)
+target_include_directories(TheMollusk PUBLIC core core/GameObjects/EntityObjects)
 
 target_link_libraries(TheMollusk PRIVATE raylib)

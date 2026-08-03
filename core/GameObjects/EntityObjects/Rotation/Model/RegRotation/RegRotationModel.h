@@ -1,0 +1,33 @@
+#ifndef _REG_ROTATION_MODEL_H_
+#define _REG_ROTATION_MODEL_H_
+
+#include "../IRotationModel.h"
+
+struct RegRotationProperty {
+    const float kp_rot;
+    
+    const float kp_speed;
+    const float ki_speed;
+
+    const float max_w;
+};
+
+class RegRotationModel :
+    public IRotationModel
+{
+public:
+    RegRotationModel(RegRotationProperty property) :
+        _property(property){}
+
+    float process(const RotationCue cue, 
+                  const Vector2 base, 
+                  const float rot, const float dt) override;
+
+private:
+    RegRotationProperty _property;
+
+    float speed_integrator = 0;
+    float _w = 0;
+};
+
+#endif // !_REG_ROTATION_MODEL_H_

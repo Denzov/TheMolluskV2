@@ -5,7 +5,7 @@
 
 struct RotationCue{
     const Vector2 target;
-    const bool is_aim;
+    const bool is_rotation;
 };
 
 #endif // !_AIM_INTENT_H_

@@ -1,15 +1,10 @@
 #ifndef _LINE_MOVING_CUE_SOURCE_H_
 #define _LINE_MOVING_CUE_SOURCE_H_
 
-#include <raylib.h>
-#include <raymath.h>
-
-#include <cmath>
-#include <memory>
-
-#include "IMovingCueSource.h"
-
+#include "../IMovingCueSource.h"
 #include "GameObjects/Vector2Source/IVector2Source.h"
+
+#include <memory>
 
 class LineMovingCueSource : 
     public IMovingCueSource
@@ -20,16 +15,7 @@ public:
         std::unique_ptr<IVector2Source> aim_pos) : 
             _aim_pos(std::move(aim_pos)), _cur_pos(std::move(cur_pos)){}
 
-    MovingCue get() override {
-        const Vector2 sub = Vector2Subtract(_aim_pos->get(), _cur_pos->get());
-
-        const float sq_len = Vector2LengthSqr(sub);
-
-        if(sq_len < EPSILON) return {0.f, false};
-
-        const float angle = std::atan2(sub.y, sub.x);
-        return {angle, true};
-    }
+    MovingCue get() const override;
 
 private:
     std::unique_ptr<IVector2Source> _cur_pos;

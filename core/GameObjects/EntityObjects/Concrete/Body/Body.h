@@ -11,11 +11,11 @@
 #include "GameObjects/Vector2Source/EntityVector2Source.h"
 #include "GameObjects/Vector2Source/MouseVector2Source.h"
 
-#include "GameObjects/EntityObjects/Moving/Source/LineMovingCueSource.h"
-#include "GameObjects/EntityObjects/Moving/Model/FirstOrderMovingModel.h"
+#include "Moving/Source/LineMoving/LineMovingCueSource.h"
+#include "Moving/Model/FirestOrderMoving/FirstOrderMovingModel.h"
 
-#include "GameObjects/EntityObjects/Rotation/Source/MovingDirectionRotationCueSource.h"
-#include "GameObjects/EntityObjects/Rotation/Model/RegRotationModel.h"
+#include "Rotation/Source/MovingDirection/MovingDirectionRotationCueSource.h"
+#include "Rotation/Model/RegRotation/RegRotationModel.h"
 
 class Body :
     public LivingEntity

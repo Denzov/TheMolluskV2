@@ -1,5 +1,5 @@
-#ifndef _SHAPE_H_
-#define _SHAPE_H_
+#ifndef THEMOLLUSK_SHAPE_H
+#define THEMOLLUSK_SHAPE_H
 
 #include <raylib.h>
 #include <variant>
@@ -76,4 +76,4 @@ namespace Shape {
     }
 }
 
-#endif // !_SHAPE_H_
+#endif // !THEMOLLUSK_SHAPE_H

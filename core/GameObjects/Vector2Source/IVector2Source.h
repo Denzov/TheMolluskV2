@@ -1,5 +1,5 @@
-#ifndef _I_VECTOR2_SOURCE_H_
-#define _I_VECTOR2_SOURCE_H_
+#ifndef THEMOLLUSK_I_VECTOR2_SOURCE_H
+#define THEMOLLUSK_I_VECTOR2_SOURCE_H
 
 #include <raylib.h>
 
@@ -9,4 +9,4 @@ public:
     virtual Vector2 get() const = 0;
 };
 
-#endif // !_I_VECTOR2_SOURCE_H_
+#endif // !THEMOLLUSK_I_VECTOR2_SOURCE_H

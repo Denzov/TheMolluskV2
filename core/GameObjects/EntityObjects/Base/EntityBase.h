@@ -1,5 +1,5 @@
-#ifndef _I_ENTITY_H_
-#define _I_ENTITY_H_
+#ifndef THEMOLLUSK_I_ENTITY_H
+#define THEMOLLUSK_I_ENTITY_H
 
 #include <memory>
 #include <raylib.h>
@@ -55,8 +55,8 @@ private:
 private:
     Shape::Variant _shape;
     
-    Vector2 _position;
-    float _rotation;
+    Vector2 _position = {};
+    float _rotation = 0;
     
     std::vector<ActiveEffect> _effects;
         
@@ -67,4 +67,4 @@ private:
     std::unique_ptr<IRotationCueSource> _rotation_cue_source;
 };
 
-#endif // !_I_ENTITY_H_
+#endif // !THEMOLLUSK_I_ENTITY_H

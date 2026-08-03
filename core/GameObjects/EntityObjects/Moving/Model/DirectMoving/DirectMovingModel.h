@@ -1,5 +1,5 @@
-#ifndef _DIRECT_MOVING_MODEL_H_
-#define _DIRECT_MOVING_MODEL_H_
+#ifndef THEMOLLUSK_DIRECT_MOVING_MODEL_H
+#define THEMOLLUSK_DIRECT_MOVING_MODEL_H
 
 #include "../IMovingModel.h"
 
@@ -22,4 +22,4 @@ private:
 
 };
 
-#endif // !_DIRECT_MOVING_MODEL_H_
+#endif // !THEMOLLUSK_DIRECT_MOVING_MODEL_H

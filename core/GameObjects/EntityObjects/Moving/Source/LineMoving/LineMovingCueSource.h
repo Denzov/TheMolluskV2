@@ -1,5 +1,5 @@
-#ifndef _LINE_MOVING_CUE_SOURCE_H_
-#define _LINE_MOVING_CUE_SOURCE_H_
+#ifndef THEMOLLUSK_LINE_MOVING_CUE_SOURCE_H
+#define THEMOLLUSK_LINE_MOVING_CUE_SOURCE_H
 
 #include "../IMovingCueSource.h"
 #include "GameObjects/Vector2Source/IVector2Source.h"
@@ -23,4 +23,4 @@ private:
 
 };
 
-#endif // !_LINE_MOVING_CUE_SOURCE_H_
+#endif // !THEMOLLUSK_LINE_MOVING_CUE_SOURCE_H

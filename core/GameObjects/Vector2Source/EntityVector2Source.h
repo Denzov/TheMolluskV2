@@ -1,5 +1,5 @@
-#ifndef _ENTITY_VECTOR2_SOURCE_H_
-#define _ENTITY_VECTOR2_SOURCE_H_
+#ifndef THEMOLLUSK_ENTITY_VECTOR2_SOURCE_H
+#define THEMOLLUSK_ENTITY_VECTOR2_SOURCE_H
 
 #include "IVector2Source.h"
 
@@ -20,4 +20,4 @@ private:
     const EntityBase& _source;
 };
 
-#endif // !_ENTITY_VECTOR2_SOURCE_H_
+#endif // !THEMOLLUSK_ENTITY_VECTOR2_SOURCE_H

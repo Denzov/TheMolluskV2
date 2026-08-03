@@ -1,5 +1,5 @@
-#ifndef _PLAYER_H_
-#define _PLAYER_H_
+#ifndef THEMOLLUSK_PLAYER_H
+#define THEMOLLUSK_PLAYER_H
 
 #include "../../EntityType/LivingEntity.h"
 
@@ -9,4 +9,4 @@ class Player :
     
 };
 
-#endif // !_PLAYER_H_
+#endif // !THEMOLLUSK_PLAYER_H

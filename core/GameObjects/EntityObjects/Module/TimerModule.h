@@ -1,5 +1,5 @@
-#ifndef _TIMER_MODULE_H_
-#define _TIMER_MODULE_H_
+#ifndef THEMOLLUSK_TIMER_MODULE_H
+#define THEMOLLUSK_TIMER_MODULE_H
 
 namespace EntityModule {
     struct Timer {
@@ -20,4 +20,4 @@ namespace EntityModule {
         virtual void addDuration(const float time) = 0;
     };
 }
-#endif // !_TIMER_MODULE_H_
+#endif // !THEMOLLUSK_TIMER_MODULE_H

@@ -1,5 +1,5 @@
-#ifndef _BODY_H_
-#define _BODY_H_
+#ifndef THEMOLLUSK_BODY_H
+#define THEMOLLUSK_BODY_H
 
 #include <cmath>
 #include <memory>
@@ -12,7 +12,7 @@
 #include "GameObjects/Vector2Source/MouseVector2Source.h"
 
 #include "Moving/Source/LineMoving/LineMovingCueSource.h"
-#include "Moving/Model/FirestOrderMoving/FirstOrderMovingModel.h"
+#include "Moving/Model/FirstOrderMoving/FirstOrderMovingModel.h"
 
 #include "Rotation/Source/MovingDirection/MovingDirectionRotationCueSource.h"
 #include "Rotation/Model/RegRotation/RegRotationModel.h"
@@ -71,4 +71,4 @@ public:
     }
 };
 
-#endif // !_BODY_H_
+#endif // !THEMOLLUSK_BODY_H

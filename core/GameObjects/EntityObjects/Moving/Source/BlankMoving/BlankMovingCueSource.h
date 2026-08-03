@@ -1,5 +1,5 @@
-#ifndef _BLANK_MOVING_CUE_SOURCE_H_
-#define _BLANK_MOVING_CUE_SOURCE_H_
+#ifndef THEMOLLUSK_BLANK_MOVING_CUE_SOURCE_H
+#define THEMOLLUSK_BLANK_MOVING_CUE_SOURCE_H
 
 #include "../IMovingCueSource.h"
 
@@ -10,4 +10,4 @@ public:
     MovingCue get() const override;
 };
 
-#endif // !_BLANK_MOVING_CUE_SOURCE_H_
+#endif // !THEMOLLUSK_BLANK_MOVING_CUE_SOURCE_H

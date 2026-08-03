@@ -1,5 +1,5 @@
-#ifndef _GAME_CONTEXT_H_
-#define _GAME_CONTEXT_H_
+#ifndef THEMOLLUSK_GAME_CONTEXT_H
+#define THEMOLLUSK_GAME_CONTEXT_H
 
 #include "../MainCamera2D/MCamera2DHandler.h"
 #include "../TimeSystem/TickSystem.h"
@@ -12,4 +12,4 @@ struct GameContext{
         : camera(camera), tick(tick) {}
 };
 
-#endif // !_GAME_CONTEXT_H_
+#endif // !THEMOLLUSK_GAME_CONTEXT_H

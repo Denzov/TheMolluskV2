@@ -1,5 +1,5 @@
-#ifndef _WORLD_H_
-#define _WORLD_H_
+#ifndef THEMOLLUSK_WORLD_H
+#define THEMOLLUSK_WORLD_H
 
 #include <raylib.h>
 
@@ -16,4 +16,4 @@ private:
 
 };
 
-#endif // !_WORLD_H_
+#endif // !THEMOLLUSK_WORLD_H

@@ -1,5 +1,5 @@
-#ifndef _TEMPORARY_ENTITY_H_
-#define _TEMPORARY_ENTITY_H_
+#ifndef THEMOLLUSK_TEMPORARY_ENTITY_H
+#define THEMOLLUSK_TEMPORARY_ENTITY_H
 
 #include "GameObjects/EntityObjects/Base/EntityBase.h"
 #include "GameObjects/EntityObjects/Module/TimerModule.h"
@@ -25,4 +25,4 @@ private:
     EntityModule::Timer _timer;
 };
 
-#endif // !_TEMPORARY_ENTITY_H_
+#endif // !THEMOLLUSK_TEMPORARY_ENTITY_H

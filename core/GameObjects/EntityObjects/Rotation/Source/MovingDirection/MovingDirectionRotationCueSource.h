@@ -1,5 +1,5 @@
-#ifndef _MOVING_DIRECTION_AIM_SOURCE_H_
-#define _MOVING_DIRECTION_AIM_SOURCE_H_
+#ifndef THEMOLLUSK_MOVING_DIRECTION_AIM_SOURCE_H
+#define THEMOLLUSK_MOVING_DIRECTION_AIM_SOURCE_H
 
 #include "../IRotationCueSource.h"
 #include "GameObjects/Vector2Source/IVector2Source.h"
@@ -24,4 +24,4 @@ private:
 
 };
 
-#endif // !_MOVING_DIRECTION_AIM_SOURCE_H_
+#endif // !THEMOLLUSK_MOVING_DIRECTION_AIM_SOURCE_H

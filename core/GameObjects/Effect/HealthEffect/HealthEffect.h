@@ -1,5 +1,5 @@
-#ifndef _HEALTH_EFFECT_H_
-#define _HEALTH_EFFECT_H_
+#ifndef THEMOLLUSK_HEALTH_EFFECT_H
+#define THEMOLLUSK_HEALTH_EFFECT_H
 
 #include "../IEffect.h"
 
@@ -13,4 +13,4 @@ struct HealthEffect :
     void apply(EntityBase& entity) override;
 };
 
-#endif // !_HEALTH_EFFECT_H_
+#endif // !THEMOLLUSK_HEALTH_EFFECT_H

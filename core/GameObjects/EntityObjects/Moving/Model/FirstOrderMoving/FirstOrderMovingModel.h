@@ -1,5 +1,5 @@
-#ifndef _FIRST_ORDER_MOVING_MODEL_H_
-#define _FIRST_ORDER_MOVING_MODEL_H_
+#ifndef THEMOLLUSK_FIRST_ORDER_MOVING_MODEL_H
+#define THEMOLLUSK_FIRST_ORDER_MOVING_MODEL_H
 
 #include "../IMovingModel.h"
 
@@ -23,4 +23,4 @@ private:
     Vector2 _velocity = {};
 };
 
-#endif // !_FIRST_ORDER_MOVING_MODEL_H_
+#endif // !THEMOLLUSK_FIRST_ORDER_MOVING_MODEL_H

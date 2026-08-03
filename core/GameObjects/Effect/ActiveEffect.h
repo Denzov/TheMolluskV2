@@ -1,5 +1,5 @@
-#ifndef _EFFECT_INSTANCE_H_
-#define _EFFECT_INSTANCE_H_
+#ifndef THEMOLLUSK_EFFECT_INSTANCE_H
+#define THEMOLLUSK_EFFECT_INSTANCE_H
 
 #include <memory>
 #include "IEffect.h"
@@ -13,4 +13,4 @@ struct ActiveEffect{
     float next_apply;
 };
 
-#endif // !_EFFECT_INSTANCE_H_
+#endif // !THEMOLLUSK_EFFECT_INSTANCE_H

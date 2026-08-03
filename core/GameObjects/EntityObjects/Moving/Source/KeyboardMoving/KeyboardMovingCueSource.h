@@ -1,5 +1,5 @@
-#ifndef _KEYBOARD_MOVING_CUE_SOURCE_H_
-#define _KEYBOARD_MOVING_CUE_SOURCE_H_
+#ifndef THEMOLLUSK_KEYBOARD_MOVING_CUE_SOURCE_H
+#define THEMOLLUSK_KEYBOARD_MOVING_CUE_SOURCE_H
 
 #include "../IMovingCueSource.h"
 
@@ -24,4 +24,4 @@ private:
     Layout _layout;
 };
 
-#endif // !_KEYBOARD_MOVING_CUE_SOURCE_H_
+#endif // !THEMOLLUSK_KEYBOARD_MOVING_CUE_SOURCE_H

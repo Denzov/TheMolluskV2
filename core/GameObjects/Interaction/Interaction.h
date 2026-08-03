@@ -1,7 +1,7 @@
-#ifndef _I_INTERACTION_SOURCE_
-#define _I_INTERACTION_SOURCE_
+#ifndef THEMOLLUSK_I_INTERACTION_SOURCE_
+#define THEMOLLUSK_I_INTERACTION_SOURCE_
 
-#include "../Entity/EntityBase.h"
+#include "GameObjects/EntityObjects/Base/EntityBase.h"
 
 namespace Interaction
 {
@@ -29,4 +29,4 @@ struct InteractionSourceValidator
     }
 };
 
-#endif // !_I_INTERACTION_SOURCE_
+#endif // !THEMOLLUSK_I_INTERACTION_SOURCE_

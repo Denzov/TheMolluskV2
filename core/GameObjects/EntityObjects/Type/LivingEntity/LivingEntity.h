@@ -1,5 +1,5 @@
-#ifndef _LIVING_ENTITY_H_
-#define _LIVING_ENTITY_H_
+#ifndef THEMOLLUSK_LIVING_ENTITY_H
+#define THEMOLLUSK_LIVING_ENTITY_H
 
 #include "GameObjects/EntityObjects/Base/EntityBase.h"
 #include "GameObjects/EntityObjects/Module/HealthModule.h"
@@ -25,4 +25,4 @@ private:
     EntityModule::Health _health;
 };
 
-#endif // !_LIVING_ENTITY_H_
+#endif // !THEMOLLUSK_LIVING_ENTITY_H

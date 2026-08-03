@@ -1,5 +1,5 @@
-#ifndef _I_EFFECT_H_
-#define _I_EFFECT_H_
+#ifndef THEMOLLUSK_I_EFFECT_H
+#define THEMOLLUSK_I_EFFECT_H
 
 class EntityBase;
 
@@ -9,4 +9,4 @@ public:
     virtual void apply(EntityBase& entity) = 0;
 };
 
-#endif // !_I_EFFECT_H_
+#endif // !THEMOLLUSK_I_EFFECT_H

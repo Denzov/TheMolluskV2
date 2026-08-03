@@ -1,5 +1,5 @@
-#ifndef _BLANK_ROTATION_CUE_SOURCE_H_
-#define _BLANK_ROTATION_CUE_SOURCE_H_
+#ifndef THEMOLLUSK_BLANK_ROTATION_CUE_SOURCE_H
+#define THEMOLLUSK_BLANK_ROTATION_CUE_SOURCE_H
 
 #include "../IRotationCueSource.h"
 
@@ -10,4 +10,4 @@ public:
     RotationCue get() const override;
 };
 
-#endif // !_BLANK_ROTATION_CUE_SOURCE_H_
+#endif // !THEMOLLUSK_BLANK_ROTATION_CUE_SOURCE_H

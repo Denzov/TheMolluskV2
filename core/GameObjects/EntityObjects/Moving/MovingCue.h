@@ -1,9 +1,9 @@
-#ifndef _MOVING_CUE_H_
-#define _MOVING_CUE_H_
+#ifndef THEMOLLUSK_MOVING_CUE_H
+#define THEMOLLUSK_MOVING_CUE_H
 
 struct MovingCue{
     const float angle;
     const bool is_moving;
 };
 
-#endif // !_MOVING_CUE_H_
+#endif // !THEMOLLUSK_MOVING_CUE_H

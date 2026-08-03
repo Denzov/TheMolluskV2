@@ -1,5 +1,5 @@
-#ifndef _MAIN_WINDOW_HANDLER_H_
-#define _MAIN_WINDOW_HANDLER_H_
+#ifndef THEMOLLUSK_MAIN_WINDOW_HANDLER_H
+#define THEMOLLUSK_MAIN_WINDOW_HANDLER_H
 
 #include <queue>
 #include "MWindowCommand.h"
@@ -23,4 +23,4 @@ private:
     std::queue<MWindowCommand> _commands;
 };
 
-#endif // !_MAIN_WINDOW_HANDLER_H_
+#endif // !THEMOLLUSK_MAIN_WINDOW_HANDLER_H

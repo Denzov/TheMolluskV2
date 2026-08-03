@@ -1,5 +1,5 @@
-#ifndef _I_ROTATION_CUE_SOURCE_
-#define _I_ROTATION_CUE_SOURCE_
+#ifndef THEMOLLUSK_I_ROTATION_CUE_SOURCE_
+#define THEMOLLUSK_I_ROTATION_CUE_SOURCE_
 
 #include <raylib.h>
 
@@ -12,4 +12,4 @@ public:
     virtual RotationCue get() const = 0;
 };
 
-#endif // !_I_ROTATION_CUE_SOURCE_
+#endif // !THEMOLLUSK_I_ROTATION_CUE_SOURCE_

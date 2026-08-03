@@ -1,5 +1,5 @@
-#ifndef _MAIN_CAMERA_COMMAND_H_
-#define _MAIN_CAMERA_COMMAND_H_
+#ifndef THEMOLLUSK_MAIN_CAMERA_COMMAND_H
+#define THEMOLLUSK_MAIN_CAMERA_COMMAND_H
 
 #include <raylib.h>
 #include <variant>
@@ -73,4 +73,4 @@ using MCameraCommand = std::variant<
     MCExecutor::CenterCameraOffset
 >;
 
-#endif // !_MAIN_CAMERA_COMMAND_H_
+#endif // !THEMOLLUSK_MAIN_CAMERA_COMMAND_H

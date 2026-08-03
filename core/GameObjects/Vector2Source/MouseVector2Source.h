@@ -1,5 +1,5 @@
-#ifndef _MOUSE_VECTOR2_SOURCE_H_
-#define _MOUSE_VECTOR2_SOURCE_H_
+#ifndef THEMOLLUSK_MOUSE_VECTOR2_SOURCE_H
+#define THEMOLLUSK_MOUSE_VECTOR2_SOURCE_H
 
 #include "IVector2Source.h"
 
@@ -23,4 +23,4 @@ private:
     const GameContext& _context;
 };
 
-#endif // !_MOUSE_VECTOR2_SOURCE_H_
+#endif // !THEMOLLUSK_MOUSE_VECTOR2_SOURCE_H

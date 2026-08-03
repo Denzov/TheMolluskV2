@@ -1,5 +1,5 @@
-#ifndef _BLANK_MOVING_MODEL_H_
-#define _BLANK_MOVING_MODEL_H_
+#ifndef THEMOLLUSK_BLANK_MOVING_MODEL_H
+#define THEMOLLUSK_BLANK_MOVING_MODEL_H
 
 #include "../IMovingModel.h"
 
@@ -12,4 +12,4 @@ public:
     Vector2 process(MovingCue cue, const float dt) override;
 };
 
-#endif // !_BLANK_MOVING_MODEL_H_
+#endif // !THEMOLLUSK_BLANK_MOVING_MODEL_H

@@ -1,5 +1,5 @@
-#ifndef _MAIN_CAMERA_2D_HANDLER_H_
-#define _MAIN_CAMERA_2D_HANDLER_H_
+#ifndef THEMOLLUSK_MAIN_CAMERA_2D_HANDLER_H
+#define THEMOLLUSK_MAIN_CAMERA_2D_HANDLER_H
 
 #include <queue>
 
@@ -24,4 +24,4 @@ private:
     std::queue<MCameraCommand> _commands;
 };
 
-#endif // !_MAIN_CAMERA_2D_HANDLER_H_
+#endif // !THEMOLLUSK_MAIN_CAMERA_2D_HANDLER_H

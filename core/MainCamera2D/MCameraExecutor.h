@@ -1,5 +1,5 @@
-#ifndef _MCAMERA_EXECUTOR_H_
-#define _MCAMERA_EXECUTOR_H_
+#ifndef THEMOLLUSK_MCAMERA_EXECUTOR_H
+#define THEMOLLUSK_MCAMERA_EXECUTOR_H
 
 #include "MCameraCommand.h"
 
@@ -97,4 +97,4 @@ inline void processCamera(Camera2D& cam, std::queue<MCameraCommand>& cmds){
         cmds.pop();
     }
 }
-#endif // !_MCAMERA_EXECUTOR_H_
+#endif // !THEMOLLUSK_MCAMERA_EXECUTOR_H

@@ -1,5 +1,5 @@
-#ifndef _VECTOR2_ROTATION_CUE_SOURCE_H_
-#define _VECTOR2_ROTATION_CUE_SOURCE_H_
+#ifndef THEMOLLUSK_VECTOR2_ROTATION_CUE_SOURCE_H
+#define THEMOLLUSK_VECTOR2_ROTATION_CUE_SOURCE_H
 
 #include "../IRotationCueSource.h"
 #include "GameObjects/Vector2Source/IVector2Source.h"
@@ -19,4 +19,4 @@ private:
     std::unique_ptr<IVector2Source> _cue;
 };
 
-#endif // !_VECTOR2_ROTATION_CUE_SOURCE_H_
+#endif // !THEMOLLUSK_VECTOR2_ROTATION_CUE_SOURCE_H

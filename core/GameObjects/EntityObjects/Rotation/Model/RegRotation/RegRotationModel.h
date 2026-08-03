@@ -1,5 +1,5 @@
-#ifndef _REG_ROTATION_MODEL_H_
-#define _REG_ROTATION_MODEL_H_
+#ifndef THEMOLLUSK_REG_ROTATION_MODEL_H
+#define THEMOLLUSK_REG_ROTATION_MODEL_H
 
 #include "../IRotationModel.h"
 
@@ -30,4 +30,4 @@ private:
     float _w = 0;
 };
 
-#endif // !_REG_ROTATION_MODEL_H_
+#endif // !THEMOLLUSK_REG_ROTATION_MODEL_H

@@ -1,5 +1,5 @@
-#ifndef _HEALTH_MODULE_H_
-#define _HEALTH_MODULE_H_
+#ifndef THEMOLLUSK_HEALTH_MODULE_H
+#define THEMOLLUSK_HEALTH_MODULE_H
 
 #include <stdint.h>
 
@@ -23,4 +23,4 @@ namespace EntityModule {
     };
 }
 
-#endif // !_HEALTH_MODULE_H_
+#endif // !THEMOLLUSK_HEALTH_MODULE_H

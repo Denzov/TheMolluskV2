@@ -1,5 +1,5 @@
-#ifndef _TIME_SYSTEM_H_
-#define _TIME_SYSTEM_H_
+#ifndef THEMOLLUSK_TIME_SYSTEM_H
+#define THEMOLLUSK_TIME_SYSTEM_H
 
 class TickSystem
 {
@@ -14,4 +14,4 @@ private:
     float _accumulator = 0;
 };
 
-#endif // !_TIME_SYSTEM_H_
+#endif // !THEMOLLUSK_TIME_SYSTEM_H

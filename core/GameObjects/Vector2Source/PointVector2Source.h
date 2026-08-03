@@ -1,5 +1,5 @@
-#ifndef _POINT_VECTOR2_SOURCE_H_
-#define _POINT_VECTOR2_SOURCE_H_
+#ifndef THEMOLLUSK_POINT_VECTOR2_SOURCE_H
+#define THEMOLLUSK_POINT_VECTOR2_SOURCE_H
 
 #include "IVector2Source.h"
 
@@ -18,4 +18,4 @@ private:
     const Vector2 _source;
 };
 
-#endif // !_POINT_VECTOR2_SOURCE_H_
+#endif // !THEMOLLUSK_POINT_VECTOR2_SOURCE_H

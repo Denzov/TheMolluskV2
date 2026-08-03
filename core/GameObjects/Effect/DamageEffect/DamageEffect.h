@@ -1,5 +1,5 @@
-#ifndef _DAMAGE_EFFECT_H_
-#define _DAMAGE_EFFECT_H_
+#ifndef THEMOLLUSK_DAMAGE_EFFECT_H
+#define THEMOLLUSK_DAMAGE_EFFECT_H
 
 #include <math.h>
 
@@ -12,4 +12,4 @@ struct DamageEffect :
     void apply(EntityBase& entity) override;
 };
 
-#endif // !_DAMAGE_EFFECT_H_
+#endif // !THEMOLLUSK_DAMAGE_EFFECT_H

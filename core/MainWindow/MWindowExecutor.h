@@ -1,5 +1,5 @@
-#ifndef _MAIN_WINDOW_EXECUTOR_H_
-#define _MAIN_WINDOW_EXECUTOR_H_
+#ifndef THEMOLLUSK_MAIN_WINDOW_EXECUTOR_H
+#define THEMOLLUSK_MAIN_WINDOW_EXECUTOR_H
 
 #include <raylib.h>
 #include <queue>
@@ -45,4 +45,4 @@ inline void processMWindow(std::queue<MWindowCommand>& cmds){
     }
 }
 
-#endif // !_MAIN_WINDOW_EXECUTOR_H_
+#endif // !THEMOLLUSK_MAIN_WINDOW_EXECUTOR_H

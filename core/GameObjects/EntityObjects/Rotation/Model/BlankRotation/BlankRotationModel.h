@@ -1,5 +1,5 @@
-#ifndef _BLANK_ROTATION_MODEL_H_
-#define _BLANK_ROTATION_MODEL_H_
+#ifndef THEMOLLUSK_BLANK_ROTATION_MODEL_H
+#define THEMOLLUSK_BLANK_ROTATION_MODEL_H
 
 #include "../IRotationModel.h"
 
@@ -12,4 +12,4 @@ public:
                   const float rot, const float dt) override;
 };
 
-#endif // !_BLANK_ROTATION_MODEL_H_
+#endif // !THEMOLLUSK_BLANK_ROTATION_MODEL_H

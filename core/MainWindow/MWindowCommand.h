@@ -1,5 +1,5 @@
-#ifndef _MAIN_WINDOW_COMMAND_H_
-#define _MAIN_WINDOW_COMMAND_H_
+#ifndef THEMOLLUSK_MAIN_WINDOW_COMMAND_H
+#define THEMOLLUSK_MAIN_WINDOW_COMMAND_H
 
 #include <variant>
 
@@ -19,4 +19,4 @@ using MWindowCommand = std::variant<
     MWExecutor::ToggleFullscreen
 >;
 
-#endif // !_MAIN_WINDOW_COMMAND_H_
+#endif // !THEMOLLUSK_MAIN_WINDOW_COMMAND_H

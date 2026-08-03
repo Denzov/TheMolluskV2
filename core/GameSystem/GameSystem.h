@@ -1,5 +1,5 @@
-#ifndef _APP_H_
-#define _APP_H_
+#ifndef THEMOLLUSK_APP_H
+#define THEMOLLUSK_APP_H
 
 #include <raylib.h>
 
@@ -33,4 +33,4 @@ private:
 	Body body;
 };
 
-#endif // !_APP_H_
+#endif // !THEMOLLUSK_APP_H

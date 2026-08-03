@@ -1,5 +1,5 @@
-#ifndef _ROTATION_CUE_H_
-#define _ROTATION_CUE_H_
+#ifndef THEMOLLUSK_ROTATION_CUE_H
+#define THEMOLLUSK_ROTATION_CUE_H
 
 #include <raylib.h>
 
@@ -8,4 +8,4 @@ struct RotationCue{
     const bool is_rotation;
 };
 
-#endif // !_ROTATION_CUE_H_
+#endif // !THEMOLLUSK_ROTATION_CUE_H

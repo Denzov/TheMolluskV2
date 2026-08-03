@@ -1,5 +1,5 @@
-#ifndef _I_MOVING_CUE_SOURCE_H_
-#define _I_MOVING_CUE_SOURCE_H_
+#ifndef THEMOLLUSK_I_MOVING_CUE_SOURCE_H
+#define THEMOLLUSK_I_MOVING_CUE_SOURCE_H
 
 #include "../MovingCue.h"
 
@@ -10,4 +10,4 @@ public:
     virtual MovingCue get() const = 0;
 };
 
-#endif // !_I_MOVING_CUE_SOURCE_H_
+#endif // !THEMOLLUSK_I_MOVING_CUE_SOURCE_H

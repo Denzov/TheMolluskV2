@@ -1,5 +1,5 @@
-#ifndef _DELAYED_ROTATION_MODEL_H_
-#define _DELAYED_ROTATION_MODEL_H_
+#ifndef THEMOLLUSK_DELAYED_ROTATION_MODEL_H
+#define THEMOLLUSK_DELAYED_ROTATION_MODEL_H
 
 #include "../IRotationModel.h"
 
@@ -22,4 +22,4 @@ private:
     const DelayedRotationProperty _property;
 };
 
-#endif // !_DELAYED_ROTATION_MODEL_H_
+#endif // !THEMOLLUSK_DELAYED_ROTATION_MODEL_H

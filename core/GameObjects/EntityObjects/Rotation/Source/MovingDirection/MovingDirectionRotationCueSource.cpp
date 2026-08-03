@@ -1,6 +1,14 @@
 #include "MovingDirectionRotationCueSource.h"
 
+#include "GameObjects/Vector2Source/IVector2Source.h"
+
 #include <raymath.h>
+
+MovingDirectionRotationCueSource::MovingDirectionRotationCueSource
+    (std::unique_ptr<IVector2Source> base) :
+        _base(std::move(base)) {}
+
+MovingDirectionRotationCueSource::~MovingDirectionRotationCueSource() = default;
 
 RotationCue MovingDirectionRotationCueSource::get() const {
     const Vector2 current = _base->get();

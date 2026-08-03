@@ -2,16 +2,17 @@
 #define THEMOLLUSK_MOVING_DIRECTION_AIM_SOURCE_H
 
 #include "../IRotationCueSource.h"
-#include "GameObjects/Vector2Source/IVector2Source.h"
 
 #include <memory>
+
+class IVector2Source;
 
 class MovingDirectionRotationCueSource :
     public IRotationCueSource
 {
 public:
-    MovingDirectionRotationCueSource(std::unique_ptr<IVector2Source> base) :
-        _base(std::move(base)) {}
+    MovingDirectionRotationCueSource(std::unique_ptr<IVector2Source> base);
+    ~MovingDirectionRotationCueSource();
 
     RotationCue get() const override;
 
@@ -21,7 +22,6 @@ private:
     mutable Vector2 _prev_target = {};
     
     std::unique_ptr<IVector2Source> _base;
-
 };
 
 #endif // !THEMOLLUSK_MOVING_DIRECTION_AIM_SOURCE_H

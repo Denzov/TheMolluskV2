@@ -13,7 +13,8 @@ class DirectMovingModel :
     public IMovingModel
 {
 public:
-    DirectMovingModel(DirectMovingProperty property) : _property(property){}
+    DirectMovingModel(DirectMovingProperty property) : 
+        _property(property){}
 
     Vector2 process(MovingCue cue, const float dt) override;
 

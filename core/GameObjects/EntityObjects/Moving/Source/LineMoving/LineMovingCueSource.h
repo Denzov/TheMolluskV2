@@ -2,9 +2,10 @@
 #define THEMOLLUSK_LINE_MOVING_CUE_SOURCE_H
 
 #include "../IMovingCueSource.h"
-#include "GameObjects/Vector2Source/IVector2Source.h"
 
 #include <memory>
+
+class IVector2Source;
 
 class LineMovingCueSource : 
     public IMovingCueSource
@@ -12,8 +13,9 @@ class LineMovingCueSource :
 public:
     LineMovingCueSource(
         std::unique_ptr<IVector2Source> cur_pos,
-        std::unique_ptr<IVector2Source> aim_pos) : 
-            _aim_pos(std::move(aim_pos)), _cur_pos(std::move(cur_pos)){}
+        std::unique_ptr<IVector2Source> aim_pos);
+
+    ~LineMovingCueSource();
 
     MovingCue get() const override;
 

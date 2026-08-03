@@ -9,13 +9,16 @@
 #include "GameObjects/EntityObjects/Type/LivingEntity/LivingEntity.h"
 
 #include "GameObjects/Vector2Source/EntityVector2Source.h"
+#include "GameObjects/Vector2Source/PointVector2Source.h"
 #include "GameObjects/Vector2Source/MouseVector2Source.h"
 
-#include "Moving/Source/LineMoving/LineMovingCueSource.h"
+#include "Moving/Source/PatrolMovingCueSource/PatrolMovingCueSource.h"
 #include "Moving/Model/FirstOrderMoving/FirstOrderMovingModel.h"
 
 #include "Rotation/Source/MovingDirection/MovingDirectionRotationCueSource.h"
 #include "Rotation/Model/RegRotation/RegRotationModel.h"
+
+#include "Common.h"
 
 class Body :
     public LivingEntity
@@ -28,9 +31,21 @@ public:
             .radius = 15.f
         });
 
-        setMovingCueSource(std::make_unique<LineMovingCueSource>(
+        setMovingCueSource(std::make_unique<PatrolMovingCueSource>(
+            15,
             std::make_unique<EntityVector2Source>(*this),
-            std::make_unique<MouseVector2Source>(context)
+            make_unique_vector<IVector2Source>(
+                std::make_unique<PointVector2Source>(
+                    Vector2{-400, -400}),
+                std::make_unique<PointVector2Source>(
+                    Vector2{400, -400}),
+                std::make_unique<PointVector2Source>(
+                    Vector2{-400, 400}),
+                std::make_unique<PointVector2Source>(
+                    Vector2{0, 0}),
+                std::make_unique<MouseVector2Source>(
+                    context)
+            )
         ));
         setMovingModel(std::make_unique<FirstOrderMovingModel>(
             FirstOrderMovingProperty{

@@ -1,6 +1,6 @@
 #include "HealthEffect.h"
 
-#include "GameObjects/EntityObjects/EntityBase.h"
+#include "GameObjects/EntityObjects/Base/EntityBase.h"
 #include "GameObjects/EntityObjects/Module/HealthModule.h"
 
 void HealthEffect::apply(EntityBase& entity){

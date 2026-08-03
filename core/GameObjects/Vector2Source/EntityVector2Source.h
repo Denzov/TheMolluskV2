@@ -3,7 +3,7 @@
 
 #include "IVector2Source.h"
 
-#include "GameObjects/EntityObjects/EntityBase.h"
+#include "GameObjects/EntityObjects/Base/EntityBase.h"
 
 class EntityVector2Source :
     public IVector2Source

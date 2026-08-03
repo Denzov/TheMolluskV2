@@ -1,7 +1,7 @@
 #ifndef _TEMPORARY_ENTITY_H_
 #define _TEMPORARY_ENTITY_H_
 
-#include "GameObjects/EntityObjects/EntityBase.h"
+#include "GameObjects/EntityObjects/Base/EntityBase.h"
 #include "GameObjects/EntityObjects/Module/TimerModule.h"
 
 class TemporaryEntity : 

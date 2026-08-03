@@ -1,7 +1,7 @@
 #ifndef _LIVING_ENTITY_H_
 #define _LIVING_ENTITY_H_
 
-#include "GameObjects/EntityObjects/EntityBase.h"
+#include "GameObjects/EntityObjects/Base/EntityBase.h"
 #include "GameObjects/EntityObjects/Module/HealthModule.h"
 
 class LivingEntity:

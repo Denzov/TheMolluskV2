@@ -20,7 +20,6 @@ public:
 private:
     std::unique_ptr<IVector2Source> _cur_pos;
     std::unique_ptr<IVector2Source> _aim_pos;
-
 };
 
 #endif // !THEMOLLUSK_LINE_MOVING_CUE_SOURCE_H

@@ -21,9 +21,11 @@ void GameSystem::draw()
 
 	ClearBackground(BLANK);
 
-
 	body.draw();
 
+	Shape::draw(Shape::Circle{.radius=5}, Vector2{-400, -400}, BLUE);
+	Shape::draw(Shape::Circle{.radius=5}, Vector2{-400, 400}, BLUE);
+	Shape::draw(Shape::Circle{.radius=5}, Vector2{400, -400}, BLUE);
 
 	EndMode2D();
 	EndDrawing();
@@ -46,7 +48,6 @@ void GameSystem::process()
 
 		_main_camera.addCommand(MCExecutor::CenterCameraOffset{});
 		_main_camera.process();
-
 
 		draw();
 	}

@@ -35,7 +35,7 @@ void EntityBase::internalUpdate(const GameContext& context) {
     const float dt = context.tick.getTickPeriod();
 
     _move_update(dt);
-    _aim_update(dt);
+    _rotation_update(dt);
     _effect_update(dt);
 
     update(context);
@@ -106,7 +106,7 @@ void EntityBase::_move_update(const float dt){
     _position = Vector2Add(_position, ds);
 }
 
-void EntityBase::_aim_update(const float dt){
+void EntityBase::_rotation_update(const float dt){
     const RotationCue cue = _rotation_cue_source->get();
     const float drot = _rotation_model->process(
         cue, _position, _rotation, dt);

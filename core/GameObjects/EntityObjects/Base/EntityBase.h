@@ -50,7 +50,7 @@ public:
 private:
     void _effect_update(const float dt);
     void _move_update(const float dt);
-    void _aim_update(const float dt);
+    void _rotation_update(const float dt);
 
 private:
     Shape::Variant _shape;

@@ -1,5 +1,5 @@
-#ifndef _AIM_INTENT_H_
-#define _AIM_INTENT_H_
+#ifndef _ROTATION_CUE_H_
+#define _ROTATION_CUE_H_
 
 #include <raylib.h>
 
@@ -8,4 +8,4 @@ struct RotationCue{
     const bool is_rotation;
 };
 
-#endif // !_AIM_INTENT_H_
+#endif // !_ROTATION_CUE_H_

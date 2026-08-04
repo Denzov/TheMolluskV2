@@ -12,6 +12,7 @@ class MovingDirectionRotationCueSource :
 {
 public:
     MovingDirectionRotationCueSource(std::unique_ptr<IVector2Source> base);
+    
     ~MovingDirectionRotationCueSource();
 
     RotationCue get() const override;

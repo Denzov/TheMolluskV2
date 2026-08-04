@@ -1,0 +1,9 @@
+#ifndef THEMOLLUSK_POSITION_STORAGE
+#define THEMOLLUSK_POSITION_STORAGE
+
+class PositionStorage{
+public:
+
+};
+
+#endif // !THEMOLLUSK_POSITION_STORAGE

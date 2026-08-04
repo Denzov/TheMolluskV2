@@ -12,6 +12,7 @@ class Vector2RotationCueSource :
 {
 public:
     Vector2RotationCueSource(std::unique_ptr<IVector2Source> cue);
+    
     ~Vector2RotationCueSource();
 
     RotationCue get() const override;

@@ -17,6 +17,8 @@
 
 #include "Rotation/Source/MovingDirection/MovingDirectionRotationCueSource.h"
 #include "Rotation/Model/RegRotation/RegRotationModel.h"
+#include "Rotation/Model/DelayedRotation/DelayedRotationModel.h"
+
 
 #include "Common.h"
 
@@ -32,31 +34,42 @@ public:
         });
 
         setMovingCueSource(std::make_unique<PatrolMovingCueSource>(
-            15,
+            300,
             std::make_unique<EntityVector2Source>(*this),
             make_unique_vector<IVector2Source>(
                 std::make_unique<PointVector2Source>(
-                    Vector2{-400, -400}),
+                    Vector2{-700, 700}),
                 std::make_unique<PointVector2Source>(
-                    Vector2{400, -400}),
+                    Vector2{-1400, 0}),
                 std::make_unique<PointVector2Source>(
-                    Vector2{-400, 400}),
+                    Vector2{700, 700}),
                 std::make_unique<PointVector2Source>(
-                    Vector2{0, 0}),
-                std::make_unique<MouseVector2Source>(
-                    context)
+                    Vector2{0, 1400}),
+                std::make_unique<PointVector2Source>(
+                    Vector2{700, -700}),
+                std::make_unique<PointVector2Source>(
+                    Vector2{1400, 0}),
+                std::make_unique<PointVector2Source>(
+                    Vector2{-700, -700}),
+                std::make_unique<PointVector2Source>(
+                    Vector2{0, -1400})
             )
         ));
         setMovingModel(std::make_unique<FirstOrderMovingModel>(
             FirstOrderMovingProperty{
-                .desired_velocity = 1000,
-                .T = 1.f
+                .desired_velocity = 6000,
+                .T = 3.f
             }
         ));
 
         setRotationCueSource(std::make_unique<MovingDirectionRotationCueSource>(
             std::make_unique<EntityVector2Source>(*this)
         ));
+        // setRotationModel(std::make_unique<DelayedRotationModel>(
+        //     DelayedRotationProperty{
+        //         .w = 10
+        //     }
+        // ));
         setRotationModel(std::make_unique<RegRotationModel>(
             RegRotationProperty{
                 .kp_rot = 10,

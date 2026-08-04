@@ -15,8 +15,6 @@ PatrolMovingCueSource::PatrolMovingCueSource(
 PatrolMovingCueSource::~PatrolMovingCueSource() = default;
 
 MovingCue PatrolMovingCueSource::get() const{
-    if(!_waypoints[_cur_point_idx]) return {0, false};
-
     Vector2 cur = _self_pos->get();
     Vector2 aim = _waypoints[_cur_point_idx]->get();
 

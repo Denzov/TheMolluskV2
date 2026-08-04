@@ -2,17 +2,17 @@
 #define THEMOLLUSK_ENTITY_MANAGER_H
 
 #include "EntityHandle.h"
-#include "Base/EntityBase.h"
-
-#include <raylib.h>
 
 #include <vector>
-
 #include <stdint.h>
 #include <memory>
 
+class EntityBase;
+
 class EntityManager{
 public:
+    ~EntityManager();
+
     template<typename T, typename... Args>
     EntityHandle spawnEntity(Args&&... args) {
         uint32_t index;
@@ -36,33 +36,20 @@ public:
         };
     }
 
-    void destroyEntity(EntityHandle handle) {
-        if(EntityBase* ent = getEntity(handle)){
-            auto& slot = _slots[handle.index];
-            slot.is_active = false;
-            slot.entity.reset();
-            slot.generation++;
+    void destroyEntity(EntityHandle handle);
 
-            _free_indices.push_back(handle.index);
-        }
-    }
-
-    EntityBase* getEntity(EntityHandle handle){
-        if(handle.index >= _slots.size()) return nullptr;
-
-        const auto& slot = _slots[handle.index];
-
-        if(slot.is_active && slot.generation == handle.generation)
-            return slot.entity.get();
-
-        return nullptr;
-    }
+    EntityBase* getEntity(EntityHandle handle) const;
 
 private:
     struct Slot {
         std::unique_ptr<EntityBase> entity;
         uint32_t generation = 1;
         bool is_active = false;
+
+        Slot();
+        ~Slot();
+        Slot(Slot&&) noexcept;
+        Slot& operator=(Slot&&) noexcept;
     };
 
     std::vector<Slot> _slots;

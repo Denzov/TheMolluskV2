@@ -20,6 +20,9 @@ void EntitySystem::cleanup(EntityManager& entmanager){
 
     entmanager.forEach([&](EntityBase& e){        
         if(!e.isAlive())
-            entmanager.destroyEntity(e.getHandle());
+            dead.push_back(e.getHandle());
     });
+
+    for(auto d : dead)
+        entmanager.destroyEntity(d);
 }

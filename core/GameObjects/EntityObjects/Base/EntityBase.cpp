@@ -21,17 +21,19 @@
 
 EntityBase::~EntityBase() = default;
 
-void EntityBase::internalInit(const GameContext& context) {
+void EntityBase::_internal_init(const GameContext& context, EntityHandle handle) {
     _moving_model = std::make_unique<BlankMovingModel>(); 
     _rotation_model = std::make_unique<BlankRotationModel>();
 
     _moving_cue_source = std::make_unique<BlankMovingCueSource>();
     _rotation_cue_source = std::make_unique<BlankRotationCueSource>();
 
+    _handle = handle;
+
     init(context);
 }
 
-void EntityBase::internalUpdate(const GameContext& context) {
+void EntityBase::_internal_update(const GameContext& context) {
     const float dt = context.tick.getTickPeriod();
 
     _move_update(dt);
@@ -55,6 +57,10 @@ float EntityBase::getRotation() const {
 
 void EntityBase::setRotation(const float rotation) { 
     _rotation = rotation; 
+}
+
+EntityHandle EntityBase::getHandle() const {
+    return _handle;
 }
 
 Shape::Variant EntityBase::getShape() const { 

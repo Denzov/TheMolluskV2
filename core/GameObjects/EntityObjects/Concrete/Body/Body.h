@@ -8,14 +8,15 @@
 
 #include "GameObjects/EntityObjects/Type/LivingEntity/LivingEntity.h"
 
-#include "GameObjects/Vector2Source/EntityVector2Source.h"
+#include "GameObjects/Vector2Source/Entity/EntityVector2Source.h"
 #include "GameObjects/Vector2Source/PointVector2Source.h"
 #include "GameObjects/Vector2Source/MouseVector2Source.h"
 
-#include "Moving/Source/PatrolMovingCueSource/PatrolMovingCueSource.h"
+#include "Moving/Source/PatrolMoving/PatrolMovingCueSource.h"
 #include "Moving/Model/FirstOrderMoving/FirstOrderMovingModel.h"
 
 #include "Rotation/Source/MovingDirection/MovingDirectionRotationCueSource.h"
+#include "Rotation/Source/Vector2Rotation/Vector2RotationCueSource.h"
 #include "Rotation/Model/RegRotation/RegRotationModel.h"
 #include "Rotation/Model/DelayedRotation/DelayedRotationModel.h"
 
@@ -27,6 +28,9 @@ class Body :
 {
 public:
     void init(const GameContext& context) override{
+        setMaxHp(100);
+        takeHp(100);
+
         setPosition({0, 0});
 
         setShape(Shape::Circle{
@@ -35,7 +39,8 @@ public:
 
         setMovingCueSource(std::make_unique<PatrolMovingCueSource>(
             300,
-            std::make_unique<EntityVector2Source>(*this),
+            std::make_unique<EntityVector2Source>(
+                context.entmanager, getHandle()),
             make_unique_vector<IVector2Source>(
                 std::make_unique<PointVector2Source>(
                     Vector2{-700, 700}),
@@ -52,18 +57,21 @@ public:
                 std::make_unique<PointVector2Source>(
                     Vector2{-700, -700}),
                 std::make_unique<PointVector2Source>(
-                    Vector2{0, -1400})
+                    Vector2{0, -1400}),
+                std::make_unique<MouseVector2Source>(
+                    context)
             )
         ));
         setMovingModel(std::make_unique<FirstOrderMovingModel>(
             FirstOrderMovingProperty{
-                .desired_velocity = 6000,
-                .T = 3.f
+                .desired_velocity = 2000,
+                .T = 1.f
             }
         ));
 
-        setRotationCueSource(std::make_unique<MovingDirectionRotationCueSource>(
-            std::make_unique<EntityVector2Source>(*this)
+        setRotationCueSource(std::make_unique<Vector2RotationCueSource>(
+            std::make_unique<MouseVector2Source>(
+                context)
         ));
         // setRotationModel(std::make_unique<DelayedRotationModel>(
         //     DelayedRotationProperty{

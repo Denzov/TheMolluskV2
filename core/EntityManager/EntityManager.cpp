@@ -1,5 +1,4 @@
 #include "EntityManager.h"
-#include "Base/EntityBase.h"
 
 EntityManager::~EntityManager() = default;
 
@@ -10,7 +9,6 @@ void EntityManager::destroyEntity(EntityHandle handle) {
         slot.entity.reset();
         slot.generation++;
 
-
         _free_indices.push_back(handle.index);
     }
 }
@@ -18,9 +16,7 @@ void EntityManager::destroyEntity(EntityHandle handle) {
 EntityBase* EntityManager::getEntity(EntityHandle handle) const {
     if(handle.index >= _slots.size()) return nullptr;
 
-
     const auto& slot = _slots[handle.index];
-
 
     if(slot.is_active && slot.generation == handle.generation)
         return slot.entity.get();

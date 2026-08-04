@@ -1,18 +1,16 @@
 #include "GameSystem.h"
 
+#include "GameObjects/EntityObjects/Concrete/Body/Body.h"
+
 void GameSystem::Run(){
     init();
-    process();
+    loop();
     close();
 }
 
 void GameSystem::init(){
 	_main_window.init();
 	_main_camera.init();
-
-	body = _entmanager.spawnEntity<Body>();
-	 
-	_entmanager.getEntity(body)->internalInit(_context);
 }
 
 void GameSystem::draw()
@@ -32,7 +30,7 @@ void GameSystem::draw()
 	Shape::draw(Shape::Circle{.radius=300}, Vector2{-1400, 0}, BLUE);
 	Shape::draw(Shape::Circle{.radius=300}, Vector2{50000, -2000}, BLUE);
 	
-	_entmanager.getEntity(body)->draw();
+	_entsystem.draw(_entmanager);
 
 	EndMode2D();
 	EndDrawing();
@@ -42,7 +40,7 @@ void GameSystem::close(){
 	CloseWindow();
 }
 
-void GameSystem::process()
+void GameSystem::loop()
 {
 	while (!WindowShouldClose())
 	{
@@ -50,35 +48,44 @@ void GameSystem::process()
 			simulate();
 		}
 
-		_tick_system.process();
-		_main_window.process();
-
-		_main_camera.addCommand(MCExecutor::CenterCameraOffset{});
-		_main_camera.process();
-
-		_main_camera.addCommand(
-			MCExecutor::RelativeZoomAt{
-				GetMouseWheelMove() * 0.2f,
-				GetMousePosition()
-			}
-		);
-
-		if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
-			Vector2 dtarget = GetMouseDelta();
-
-			_main_camera.addCommand(
-				MCExecutor::AddTarget{
-					.x = -dtarget.x,
-					.y = -dtarget.y
-				}
-			);
-		}
-
+		process();
 		draw();
 	}
 }
 
 void GameSystem::simulate()
 {
-	_entmanager.getEntity(body)->internalUpdate(_context);
+	_entsystem.update(_entmanager, _context);
+	_entsystem.cleanup(_entmanager);
+}
+
+void GameSystem::process(){
+	_tick_system.process();
+	_main_window.process();
+
+	_main_camera.addCommand(MCExecutor::CenterCameraOffset{});
+	_main_camera.process();
+
+	_main_camera.addCommand(
+		MCExecutor::RelativeZoomAt{
+			GetMouseWheelMove() * 0.2f,
+			GetMousePosition()
+		}
+	);
+
+	if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
+		Vector2 dtarget = GetMouseDelta();
+
+		_main_camera.addCommand(
+			MCExecutor::AddTarget{
+				.x = -dtarget.x,
+				.y = -dtarget.y
+			}
+		);
+	}
+
+	if(IsKeyDown(KEY_SPACE)){
+		EntityHandle handle = _entmanager.spawnEntity<Body>(_context);
+		WaitTime(0.01);
+	}
 }

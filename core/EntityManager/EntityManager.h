@@ -2,19 +2,20 @@
 #define THEMOLLUSK_ENTITY_MANAGER_H
 
 #include "EntityHandle.h"
+#include "Base/EntityBase.h"
 
 #include <vector>
 #include <stdint.h>
 #include <memory>
 
-class EntityBase;
+class GameContext;
 
 class EntityManager{
 public:
     ~EntityManager();
 
     template<typename T, typename... Args>
-    EntityHandle spawnEntity(Args&&... args) {
+    EntityHandle spawnEntity(GameContext& context, Args&&... args) {
         uint32_t index;
 
         if(!_free_indices.empty()){
@@ -29,16 +30,46 @@ public:
         auto& slot = _slots[index];
         slot.entity = std::make_unique<T>(std::forward<Args>(args)...);
         slot.is_active = true;
+        
+        auto handle = 
+            EntityHandle{
+                .index = index,
+                .generation = slot.generation
+            };
 
-        return EntityHandle{
-            .index = index,
-            .generation = slot.generation
-        };
+        slot.entity->_internal_init(context, handle);
+
+        return handle;
     }
 
     void destroyEntity(EntityHandle handle);
 
     EntityBase* getEntity(EntityHandle handle) const;
+    
+    template<typename Func>
+    void forEach(Func func)
+    {
+        for (Slot& slot : _slots)
+        {
+            if (!slot.is_active)
+                continue;
+
+            func(*slot.entity.get());
+        }
+    }
+
+    template<typename T, typename Func>
+    void forEach(Func func)
+    {
+        for (Slot& slot : _slots)
+        {
+            if (!slot.is_active)
+                continue;
+
+            if (auto* obj = dynamic_cast<T*>(slot.entity.get()))
+                func(*obj);
+        }
+    }
 
 private:
     struct Slot {

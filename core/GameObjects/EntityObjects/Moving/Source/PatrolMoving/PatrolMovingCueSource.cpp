@@ -2,7 +2,7 @@
 
 #include "GameObjects/Vec2Source/IVec2Source.h"
 
-#include <raymath.h>
+#include <cmath>
 
 PatrolMovingCueSource::PatrolMovingCueSource(
     const float reach_radius,
@@ -22,8 +22,9 @@ MovingCue PatrolMovingCueSource::get() const{
     const float angle = std::atan2(sub.y, sub.x);
 
     const float dist_sq = Math::distance_sq(cur, aim);
-    if(dist_sq <= _reach_radius * _reach_radius) 
+    if(dist_sq <= _reach_radius * _reach_radius){
         _cur_point_idx = (_cur_point_idx + 1) % _waypoints.size();
+    }
 
     return {angle, true};
 }

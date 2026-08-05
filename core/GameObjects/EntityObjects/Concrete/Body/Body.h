@@ -3,8 +3,6 @@
 
 #include <cmath>
 #include <memory>
-#include <raylib.h>
-#include <raymath.h>
 
 #include "GameObjects/EntityObjects/Type/LivingEntity/LivingEntity.h"
 
@@ -85,7 +83,7 @@ public:
         Shape::draw(form, pos, RED);
 
         const float rot = getRotation();
-        const Math::Vec2 rot_vec = {.x = cos(rot), .y = sin(rot)};
+        const Math::Vec2 rot_vec = {.x = std::cos(rot), .y = std::sin(rot)};
         const Math::Vec2 scale_rot_vec = rot_vec * 100;
         const Math::Vec2 b_add = {scale_rot_vec.x + pos.x, scale_rot_vec.y + pos.y};
         DrawLineV(toRaylib(pos), toRaylib(b_add), WHITE);

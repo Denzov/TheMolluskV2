@@ -3,8 +3,6 @@
 
 #include "../IMovingModel.h"
 
-#include <raylib.h>
-
 class BlankMovingModel :
     public IMovingModel
 {

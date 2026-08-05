@@ -3,8 +3,6 @@
 
 #include "../IMovingModel.h"
 
-#include <raylib.h>
-
 struct DirectMovingProperty{
     const float speed; // [1 / s]
 };

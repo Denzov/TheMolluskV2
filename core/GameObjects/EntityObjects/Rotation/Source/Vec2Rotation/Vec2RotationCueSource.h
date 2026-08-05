@@ -5,19 +5,19 @@
 
 #include <memory>
 
-class IVector2Source;
+class IVec2Source;
 
-class Vector2RotationCueSource :
+class RotationCueSource :
     public IRotationCueSource
 {
 public:
-    Vector2RotationCueSource(std::unique_ptr<IVector2Source> cue);
+    RotationCueSource(std::unique_ptr<IVec2Source> cue);
     
-    ~Vector2RotationCueSource();
+    ~RotationCueSource();
 
     RotationCue get() const override;
 private:
-    std::unique_ptr<IVector2Source> _cue;
+    std::unique_ptr<IVec2Source> _cue;
 };
 
 #endif // !THEMOLLUSK_VECTOR2_ROTATION_CUE_SOURCE_H

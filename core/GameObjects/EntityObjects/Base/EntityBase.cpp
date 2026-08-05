@@ -1,5 +1,6 @@
 #include "EntityBase.h"
 
+#include <raylib.h>
 #include <raymath.h>
 
 #include "GameSystem/GameContext.h"
@@ -43,11 +44,11 @@ void EntityBase::_internal_update(const GameContext& context) {
     update(context);
 }
 
-Vector2 EntityBase::getPosition() const { 
+Math::Vec2 EntityBase::getPosition() const { 
     return _position;
 }
 
-void EntityBase::setPosition(Vector2 position) { 
+void EntityBase::setPosition(Math::Vec2 position) { 
     _position = position; 
 }
 
@@ -107,9 +108,9 @@ void EntityBase::_effect_update(const float dt){
 
 void EntityBase::_move_update(const float dt){
     const MovingCue cue = _moving_cue_source->get();
-    const Vector2 ds = _moving_model->process(cue, dt);
+    const Math::Vec2 ds = _moving_model->process(cue, dt);
 
-    _position = Vector2Add(_position, ds);
+    _position += ds;
 }
 
 void EntityBase::_rotation_update(const float dt){

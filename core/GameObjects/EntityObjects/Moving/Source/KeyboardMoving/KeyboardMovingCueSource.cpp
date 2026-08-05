@@ -1,9 +1,12 @@
 #include "KeyboardMovingCueSource.h"
 
-#include <raylib.h>
-#include <raymath.h>
+#include "Math/Vec2.h"
+#include "Math/Constants.h"
 
+#include <raylib.h>
 #include <cmath>
+
+
 
 KeyboardMovingCueSource::KeyboardMovingCueSource(){
     Layout default_layout = {
@@ -24,12 +27,12 @@ MovingCue KeyboardMovingCueSource::get() const {
         IsKeyDown(_layout.south)
     };
 
-    const Vector2 v = {
+    const Math::Vec2 v = {
         .x = static_cast<float>(dirs[1] - dirs[2]),
         .y = static_cast<float>(dirs[3] - dirs[0])
     };
 
-    if(abs(v.x) < EPSILON && abs(v.y) < EPSILON) 
+    if(std::abs(v.x) < Math::EPSILON && std::abs(v.y) < Math::EPSILON) 
         return {0.f, false};
     
     const float angle = std::atan2(v.y, v.x);

@@ -3,9 +3,9 @@
 #include <math.h>
 #include <raymath.h>
 
-Vector2 FirstOrderMovingModel::process(MovingCue cue, float dt)
+Math::Vec2 FirstOrderMovingModel::process(MovingCue cue, float dt)
 {
-    Vector2 target_velocity = {};
+    Math::Vec2 target_velocity = {};
 
     if(cue.is_moving)
     {
@@ -20,5 +20,5 @@ Vector2 FirstOrderMovingModel::process(MovingCue cue, float dt)
     _velocity.x = std::lerp(_velocity.x, target_velocity.x, alpha);
     _velocity.y = std::lerp(_velocity.y, target_velocity.y, alpha);
 
-    return Vector2Scale(_velocity, dt);
+    return _velocity * dt;
 }

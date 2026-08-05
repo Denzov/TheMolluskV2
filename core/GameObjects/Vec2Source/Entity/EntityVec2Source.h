@@ -1,26 +1,26 @@
 #ifndef THEMOLLUSK_ENTITY_VECTOR2_SOURCE_H
 #define THEMOLLUSK_ENTITY_VECTOR2_SOURCE_H
 
-#include "../IVector2Source.h"
+#include "../IVec2Source.h"
 
 #include "EntityManager/EntityHandle.h"
 
 class GameContext;
 
-class EntityVector2Source :
-    public IVector2Source
+class EntityVec2Source :
+    public IVec2Source
 {
 public:
-    EntityVector2Source(
+    EntityVec2Source(
         const GameContext& context,
         const EntityHandle& source) :
             _context(context),
             _source(source){}
 
-    Vector2 get() const override;
+    Math::Vec2 get() const override;
 
 private:
-    mutable Vector2 _last_source_pos = {};
+    mutable Math::Vec2 _last_source_pos = {};
     const GameContext& _context;
     const EntityHandle _source;
 };

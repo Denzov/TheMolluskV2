@@ -5,23 +5,23 @@
 
 #include <memory>
 
-class IVector2Source;
+class IVec2Source;
 
 class LineMovingCueSource : 
     public IMovingCueSource
 {
 public:
     LineMovingCueSource(
-        std::unique_ptr<IVector2Source> cur_pos,
-        std::unique_ptr<IVector2Source> aim_pos);
+        std::unique_ptr<IVec2Source> cur_pos,
+        std::unique_ptr<IVec2Source> aim_pos);
 
     ~LineMovingCueSource();
 
     MovingCue get() const override;
 
 private:
-    std::unique_ptr<IVector2Source> _cur_pos;
-    std::unique_ptr<IVector2Source> _aim_pos;
+    std::unique_ptr<IVec2Source> _cur_pos;
+    std::unique_ptr<IVec2Source> _aim_pos;
 };
 
 #endif // !THEMOLLUSK_LINE_MOVING_CUE_SOURCE_H

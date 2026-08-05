@@ -1,8 +1,10 @@
 #ifndef THEMOLLUSK_SHAPE_H
 #define THEMOLLUSK_SHAPE_H
 
-#include <raylib.h>
 #include <variant>
+#include "Math/Vec2.h"
+
+class Color;
 
 namespace Shape {
     struct Circle{
@@ -20,58 +22,31 @@ namespace Shape {
     >;
 
     struct Collision{
-        const Vector2& pos1;
-        const Vector2& pos2;
+        const Math::Vec2& pos1;
+        const Math::Vec2& pos2;
 
-        bool operator()(const Shape::Circle& form1, const Shape::Circle& form2) const {
-            return CheckCollisionCircles(
-                pos1, form1.radius, 
-                pos2, form2.radius
-            );
-        }
-
-        bool operator()(const Shape::AABB& form1, const Shape::AABB& form2) const {
-            return CheckCollisionRecs(
-                {pos1.x, pos1.y, form1.width, form1.height}, 
-                {pos2.x, pos2.y, form2.width, form2.height}
-            );
-        }
-
-        bool operator()(const Shape::Circle& form1, const Shape::AABB& form2) const {            
-            return CheckCollisionCircleRec(
-                pos1, form1.radius, 
-                {pos2.x, pos2.y, form2.width, form2.height}
-            );
-        }
-
-        bool operator()(const Shape::AABB& form1, const Shape::Circle& form2) const {
-            return CheckCollisionCircleRec(
-                pos2, form2.radius, 
-                {pos1.x, pos1.y, form1.width, form1.height}
-            );
-        }
+        bool operator()(const Shape::Circle& form1, const Shape::Circle& form2) const;
+        bool operator()(const Shape::AABB& form1, const Shape::AABB& form2) const;
+        bool operator()(const Shape::Circle& form1, const Shape::AABB& form2) const;
+        bool operator()(const Shape::AABB& form1, const Shape::Circle& form2) const;
     };
 
     inline bool intersect(
-        const Variant& form1, const Vector2& pos1, 
-        const Variant& form2, const Vector2& pos2) 
+        const Variant& form1, const Math::Vec2& pos1, 
+        const Variant& form2, const Math::Vec2& pos2) 
     {
         return std::visit(Collision{pos1, pos2}, form1, form2);
     }
 
     struct Drawer{
-        const Vector2& pos;
+        const Math::Vec2& pos;
         const Color& col;
 
-        void operator()(const Shape::Circle& form) const {
-            DrawCircleV(pos, form.radius, col);
-        }
-        void operator()(const Shape::AABB& form) const {
-            DrawRectangleV(pos, {form.width, form.height}, col);
-        }
+        void operator()(const Shape::Circle& form) const;
+        void operator()(const Shape::AABB& form) const;
     };
 
-    inline void draw(const Variant& form, const Vector2& pos, const Color& col){
+    inline void draw(const Variant& form, const Math::Vec2& pos, const Color& col){
         std::visit(Drawer{.pos = pos, .col = col}, form);
     }
 }

@@ -19,16 +19,12 @@ void GameSystem::draw()
 	BeginMode2D(_main_camera.getData());
 
 	ClearBackground(BLANK);
-	
-	Shape::draw(Shape::Circle{.radius=300}, Vector2{-700, -700}, BLUE);
-	Shape::draw(Shape::Circle{.radius=300}, Vector2{-700, 700}, BLUE);
-	Shape::draw(Shape::Circle{.radius=300}, Vector2{700, -700}, BLUE);
-	Shape::draw(Shape::Circle{.radius=300}, Vector2{700, 700}, BLUE);
-	Shape::draw(Shape::Circle{.radius=300}, Vector2{0, 1400}, BLUE);
-	Shape::draw(Shape::Circle{.radius=300}, Vector2{0, -1400}, BLUE);
-	Shape::draw(Shape::Circle{.radius=300}, Vector2{1400, 0}, BLUE);
-	Shape::draw(Shape::Circle{.radius=300}, Vector2{-1400, 0}, BLUE);
-	Shape::draw(Shape::Circle{.radius=300}, Vector2{50000, -2000}, BLUE);
+
+	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, 0}, BLUE);
+	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{50000, 0}, BLUE);
+	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{-50000, 0}, BLUE);
+	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, 50000}, BLUE);
+	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, -50000}, BLUE);
 	
 	_entsystem.draw(_entmanager);
 
@@ -86,6 +82,17 @@ void GameSystem::process(){
 
 	if(IsKeyDown(KEY_SPACE)){
 		EntityHandle handle = _entmanager.spawnEntity<Body>(_context);
-		WaitTime(0.01);
+		_entmanager.getEntity(handle)->setPosition({
+			(float)GetRandomValue(-20000, 20000) / 100.f + 
+				GetScreenToWorld2D(GetMousePosition(), _context.camera.getData()).x, 
+			(float)GetRandomValue(-20000, 20000) / 100.f + 
+				GetScreenToWorld2D(GetMousePosition(), _context.camera.getData()).y});
+
+		_entmanager.getEntity(handle)->setMovingModel(std::make_unique<FirstOrderMovingModel>(
+            FirstOrderMovingProperty{
+                .desired_velocity = 3000,
+                .T = 1.5f + (float)GetRandomValue(-1000, 1000) / 1000.f
+            }
+        ));
 	}
 }

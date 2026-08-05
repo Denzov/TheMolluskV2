@@ -20,7 +20,7 @@ public:
         _property(property){}
 
     float process(const RotationCue cue, 
-                  const Vector2 base, 
+                  const Math::Vec2 base, 
                   const float rot, const float dt) override;
 
 private:

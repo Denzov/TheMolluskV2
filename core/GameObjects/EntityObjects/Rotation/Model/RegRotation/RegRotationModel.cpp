@@ -1,17 +1,18 @@
 #include "RegRotationModel.h"
 
+#include "Math/Constants.h"
+
 #include <algorithm>
-#include <raymath.h>
 #include <cmath>
 
 float RegRotationModel::process(const RotationCue cue, 
-              const Vector2 base, 
+              const Math::Vec2 base, 
               const float rot, const float dt)
 {
-    const Vector2 d = Vector2Subtract(cue.target, base);
+    const Math::Vec2 d = cue.target - base;
     const float target_rot = std::atan2(d.y, d.x);
 
-    const float err_rot = std::remainder(target_rot - rot, 2.0f * PI);
+    const float err_rot = std::remainder(target_rot - rot, 2.0f * Math::PI);
     
     const float P_rot_product = err_rot * _property.kp_rot;
     const float w_target = cue.is_rotation?

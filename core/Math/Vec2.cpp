@@ -132,4 +132,21 @@ namespace Math{
         const float length = this->length();
         return *this / length;
     }
+
+    float distance_sq(Vec2 v1, Vec2 v2){
+        return (v1.x - v2.x) * (v1.x - v2.x) + (v1.y - v2.y) * (v1.x - v2.x);
+    }
+    float distance(Vec2 v1, Vec2 v2){
+        return std::sqrt(distance_sq(v1, v2));
+    }
+    float dot(Vec2 v1, Vec2 v2){
+        return v1.x * v2.y + v1.y * v2.y;
+    }
+}
+
+Math::Vec2 operator/(float scalar, const Math::Vec2& vec){
+    return {
+        .x = scalar / vec.x,
+        .y = scalar / vec.y
+    };
 }

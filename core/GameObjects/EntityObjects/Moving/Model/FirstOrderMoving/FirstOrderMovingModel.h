@@ -15,12 +15,12 @@ public:
     FirstOrderMovingModel(FirstOrderMovingProperty property)
         : _property(property) {}
 
-    Vector2 process(MovingCue cue, float dt) override;
+    Math::Vec2 process(MovingCue cue, float dt) override;
 
 private:
     FirstOrderMovingProperty _property;
 
-    Vector2 _velocity = {};
+    Math::Vec2 _velocity = {};
 };
 
 #endif // !THEMOLLUSK_FIRST_ORDER_MOVING_MODEL_H

@@ -16,7 +16,7 @@ public:
     DirectMovingModel(DirectMovingProperty property) : 
         _property(property){}
 
-    Vector2 process(MovingCue cue, const float dt) override;
+    Math::Vec2 process(MovingCue cue, const float dt) override;
 
 private:
     const DirectMovingProperty _property;

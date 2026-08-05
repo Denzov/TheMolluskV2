@@ -2,9 +2,9 @@
 #define THEMOLLUSK_I_ENTITY_H
 
 #include <memory>
-#include <raylib.h>
-
 #include <vector>
+
+#include "Math/Vec2.h"
 
 #include "GameObjects/Effect/ActiveEffect.h"
 #include "GameObjects/CollisionSystem/Shape.h"
@@ -31,8 +31,8 @@ public:
 
     virtual bool isAlive() const = 0;
     
-    Vector2 getPosition() const;
-    void setPosition(Vector2 position);
+    Math::Vec2 getPosition() const;
+    void setPosition(Math::Vec2 position);
 
     float getRotation() const;
     void setRotation(const float rotation);
@@ -66,7 +66,7 @@ private:
 private:
     Shape::Variant _shape;
     
-    Vector2 _position = {};
+    Math::Vec2 _position = {};
     float _rotation = 0;
     
     std::vector<ActiveEffect> _effects;

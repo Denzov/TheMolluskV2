@@ -6,7 +6,7 @@
 #include <vector>
 #include <memory>
 
-class IVector2Source;
+class IVec2Source;
 
 class PatrolMovingCueSource : 
     public IMovingCueSource 
@@ -14,8 +14,8 @@ class PatrolMovingCueSource :
 public:
     PatrolMovingCueSource(
         const float reach_radius,
-        std::unique_ptr<IVector2Source> self_pos, 
-        std::vector<std::unique_ptr<IVector2Source>> waypoints);
+        std::unique_ptr<IVec2Source> self_pos, 
+        std::vector<std::unique_ptr<IVec2Source>> waypoints);
 
     ~PatrolMovingCueSource();
 
@@ -23,8 +23,8 @@ public:
 
 private:
     const float _reach_radius;
-    std::unique_ptr<IVector2Source> _self_pos;
-    std::vector<std::unique_ptr<IVector2Source>> _waypoints;
+    std::unique_ptr<IVec2Source> _self_pos;
+    std::vector<std::unique_ptr<IVec2Source>> _waypoints;
 
     mutable size_t _cur_point_idx = 0;
 };

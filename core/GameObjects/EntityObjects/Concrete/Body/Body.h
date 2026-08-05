@@ -8,18 +8,18 @@
 
 #include "GameObjects/EntityObjects/Type/LivingEntity/LivingEntity.h"
 
-#include "GameObjects/Vector2Source/Entity/EntityVector2Source.h"
-#include "GameObjects/Vector2Source/PointVector2Source.h"
-#include "GameObjects/Vector2Source/MouseVector2Source.h"
+#include "GameObjects/Vec2Source/Entity/EntityVec2Source.h"
+#include "GameObjects/Vec2Source/Point/PointVec2Source.h"
+#include "GameObjects/Vec2Source/Mouse/MouseVec2Source.h"
 
 #include "Moving/Source/PatrolMoving/PatrolMovingCueSource.h"
 #include "Moving/Model/FirstOrderMoving/FirstOrderMovingModel.h"
 
 #include "Rotation/Source/MovingDirection/MovingDirectionRotationCueSource.h"
-#include "Rotation/Source/Vector2Rotation/Vector2RotationCueSource.h"
+#include "Rotation/Source/Vec2Rotation/Vec2RotationCueSource.h"
 #include "Rotation/Model/RegRotation/RegRotationModel.h"
-#include "Rotation/Model/DelayedRotation/DelayedRotationModel.h"
 
+#include "Math/MathRaylibConverter.h"
 
 #include "Common.h"
 
@@ -38,52 +38,41 @@ public:
         });
 
         setMovingCueSource(std::make_unique<PatrolMovingCueSource>(
-            300,
-            std::make_unique<EntityVector2Source>(
-                context.entmanager, getHandle()),
-            make_unique_vector<IVector2Source>(
-                std::make_unique<PointVector2Source>(
-                    Vector2{-700, 700}),
-                std::make_unique<PointVector2Source>(
-                    Vector2{-1400, 0}),
-                std::make_unique<PointVector2Source>(
-                    Vector2{700, 700}),
-                std::make_unique<PointVector2Source>(
-                    Vector2{0, 1400}),
-                std::make_unique<PointVector2Source>(
-                    Vector2{700, -700}),
-                std::make_unique<PointVector2Source>(
-                    Vector2{1400, 0}),
-                std::make_unique<PointVector2Source>(
-                    Vector2{-700, -700}),
-                std::make_unique<PointVector2Source>(
-                    Vector2{0, -1400}),
-                std::make_unique<MouseVector2Source>(
-                    context)
+            200,
+            std::make_unique<EntityVec2Source>(
+                context,
+                getHandle()),
+            make_unique_vector<IVec2Source>(
+                std::make_unique<PointVec2Source>(
+                    Math::Vec2{0, 0}),
+                std::make_unique<PointVec2Source>(
+                    Math::Vec2{50000, 0}),
+                std::make_unique<PointVec2Source>(
+                    Math::Vec2{0, -50000}),
+                std::make_unique<PointVec2Source>(
+                    Math::Vec2{-50000, 0}),
+                std::make_unique<PointVec2Source>(
+                    Math::Vec2{0, 50000})
             )
         ));
         setMovingModel(std::make_unique<FirstOrderMovingModel>(
             FirstOrderMovingProperty{
-                .desired_velocity = 2000,
-                .T = 1.f
+                .desired_velocity = 3000,
+                .T = 1.5f
             }
         ));
 
-        setRotationCueSource(std::make_unique<Vector2RotationCueSource>(
-            std::make_unique<MouseVector2Source>(
-                context)
+        setRotationCueSource(std::make_unique<MovingDirectionRotationCueSource>(
+            std::make_unique<EntityVec2Source>(
+                context,
+                getHandle())
         ));
-        // setRotationModel(std::make_unique<DelayedRotationModel>(
-        //     DelayedRotationProperty{
-        //         .w = 10
-        //     }
-        // ));
         setRotationModel(std::make_unique<RegRotationModel>(
             RegRotationProperty{
                 .kp_rot = 10,
                 
-                .kp_speed = 0.3,
-                .ki_speed = 5.f,
+                .kp_speed = 0.5,
+                .ki_speed = 3.f,
 
                 .max_w = 100
             }
@@ -91,15 +80,15 @@ public:
     }
 
     void draw() const override{
-        const Vector2 pos = getPosition();
+        const Math::Vec2 pos = getPosition();
         const Shape::Variant form = getShape();
         Shape::draw(form, pos, RED);
 
         const float rot = getRotation();
-        const Vector2 rot_vec = {.x = cos(rot), .y = sin(rot)};
-        const Vector2 scale_rot_vec = Vector2Scale(rot_vec, 100);
-        const Vector2 b_add = {scale_rot_vec.x + pos.x, scale_rot_vec.y + pos.y};
-        DrawLineV(pos, b_add, WHITE);
+        const Math::Vec2 rot_vec = {.x = cos(rot), .y = sin(rot)};
+        const Math::Vec2 scale_rot_vec = rot_vec * 100;
+        const Math::Vec2 b_add = {scale_rot_vec.x + pos.x, scale_rot_vec.y + pos.y};
+        DrawLineV(toRaylib(pos), toRaylib(b_add), WHITE);
     }
 
     void update(const GameContext& constext) override{

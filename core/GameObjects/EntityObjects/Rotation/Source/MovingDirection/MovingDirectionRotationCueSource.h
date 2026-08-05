@@ -5,13 +5,13 @@
 
 #include <memory>
 
-class IVector2Source;
+class IVec2Source;
 
 class MovingDirectionRotationCueSource :
     public IRotationCueSource
 {
 public:
-    MovingDirectionRotationCueSource(std::unique_ptr<IVector2Source> base);
+    MovingDirectionRotationCueSource(std::unique_ptr<IVec2Source> base);
     
     ~MovingDirectionRotationCueSource();
 
@@ -19,10 +19,10 @@ public:
 
 private:
     mutable float _prev_angle = 0;
-    mutable Vector2 _prev_base = {};
-    mutable Vector2 _prev_target = {};
+    mutable Math::Vec2 _prev_base = {};
+    mutable Math::Vec2 _prev_target = {};
     
-    std::unique_ptr<IVector2Source> _base;
+    std::unique_ptr<IVec2Source> _base;
 };
 
 #endif // !THEMOLLUSK_MOVING_DIRECTION_AIM_SOURCE_H

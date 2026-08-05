@@ -33,8 +33,11 @@ namespace Math{
         Vec2 normalize() const;
     };
 
-    // Vec2 operator/(float scalar, const Vec2& vec);
-
+    float distance_sq(Vec2 v1, Vec2 v2);
+    float distance(Vec2 v1, Vec2 v2);
+    float dot(Vec2 v1, Vec2 v2);
 }
+Math::Vec2 operator/(float scalar, const Math::Vec2& vec);
+
 
 #endif // !THEMOLLUSK_VEC2_H

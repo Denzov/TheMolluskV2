@@ -1,18 +1,18 @@
 #ifndef THEMOLLUSK_MOUSE_VECTOR2_SOURCE_H
 #define THEMOLLUSK_MOUSE_VECTOR2_SOURCE_H
 
-#include "../IVector2Source.h"
+#include "../IVec2Source.h"
 
 class GameContext;
 
-class MouseVector2Source :
-    public IVector2Source
+class MouseVec2Source :
+    public IVec2Source
 {
 public:
-    MouseVector2Source(const GameContext& context) :
+    MouseVec2Source(const GameContext& context) :
         _context(context){}
 
-    Vector2 get() const override;
+    Math::Vec2 get() const override;
 private:
     const GameContext& _context;
 };

@@ -9,7 +9,7 @@ class BlankMovingModel :
     public IMovingModel
 {
 public:
-    Vector2 process(MovingCue cue, const float dt) override;
+    Math::Vec2 process(MovingCue cue, const float dt) override;
 };
 
 #endif // !THEMOLLUSK_BLANK_MOVING_MODEL_H

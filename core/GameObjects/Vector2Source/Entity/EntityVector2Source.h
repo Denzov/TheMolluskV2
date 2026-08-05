@@ -3,23 +3,25 @@
 
 #include "../IVector2Source.h"
 
-#include "EntityManager/EntityManager.h"
+#include "EntityManager/EntityHandle.h"
+
+class GameContext;
 
 class EntityVector2Source :
     public IVector2Source
 {
 public:
     EntityVector2Source(
-        const EntityManager& entmanager,
+        const GameContext& context,
         const EntityHandle& source) :
-            _entmanager(entmanager),
+            _context(context),
             _source(source){}
 
     Vector2 get() const override;
 
 private:
     mutable Vector2 _last_source_pos = {};
-    const EntityManager& _entmanager;
+    const GameContext& _context;
     const EntityHandle _source;
 };
 

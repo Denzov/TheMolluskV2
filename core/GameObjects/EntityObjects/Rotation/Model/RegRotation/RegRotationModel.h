@@ -26,7 +26,7 @@ public:
 private:
     RegRotationProperty _property;
 
-    float speed_integrator = 0;
+    float _speed_integrator = 0;
     float _w = 0;
 };
 

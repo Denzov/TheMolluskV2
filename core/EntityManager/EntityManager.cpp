@@ -21,7 +21,6 @@ EntityBase* EntityManager::getEntity(EntityHandle handle) const {
     if(slot.is_active && slot.generation == handle.generation)
         return slot.entity.get();
 
-
     return nullptr;
 }
 

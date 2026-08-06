@@ -7,8 +7,6 @@ int64_t LivingEntity::getMaxHp() const {
     return _health.max_hp; 
 }
 
-#include <iostream>
-
 void LivingEntity::takeHp(const int64_t delta_hp) { 
     _health.hp += delta_hp;
 }

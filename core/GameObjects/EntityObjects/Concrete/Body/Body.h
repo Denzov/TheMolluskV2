@@ -29,10 +29,11 @@ public:
         setMaxHp(100);
         takeHp(100);
 
-        setPosition({0, 0});
-
-        setShape(Shape::Circle{
-            .radius = 15.f
+        getShapeCluster().add(Shape::ClusterNode{
+            .shape = Shape::Circle{
+                .radius = 15
+            },
+            .anchor = {0, 0}
         });
 
         setMovingCueSource(std::make_unique<PatrolMovingCueSource>(
@@ -44,22 +45,10 @@ public:
                 std::make_unique<PointVec2Source>(
                     Math::Vec2{0, 0}),
                 std::make_unique<PointVec2Source>(
-                    Math::Vec2{50000, 0}),
-                std::make_unique<PointVec2Source>(
-                    Math::Vec2{0, -50000}),
-                std::make_unique<PointVec2Source>(
-                    Math::Vec2{-50000, 0}),
-                std::make_unique<PointVec2Source>(
-                    Math::Vec2{0, 50000})
+                    Math::Vec2{10000, 0})
             )
         ));
-        setMovingModel(std::make_unique<FirstOrderMovingModel>(
-            FirstOrderMovingProperty{
-                .desired_velocity = 3000,
-                .T = 1.5f
-            }
-        ));
-
+         
         setRotationCueSource(std::make_unique<MovingDirectionRotationCueSource>(
             std::make_unique<EntityVec2Source>(
                 context,
@@ -79,14 +68,17 @@ public:
 
     void draw() const override{
         const Math::Vec2 pos = getPosition();
-        const Shape::Variant form = getShape();
-        Shape::draw(form, pos, RED);
+        const Shape::Cluster& form = getShapeCluster();
+
+        for(const auto& node : form.getNodes()){
+            Shape::draw(node.shape, pos + node.anchor, RED);
+        }
 
         const float rot = getRotation();
         const Math::Vec2 rot_vec = {.x = std::cos(rot), .y = std::sin(rot)};
         const Math::Vec2 scale_rot_vec = rot_vec * 100;
         const Math::Vec2 b_add = {scale_rot_vec.x + pos.x, scale_rot_vec.y + pos.y};
-        DrawLineV(toRaylib(pos), toRaylib(b_add), WHITE);
+        DrawLineEx(toRaylib(pos), toRaylib(b_add), 5, WHITE);
     }
 
     void update(const GameContext& constext) override{

@@ -2,12 +2,12 @@
 
 #include "GameObjects/Vec2Source/IVec2Source.h"
 
-RotationCueSource::RotationCueSource(
+Vec2RotationCueSource::Vec2RotationCueSource(
         std::unique_ptr<IVec2Source> cue) :
             _cue(std::move(cue)) {}
 
-RotationCueSource::~RotationCueSource() = default;
+Vec2RotationCueSource::~Vec2RotationCueSource() = default;
 
-RotationCue RotationCueSource::get() const {
+RotationCue Vec2RotationCueSource::get() const {
     return {_cue->get(), true};
 }

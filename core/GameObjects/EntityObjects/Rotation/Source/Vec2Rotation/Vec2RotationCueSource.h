@@ -7,13 +7,13 @@
 
 class IVec2Source;
 
-class RotationCueSource :
+class Vec2RotationCueSource :
     public IRotationCueSource
 {
 public:
-    RotationCueSource(std::unique_ptr<IVec2Source> cue);
+    Vec2RotationCueSource(std::unique_ptr<IVec2Source> cue);
     
-    ~RotationCueSource();
+    ~Vec2RotationCueSource();
 
     RotationCue get() const override;
 private:

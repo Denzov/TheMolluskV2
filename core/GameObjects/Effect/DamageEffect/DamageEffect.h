@@ -8,6 +8,9 @@
 struct DamageEffect : 
     public IEffect
 {
+    DamageEffect(int64_t dmg):
+        damage(dmg){}
+
     int64_t damage;
     void apply(EntityBase& entity) override;
 };

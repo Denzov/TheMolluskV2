@@ -2,6 +2,8 @@
 
 #include "GameObjects/EntityObjects/Concrete/Body/Body.h"
 
+#include "GameObjects/Effect/DamageEffect/DamageEffect.h"
+
 void GameSystem::Run(){
     init();
     loop();
@@ -21,10 +23,10 @@ void GameSystem::draw()
 	ClearBackground(BLANK);
 
 	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, 0}, BLUE);
-	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{50000, 0}, BLUE);
-	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{-50000, 0}, BLUE);
-	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, 50000}, BLUE);
-	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, -50000}, BLUE);
+	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{10000, 0}, BLUE);
+	// Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{-50000, 0}, BLUE);
+	// Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, 50000}, BLUE);
+	// Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, -50000}, BLUE);
 	
 	_entsystem.draw(_entmanager);
 
@@ -90,9 +92,17 @@ void GameSystem::process(){
 
 		_entmanager.getEntity(handle)->setMovingModel(std::make_unique<FirstOrderMovingModel>(
             FirstOrderMovingProperty{
-                .desired_velocity = 3000,
-                .T = 1.5f + (float)GetRandomValue(-1000, 1000) / 1000.f
+                .desired_velocity = 2000 + (float)GetRandomValue(-1000, 2000),
+                .T = 2.5f + (float)GetRandomValue(-2000, 2000) / 1000.f
             }
         ));
+
+		_entmanager.getEntity(handle)->addEffect(ActiveEffect{
+			.effect = std::make_unique<DamageEffect>(100),
+			.elapsed = 0,
+			.duration = 20,
+			.interval = 0,
+			.next_apply = 20
+		});
 	}
 }

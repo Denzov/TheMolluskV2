@@ -7,7 +7,7 @@
 #include "Math/Vec2.h"
 
 #include "GameObjects/Effect/ActiveEffect.h"
-#include "GameObjects/CollisionSystem/Shape.h"
+#include "CollisionSystem/ShapeCluster.h"
 
 #include "EntityManager/EntityHandle.h"
 
@@ -39,8 +39,10 @@ public:
 
     EntityHandle getHandle() const;
 
-    Shape::Variant getShape() const;
-    void setShape(Shape::Variant shape);
+    Shape::Cluster& getShapeCluster();
+    const Shape::Cluster& getShapeCluster() const;
+    void setShapeCluster(Shape::Cluster&);
+    void addNodeToCluster(Shape::ClusterNode);
 
     void addEffect(ActiveEffect effect);
 
@@ -64,7 +66,7 @@ private:
     void _rotation_update(const float dt);
 
 private:
-    Shape::Variant _shape;
+    Shape::Cluster _shape_cluster;
     
     Math::Vec2 _position = {};
     float _rotation = 0;

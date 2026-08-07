@@ -24,6 +24,7 @@ void GameSystem::draw()
 
 	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, 0}, BLUE);
 	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{10000, 0}, BLUE);
+	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{5000, (float)std::sqrt(3) / 2 * 10000}, BLUE);
 	// Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{-50000, 0}, BLUE);
 	// Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, 50000}, BLUE);
 	// Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, -50000}, BLUE);
@@ -71,7 +72,7 @@ void GameSystem::process(){
 		}
 	);
 
-	if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
+	if(IsMouseButtonDown(MOUSE_BUTTON_MIDDLE)){
 		Vector2 dtarget = GetMouseDelta();
 
 		_main_camera.addCommand(
@@ -92,17 +93,11 @@ void GameSystem::process(){
 
 		_entmanager.getEntity(handle)->setMovingModel(std::make_unique<FirstOrderMovingModel>(
             FirstOrderMovingProperty{
-                .desired_velocity = 2000 + (float)GetRandomValue(-1000, 2000),
                 .T = 2.5f + (float)GetRandomValue(-2000, 2000) / 1000.f
             }
         ));
 
-		_entmanager.getEntity(handle)->addEffect(ActiveEffect{
-			.effect = std::make_unique<DamageEffect>(100),
-			.elapsed = 0,
-			.duration = 20,
-			.interval = 0,
-			.next_apply = 20
-		});
+		_entmanager.getEntity(handle)->
+			setDesiredVelocity((float)GetRandomValue(2000, 6000));
 	}
 }

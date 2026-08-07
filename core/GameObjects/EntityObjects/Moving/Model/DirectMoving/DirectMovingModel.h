@@ -3,22 +3,12 @@
 
 #include "../IMovingModel.h"
 
-struct DirectMovingProperty{
-    const float speed; // [1 / s]
-};
-
 class DirectMovingModel :
     public IMovingModel
 {
 public:
-    DirectMovingModel(DirectMovingProperty property) : 
-        _property(property){}
-
-    Math::Vec2 process(MovingCue cue, const float dt) override;
-
-private:
-    const DirectMovingProperty _property;
-
+    Math::Vec2 process(MovingCue, 
+        const float desired_velocity, const float dt) override;
 };
 
 #endif // !THEMOLLUSK_DIRECT_MOVING_MODEL_H

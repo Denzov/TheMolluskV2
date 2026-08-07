@@ -31,6 +31,9 @@ public:
 
     virtual bool isAlive() const = 0;
     
+    float getDesiredVelocity(); 
+    void setDesiredVelocity(float velocity);
+
     Math::Vec2 getPosition() const;
     void setPosition(Math::Vec2 position);
 
@@ -41,7 +44,7 @@ public:
 
     Shape::Cluster& getShapeCluster();
     const Shape::Cluster& getShapeCluster() const;
-    void setShapeCluster(Shape::Cluster&);
+    void setShapeCluster(Shape::Cluster&&);
     void addNodeToCluster(Shape::ClusterNode);
 
     void addEffect(ActiveEffect effect);
@@ -69,6 +72,7 @@ private:
     Shape::Cluster _shape_cluster;
     
     Math::Vec2 _position = {};
+    float _desired_velocity = 0;
     float _rotation = 0;
     
     std::vector<ActiveEffect> _effects;

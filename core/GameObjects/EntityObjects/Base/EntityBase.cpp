@@ -44,6 +44,14 @@ void EntityBase::_internal_update(const GameContext& context) {
     update(context);
 }
 
+float EntityBase::getDesiredVelocity(){
+    return _desired_velocity;
+}
+
+void EntityBase::setDesiredVelocity(float velocity){
+    _desired_velocity = velocity;
+}
+
 Math::Vec2 EntityBase::getPosition() const { 
     return _position;
 }
@@ -72,8 +80,8 @@ const Shape::Cluster& EntityBase::getShapeCluster() const {
     return _shape_cluster; 
 }
 
-void EntityBase::setShapeCluster(Shape::Cluster& cluster){
-    _shape_cluster = std::move(cluster);
+void EntityBase::setShapeCluster(Shape::Cluster&& cluster){
+    _shape_cluster = cluster;
 }
 
 void EntityBase::addNodeToCluster(Shape::ClusterNode node){
@@ -116,7 +124,7 @@ void EntityBase::_effect_update(const float dt){
 
 void EntityBase::_move_update(const float dt){
     const MovingCue cue = _moving_cue_source->get();
-    const Math::Vec2 ds = _moving_model->process(cue, dt);
+    const Math::Vec2 ds = _moving_model->process(cue, _desired_velocity, dt);
 
     _position += ds;
 }

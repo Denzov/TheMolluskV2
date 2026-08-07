@@ -31,11 +31,10 @@ public:
         slot.entity = std::make_unique<T>(std::forward<Args>(args)...);
         slot.is_active = true;
         
-        auto handle = 
-            EntityHandle{
-                .index = index,
-                .generation = slot.generation
-            };
+        auto handle = EntityHandle{
+            .index = index,
+            .generation = slot.generation
+        };
 
         slot.entity->_internal_init(context, handle);
 

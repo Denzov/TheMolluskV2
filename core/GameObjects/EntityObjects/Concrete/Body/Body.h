@@ -45,7 +45,9 @@ public:
                 std::make_unique<PointVec2Source>(
                     Math::Vec2{0, 0}),
                 std::make_unique<PointVec2Source>(
-                    Math::Vec2{10000, 0})
+                    Math::Vec2{10000, 0}),
+                std::make_unique<PointVec2Source>(
+                    Math::Vec2{5000, (float)std::sqrt(3) / 2 * 10000})
             )
         ));
          

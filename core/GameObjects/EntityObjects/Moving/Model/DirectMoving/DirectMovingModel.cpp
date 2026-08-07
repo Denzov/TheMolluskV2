@@ -2,10 +2,11 @@
 
 #include <raymath.h>
 
-Math::Vec2 DirectMovingModel::process(MovingCue cue, const float dt) {
+Math::Vec2 DirectMovingModel::process(MovingCue cue, 
+        const float desired_velocity, const float dt) {
     if(!cue.is_moving) return {};
 
-    const float ds_len = dt * _property.speed;
+    const float ds_len = dt * desired_velocity;
 
     const Math::Vec2 ds = {cos(cue.angle), sin(cue.angle)};
     const Math::Vec2 scaled_ds = ds * ds_len;

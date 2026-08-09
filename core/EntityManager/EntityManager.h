@@ -44,6 +44,8 @@ public:
     void destroyEntity(EntityHandle handle);
 
     EntityBase* getEntity(EntityHandle handle) const;
+
+    size_t getSlotsSize();
     
     template<typename Func>
     void forEach(Func func)

@@ -11,6 +11,8 @@
 
 #include "EntityManager/EntityHandle.h"
 
+#include <raylib.h>
+
 class EntityManager;
 class EntitySystem;
 
@@ -31,7 +33,7 @@ public:
 
     virtual bool isAlive() const = 0;
     
-    float getDesiredVelocity(); 
+    float getDesiredVelocity() const ; 
     void setDesiredVelocity(float velocity);
 
     Math::Vec2 getPosition() const;

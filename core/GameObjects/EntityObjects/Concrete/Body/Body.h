@@ -31,23 +31,35 @@ public:
 
         getShapeCluster().add(Shape::ClusterNode{
             .shape = Shape::Circle{
-                .radius = 15
+                .radius = 30
             },
             .anchor = {0, 0}
         });
 
         setMovingCueSource(std::make_unique<PatrolMovingCueSource>(
-            200,
+            300,
             std::make_unique<EntityVec2Source>(
                 context,
                 getHandle()),
             make_unique_vector<IVec2Source>(
                 std::make_unique<PointVec2Source>(
-                    Math::Vec2{0, 0}),
+                    Math::Vec2{0, 10000}),
                 std::make_unique<PointVec2Source>(
-                    Math::Vec2{10000, 0}),
+                    Math::Vec2{0, 30000}),
                 std::make_unique<PointVec2Source>(
-                    Math::Vec2{5000, (float)std::sqrt(3) / 2 * 10000})
+                    Math::Vec2{10000, 30000}),
+                std::make_unique<PointVec2Source>(
+                    Math::Vec2{10000, 15000}),
+                std::make_unique<PointVec2Source>(
+                    Math::Vec2{20000, 15000}),
+                std::make_unique<PointVec2Source>(
+                    Math::Vec2{20000, 30000}),
+                std::make_unique<PointVec2Source>(
+                    Math::Vec2{30000, 30000}),
+                std::make_unique<PointVec2Source>(
+                    Math::Vec2{30000, 10000}),
+                std::make_unique<PointVec2Source>(
+                    Math::Vec2{15000, -10000})
             )
         ));
          
@@ -80,7 +92,8 @@ public:
         const Math::Vec2 rot_vec = {.x = std::cos(rot), .y = std::sin(rot)};
         const Math::Vec2 scale_rot_vec = rot_vec * 100;
         const Math::Vec2 b_add = {scale_rot_vec.x + pos.x, scale_rot_vec.y + pos.y};
-        DrawLineEx(toRaylib(pos), toRaylib(b_add), 5, WHITE);
+
+        DrawLineEx(toRaylib(pos), toRaylib(b_add), 10, RED);
     }
 
     void update(const GameContext& constext) override{

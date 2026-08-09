@@ -3,6 +3,7 @@
 #include "GameObjects/EntityObjects/Concrete/Body/Body.h"
 
 #include "GameObjects/Effect/DamageEffect/DamageEffect.h"
+#include <iostream>
 
 void GameSystem::Run(){
     init();
@@ -21,10 +22,16 @@ void GameSystem::draw()
 	BeginMode2D(_main_camera.getData());
 
 	ClearBackground(BLANK);
+	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{0, 10000}, BLUE);
+	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{0, 30000}, BLUE);
+	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{10000, 30000}, BLUE);
+	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{10000, 15000}, BLUE);
+	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{20000, 15000}, BLUE);
+	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{20000, 30000}, BLUE);
+	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{30000, 30000}, BLUE);
+	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{30000, 10000}, BLUE);
+	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{15000, -10000}, BLUE);
 
-	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, 0}, BLUE);
-	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{10000, 0}, BLUE);
-	Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{5000, (float)std::sqrt(3) / 2 * 10000}, BLUE);
 	// Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{-50000, 0}, BLUE);
 	// Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, 50000}, BLUE);
 	// Shape::draw(Shape::Circle{.radius=200}, Math::Vec2{0, -50000}, BLUE);
@@ -72,6 +79,10 @@ void GameSystem::process(){
 		}
 	);
 
+	if(IsKeyPressed(KEY_F)){
+		std::cout << _entmanager.getSlotsSize() << '\n';
+	}
+
 	if(IsMouseButtonDown(MOUSE_BUTTON_MIDDLE)){
 		Vector2 dtarget = GetMouseDelta();
 
@@ -93,7 +104,7 @@ void GameSystem::process(){
 
 		_entmanager.getEntity(handle)->setMovingModel(std::make_unique<FirstOrderMovingModel>(
             FirstOrderMovingProperty{
-                .T = 2.5f + (float)GetRandomValue(-2000, 2000) / 1000.f
+                .T = (1.1f + (float)GetRandomValue(-1000, 1000) / 1000.f) / 1.5f
             }
         ));
 

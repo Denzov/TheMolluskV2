@@ -44,7 +44,7 @@ void EntityBase::_internal_update(const GameContext& context) {
     update(context);
 }
 
-float EntityBase::getDesiredVelocity(){
+float EntityBase::getDesiredVelocity() const {
     return _desired_velocity;
 }
 

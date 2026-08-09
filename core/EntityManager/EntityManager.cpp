@@ -24,6 +24,11 @@ EntityBase* EntityManager::getEntity(EntityHandle handle) const {
     return nullptr;
 }
 
+size_t EntityManager::getSlotsSize(){
+    return _slots.size();
+}
+
+
 EntityManager::Slot::Slot() = default;
 EntityManager::Slot::~Slot() = default;
 EntityManager::Slot::Slot(Slot&& other) noexcept = default;

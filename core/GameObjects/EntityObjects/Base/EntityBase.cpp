@@ -56,7 +56,7 @@ const Shape::Cluster& EntityBase::getShapeCluster() const {
 }
 
 void EntityBase::setShapeCluster(Shape::Cluster&& cluster){
-    _shape_cluster = cluster;
+    _shape_cluster = std::move(cluster);
 }
 
 void EntityBase::addNodeToCluster(Shape::ClusterNode node){

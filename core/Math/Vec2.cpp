@@ -140,7 +140,7 @@ namespace Math{
         return std::sqrt(distance_sq(v1, v2));
     }
     float dot(Vec2 v1, Vec2 v2){
-        return v1.x * v2.y + v1.y * v2.y;
+        return v1.x * v2.x + v1.y * v2.y;
     }
 }
 

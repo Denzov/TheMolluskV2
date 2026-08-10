@@ -65,6 +65,8 @@ void GameSystem::simulate()
 	_entsystem.cleanup(_entmanager);
 }
 
+#include <Moving/Model/DirectMoving/DirectMovingModel.h>
+
 void GameSystem::process(){
 	_tick_system.process();
 	_main_window.process();
@@ -94,21 +96,51 @@ void GameSystem::process(){
 		);
 	}
 
+	if(IsKeyPressed(KEY_A)){
+		_entmanager.forEach([](EntityBase& e){
+			e.setMovingModel(
+				std::make_unique<DirectMovingModel>(
+					e.getPosition(),
+					DirectMovingPropery{
+						.velocity = (float)GetRandomValue(1000, 9000)
+					}
+				)
+			);
+		});
+	}
+
+	if(IsKeyPressed(KEY_S)){
+		_entmanager.forEach([](EntityBase& e){
+			e.setMovingModel(
+				std::make_unique<FirstOrderMovingModel>(
+					e.getPosition(),
+					FirstOrderMovingProperty
+					{
+						.desired_velocity = (float)GetRandomValue(1000, 9000),
+						.T = ((float)GetRandomValue(1, 3000) / 1000.f)
+					}
+				)	
+			);
+		});
+	}
+
 	if(IsKeyDown(KEY_SPACE)){
 		EntityHandle handle = _entmanager.spawnEntity<Body>(_context);
-		_entmanager.getEntity(handle)->setPosition({
-			(float)GetRandomValue(-20000, 20000) / 100.f + 
-				GetScreenToWorld2D(GetMousePosition(), _context.camera.getData()).x, 
-			(float)GetRandomValue(-20000, 20000) / 100.f + 
-				GetScreenToWorld2D(GetMousePosition(), _context.camera.getData()).y});
-
-		_entmanager.getEntity(handle)->setMovingModel(std::make_unique<FirstOrderMovingModel>(
-            FirstOrderMovingProperty{
-                .T = (1.1f + (float)GetRandomValue(-1000, 1000) / 1000.f) / 1.5f
-            }
-        ));
-
-		_entmanager.getEntity(handle)->
-			setDesiredVelocity((float)GetRandomValue(2000, 6000));
+		
+		_entmanager.getEntity(handle)->setMovingModel(
+			std::make_unique<FirstOrderMovingModel>(
+				Math::Vec2{
+					.x = (float)GetRandomValue(-20000, 20000) / 100.f + 
+						GetScreenToWorld2D(GetMousePosition(), _context.camera.getData()).x, 
+					.y = (float)GetRandomValue(-20000, 20000) / 100.f + 
+						GetScreenToWorld2D(GetMousePosition(), _context.camera.getData()).y
+				},
+				FirstOrderMovingProperty
+				{
+					.desired_velocity = (float)GetRandomValue(2000, 6000),
+					.T = (1.1f + (float)GetRandomValue(-1000, 1000) / 1000.f) / 1.5f
+				}
+			)
+		);
 	}
 }

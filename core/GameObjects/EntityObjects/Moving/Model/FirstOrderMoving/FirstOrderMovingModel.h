@@ -1,24 +1,27 @@
 #ifndef THEMOLLUSK_FIRST_ORDER_MOVING_MODEL_H
 #define THEMOLLUSK_FIRST_ORDER_MOVING_MODEL_H
 
-#include "../IMovingModel.h"
+#include "../MovingModelBase.h"
 
 struct FirstOrderMovingProperty{
+    const float desired_velocity;
     const float T;
 };
 
 class FirstOrderMovingModel :
-    public IMovingModel
+    public MovingModelBase
 {
 public:
-    FirstOrderMovingModel(FirstOrderMovingProperty property)
-        : _property(property) {}
+    FirstOrderMovingModel(
+        Math::Vec2 position,
+        FirstOrderMovingProperty property):
+            MovingModelBase(position),
+            _property(property) {}
 
-    Math::Vec2 process(MovingCue, 
-        const float desired_velocity, const float dt) override;
+    void process(MovingCue, const float dt) override;
 
 private:
-    FirstOrderMovingProperty _property;
+    FirstOrderMovingProperty _property = {};
     Math::Vec2 _velocity = {};
 };
 

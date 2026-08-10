@@ -3,7 +3,7 @@
 #include "Math/Constants.h"
 #include <cmath>
 
-float process(const RotationCue cue, 
+float InstaRotationModel::process(const RotationCue cue, 
               const Math::Vec2 base, 
               const float rot, const float dt)
 {

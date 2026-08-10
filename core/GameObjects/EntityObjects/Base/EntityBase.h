@@ -19,7 +19,7 @@ class EntitySystem;
 class GameContext;
 
 class IMovingCueSource;
-class IMovingModel;
+class MovingModelBase;
 
 class IRotationCueSource;
 class IRotationModel;
@@ -33,14 +33,8 @@ public:
 
     virtual bool isAlive() const = 0;
     
-    float getDesiredVelocity() const ; 
-    void setDesiredVelocity(float velocity);
-
     Math::Vec2 getPosition() const;
-    void setPosition(Math::Vec2 position);
-
     float getRotation() const;
-    void setRotation(const float rotation);
 
     EntityHandle getHandle() const;
 
@@ -52,7 +46,7 @@ public:
     void addEffect(ActiveEffect effect);
 
     void setMovingCueSource(std::unique_ptr<IMovingCueSource> source);
-    void setMovingModel(std::unique_ptr<IMovingModel> model);
+    void setMovingModel(std::unique_ptr<MovingModelBase> model);
 
     void setRotationCueSource(std::unique_ptr<IRotationCueSource> source);
     void setRotationModel(std::unique_ptr<IRotationModel> model);
@@ -73,13 +67,11 @@ private:
 private:
     Shape::Cluster _shape_cluster;
     
-    Math::Vec2 _position = {};
-    float _desired_velocity = 0;
     float _rotation = 0;
     
     std::vector<ActiveEffect> _effects;
         
-    std::unique_ptr<IMovingModel  > _moving_model;
+    std::unique_ptr<MovingModelBase  > _moving_model;
     std::unique_ptr<IRotationModel> _rotation_model;
 
     std::unique_ptr<IMovingCueSource  > _moving_cue_source;

@@ -1,14 +1,15 @@
 #ifndef THEMOLLUSK_BLANK_MOVING_MODEL_H
 #define THEMOLLUSK_BLANK_MOVING_MODEL_H
 
-#include "../IMovingModel.h"
+#include "../MovingModelBase.h"
 
 class BlankMovingModel :
-    public IMovingModel
+    public MovingModelBase
 {
 public:
-    Math::Vec2 process(MovingCue, 
-        const float desired_velocity, const float dt) override;
+    BlankMovingModel():
+        MovingModelBase({0, 0}) {}
+    void process(MovingCue cue, const float dt) override;
 };
 
 #endif // !THEMOLLUSK_BLANK_MOVING_MODEL_H

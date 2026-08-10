@@ -8,7 +8,7 @@
 #include "Rotation/RotationCue.h"
 #include "Moving/MovingCue.h"
 
-#include "Moving/Model/IMovingModel.h"
+#include "Moving/Model/MovingModelBase.h"
 #include "Moving/Source/IMovingCueSource.h"
 
 #include "Rotation/Model/IRotationModel.h"
@@ -44,28 +44,12 @@ void EntityBase::_internal_update(const GameContext& context) {
     update(context);
 }
 
-float EntityBase::getDesiredVelocity() const {
-    return _desired_velocity;
-}
-
-void EntityBase::setDesiredVelocity(float velocity){
-    _desired_velocity = velocity;
-}
-
 Math::Vec2 EntityBase::getPosition() const { 
-    return _position;
-}
-
-void EntityBase::setPosition(Math::Vec2 position) { 
-    _position = position; 
+    return _moving_model->getPosition();
 }
 
 float EntityBase::getRotation() const { 
     return _rotation; 
-}
-
-void EntityBase::setRotation(const float rotation) { 
-    _rotation = rotation; 
 }
 
 EntityHandle EntityBase::getHandle() const {
@@ -96,7 +80,7 @@ void EntityBase::setMovingCueSource(std::unique_ptr<IMovingCueSource> source) {
     _moving_cue_source = std::move(source);
 }
     
-void EntityBase::setMovingModel(std::unique_ptr<IMovingModel> model) {
+void EntityBase::setMovingModel(std::unique_ptr<MovingModelBase> model) {
     _moving_model = std::move(model);
 }
 
@@ -124,15 +108,13 @@ void EntityBase::_effect_update(const float dt){
 
 void EntityBase::_move_update(const float dt){
     const MovingCue cue = _moving_cue_source->get();
-    const Math::Vec2 ds = _moving_model->process(cue, _desired_velocity, dt);
-
-    _position += ds;
+    _moving_model->process(cue, dt);
 }
 
 void EntityBase::_rotation_update(const float dt){
     const RotationCue cue = _rotation_cue_source->get();
     const float drot = _rotation_model->process(
-        cue, _position, _rotation, dt);
+        cue, _moving_model->getPosition(), _rotation, dt);
 
     _rotation += drot;
 }

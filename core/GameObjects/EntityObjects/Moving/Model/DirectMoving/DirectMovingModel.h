@@ -1,14 +1,25 @@
 #ifndef THEMOLLUSK_DIRECT_MOVING_MODEL_H
 #define THEMOLLUSK_DIRECT_MOVING_MODEL_H
 
-#include "../IMovingModel.h"
+#include "../MovingModelBase.h"
+
+struct DirectMovingPropery{
+    const float velocity;
+};
 
 class DirectMovingModel :
-    public IMovingModel
+    public MovingModelBase
 {
 public:
-    Math::Vec2 process(MovingCue, 
-        const float desired_velocity, const float dt) override;
+    DirectMovingModel(
+        Math::Vec2 position, DirectMovingPropery property):
+            MovingModelBase(position),
+            _property(property) {}
+
+    void process(MovingCue cue, const float dt) override;
+
+private:
+    DirectMovingPropery _property;
 };
 
 #endif // !THEMOLLUSK_DIRECT_MOVING_MODEL_H

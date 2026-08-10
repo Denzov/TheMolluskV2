@@ -28,7 +28,7 @@ namespace Math{
         float length() const;
         float lengthSq() const;
 
-        float x_axis_angle() const;
+        float angle() const;
         
         Vec2 normalize() const;
     };
@@ -36,6 +36,7 @@ namespace Math{
     float distance_sq(Vec2 v1, Vec2 v2);
     float distance(Vec2 v1, Vec2 v2);
     float dot(Vec2 v1, Vec2 v2);
+    float angleFromTo(Vec2 from, Vec2 to);
 }
 Math::Vec2 operator/(float scalar, const Math::Vec2& vec);
 

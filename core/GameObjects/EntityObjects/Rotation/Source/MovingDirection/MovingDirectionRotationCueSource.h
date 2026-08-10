@@ -7,22 +7,26 @@
 
 class IVec2Source;
 
+struct MovingDirectionRotationCueProperty{
+    std::unique_ptr<IVec2Source> base;
+};
+
 class MovingDirectionRotationCueSource :
     public IRotationCueSource
 {
 public:
-    MovingDirectionRotationCueSource(std::unique_ptr<IVec2Source> base);
+    MovingDirectionRotationCueSource(
+        MovingDirectionRotationCueProperty property);
     
     ~MovingDirectionRotationCueSource();
 
     RotationCue get() const override;
 
 private:
-    mutable float _prev_angle = 0;
+    mutable float _angle = 0;
     mutable Math::Vec2 _prev_base = {};
-    mutable Math::Vec2 _prev_target = {};
     
-    std::unique_ptr<IVec2Source> _base;
+    MovingDirectionRotationCueProperty _property;
 };
 
 #endif // !THEMOLLUSK_MOVING_DIRECTION_AIM_SOURCE_H

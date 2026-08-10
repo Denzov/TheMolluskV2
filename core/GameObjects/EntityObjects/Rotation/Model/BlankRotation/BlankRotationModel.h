@@ -1,15 +1,14 @@
 #ifndef THEMOLLUSK_BLANK_ROTATION_MODEL_H
 #define THEMOLLUSK_BLANK_ROTATION_MODEL_H
 
-#include "../IRotationModel.h"
+#include "../RotationModelBase.h"
 
 class BlankRotationModel :
-    public IRotationModel
+    public RotationModelBase
 {
 public:
-    float process(const RotationCue cue, 
-                  const Math::Vec2 base, 
-                  const float rot, const float dt) override;
+    BlankRotationModel();
+    void process(RotationCue cue, const float dt) override;
 };
 
 #endif // !THEMOLLUSK_BLANK_ROTATION_MODEL_H

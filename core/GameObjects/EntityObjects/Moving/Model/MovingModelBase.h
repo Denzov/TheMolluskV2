@@ -12,7 +12,7 @@ public:
     MovingModelBase(Math::Vec2 position) :
         _position(position){}    
 
-    Math::Vec2 getPosition() { 
+    Math::Vec2 getPosition() const { 
         return _position; 
     }
 

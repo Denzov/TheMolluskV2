@@ -121,7 +121,7 @@ namespace Math{
         return std::sqrt(sq);
     }
 
-    float Vec2::x_axis_angle() const {
+    float Vec2::angle() const {
         return std::atan2(y, x);
     }
 
@@ -141,6 +141,9 @@ namespace Math{
     }
     float dot(Vec2 v1, Vec2 v2){
         return v1.x * v2.x + v1.y * v2.y;
+    }
+    float angleFromTo(Vec2 from, Vec2 to){
+        return (to - from).angle();
     }
 }
 

@@ -1,8 +1,6 @@
 #include "BlankRotationModel.h"
 
-float BlankRotationModel::process(const RotationCue cue, 
-              const Math::Vec2 base, 
-              const float rot, const float dt) 
-{
-    return 0;
-}
+BlankRotationModel::BlankRotationModel():
+    RotationModelBase(0) {}
+
+void BlankRotationModel::process(RotationCue cue, const float dt) {}

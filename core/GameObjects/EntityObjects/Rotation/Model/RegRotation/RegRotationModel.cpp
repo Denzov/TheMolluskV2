@@ -5,16 +5,16 @@
 #include <algorithm>
 #include <cmath>
 
-float RegRotationModel::process(const RotationCue cue, 
-              const Math::Vec2 base, 
-              const float rot, const float dt)
-{
-    const Math::Vec2 d = cue.target - base;
-    const float target_rot = std::atan2(d.y, d.x);
+RegRotationModel::RegRotationModel(
+    float rotation, RegRotationProperty property):
+        RotationModelBase(rotation),
+        _property(property){}
 
-    const float err_rot = std::remainder(target_rot - rot, 2.0f * Math::PI);
+void RegRotationModel::process(RotationCue cue, const float dt) {
+    const float err = std::remainder(
+        cue.direction_angle - _rotation, 2.0f * Math::PI);;
     
-    const float P_rot_product = err_rot * _property.kp_rot;
+    const float P_rot_product = err * _property.kp_rot;
     const float w_target = cue.is_rotation?
         std::clamp(
             P_rot_product,
@@ -31,5 +31,6 @@ float RegRotationModel::process(const RotationCue cue,
     _w = P_speed_product + I_speed_product;
     
     const float da = _w * dt;
-    return da;
+
+    _rotation += da;
 }

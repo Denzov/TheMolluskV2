@@ -3,11 +3,16 @@
 #include "GameObjects/Vec2Source/IVec2Source.h"
 
 Vec2RotationCueSource::Vec2RotationCueSource(
-        std::unique_ptr<IVec2Source> cue) :
-            _cue(std::move(cue)) {}
+        Vec2RotationCueProperty property) :
+            _property(std::move(property)) {}
 
 Vec2RotationCueSource::~Vec2RotationCueSource() = default;
 
 RotationCue Vec2RotationCueSource::get() const {
-    return {_cue->get(), true};
+    const float direction_angle = Math::angleFromTo(
+        _property.base->get(), 
+        _property.base->get()
+    );
+
+    return {direction_angle, true};
 }

@@ -22,7 +22,7 @@ class IMovingCueSource;
 class MovingModelBase;
 
 class IRotationCueSource;
-class IRotationModel;
+class RotationModelBase;
 
 class EntityBase {
     friend class EntityManager;
@@ -33,13 +33,11 @@ public:
 
     virtual bool isAlive() const = 0;
     
-    Math::Vec2 getPosition() const;
-    float getRotation() const;
-
     EntityHandle getHandle() const;
 
     Shape::Cluster& getShapeCluster();
     const Shape::Cluster& getShapeCluster() const;
+
     void setShapeCluster(Shape::Cluster&&);
     void addNodeToCluster(Shape::ClusterNode);
 
@@ -47,9 +45,11 @@ public:
 
     void setMovingCueSource(std::unique_ptr<IMovingCueSource> source);
     void setMovingModel(std::unique_ptr<MovingModelBase> model);
+    const MovingModelBase& getMovingModel() const;
 
     void setRotationCueSource(std::unique_ptr<IRotationCueSource> source);
-    void setRotationModel(std::unique_ptr<IRotationModel> model);
+    void setRotationModel(std::unique_ptr<RotationModelBase> model);
+    const RotationModelBase& getRotationModel() const;
 
 protected:
     virtual void draw() const = 0;
@@ -66,13 +66,11 @@ private:
 
 private:
     Shape::Cluster _shape_cluster;
-    
-    float _rotation = 0;
-    
+
     std::vector<ActiveEffect> _effects;
         
     std::unique_ptr<MovingModelBase  > _moving_model;
-    std::unique_ptr<IRotationModel> _rotation_model;
+    std::unique_ptr<RotationModelBase> _rotation_model;
 
     std::unique_ptr<IMovingCueSource  > _moving_cue_source;
     std::unique_ptr<IRotationCueSource> _rotation_cue_source;

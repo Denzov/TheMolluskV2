@@ -2,7 +2,7 @@
 #define THEMOLLUSK_MOVING_CUE_H
 
 struct MovingCue{
-    const float angle;
+    const float direction_angle;
     const bool is_moving;
 };
 

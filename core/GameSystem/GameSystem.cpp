@@ -100,7 +100,7 @@ void GameSystem::process(){
 		_entmanager.forEach([](EntityBase& e){
 			e.setMovingModel(
 				std::make_unique<DirectMovingModel>(
-					e.getPosition(),
+					e.getMovingModel().getPosition(),
 					DirectMovingPropery{
 						.velocity = (float)GetRandomValue(1000, 9000)
 					}
@@ -113,7 +113,7 @@ void GameSystem::process(){
 		_entmanager.forEach([](EntityBase& e){
 			e.setMovingModel(
 				std::make_unique<FirstOrderMovingModel>(
-					e.getPosition(),
+					e.getMovingModel().getPosition(),
 					FirstOrderMovingProperty
 					{
 						.desired_velocity = (float)GetRandomValue(1000, 9000),

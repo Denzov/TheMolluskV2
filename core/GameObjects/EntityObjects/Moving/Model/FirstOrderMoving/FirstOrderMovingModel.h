@@ -14,9 +14,7 @@ class FirstOrderMovingModel :
 public:
     FirstOrderMovingModel(
         Math::Vec2 position,
-        FirstOrderMovingProperty property):
-            MovingModelBase(position),
-            _property(property) {}
+        FirstOrderMovingProperty property);
 
     void process(MovingCue, const float dt) override;
 

@@ -12,9 +12,7 @@ class DirectMovingModel :
 {
 public:
     DirectMovingModel(
-        Math::Vec2 position, DirectMovingPropery property):
-            MovingModelBase(position),
-            _property(property) {}
+        Math::Vec2 position, DirectMovingPropery property);
 
     void process(MovingCue cue, const float dt) override;
 

@@ -4,7 +4,7 @@
 #include "Math/Vec2.h"
 
 struct RotationCue{
-    const Math::Vec2 target;
+    const float direction_angle;
     const bool is_rotation;
 };
 

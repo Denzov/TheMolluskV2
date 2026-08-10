@@ -64,11 +64,15 @@ public:
         ));
          
         setRotationCueSource(std::make_unique<MovingDirectionRotationCueSource>(
-            std::make_unique<EntityVec2Source>(
-                context,
-                getHandle())
+            MovingDirectionRotationCueProperty{
+                .base = std::make_unique<EntityVec2Source>(
+                    context,
+                    getHandle()
+                )
+            }   
         ));
         setRotationModel(std::make_unique<RegRotationModel>(
+            0, 
             RegRotationProperty{
                 .kp_rot = 10,
                 
@@ -81,14 +85,14 @@ public:
     }
 
     void draw() const override{
-        const Math::Vec2 pos = getPosition();
+        const Math::Vec2 pos = getMovingModel().getPosition();
         const Shape::Cluster& form = getShapeCluster();
 
         for(const auto& node : form.getNodes()){
             Shape::draw(node.shape, pos + node.anchor, RED);
         }
 
-        const float rot = getRotation();
+        const float rot = getRotationModel().getRotation();
         const Math::Vec2 rot_vec = {.x = std::cos(rot), .y = std::sin(rot)};
         const Math::Vec2 scale_rot_vec = rot_vec * 100;
         const Math::Vec2 b_add = {scale_rot_vec.x + pos.x, scale_rot_vec.y + pos.y};

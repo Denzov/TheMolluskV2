@@ -1,7 +1,7 @@
 #ifndef THEMOLLUSK_REG_ROTATION_MODEL_H
 #define THEMOLLUSK_REG_ROTATION_MODEL_H
 
-#include "../IRotationModel.h"
+#include "../RotationModelBase.h"
 
 struct RegRotationProperty {
     const float kp_rot;
@@ -13,15 +13,13 @@ struct RegRotationProperty {
 };
 
 class RegRotationModel :
-    public IRotationModel
+    public RotationModelBase
 {
 public:
-    RegRotationModel(RegRotationProperty property) :
-        _property(property){}
+    RegRotationModel(
+        float rotation, RegRotationProperty property);
 
-    float process(const RotationCue cue, 
-                  const Math::Vec2 base, 
-                  const float rot, const float dt) override;
+    void process(RotationCue cue, const float dt) override;
 
 private:
     RegRotationProperty _property;

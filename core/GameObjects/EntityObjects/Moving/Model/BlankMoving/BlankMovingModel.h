@@ -7,8 +7,7 @@ class BlankMovingModel :
     public MovingModelBase
 {
 public:
-    BlankMovingModel():
-        MovingModelBase({0, 0}) {}
+    BlankMovingModel();
     void process(MovingCue cue, const float dt) override;
 };
 

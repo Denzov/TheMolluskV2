@@ -7,17 +7,24 @@
 
 class IVec2Source;
 
+struct Vec2RotationCueProperty{
+    std::unique_ptr<IVec2Source> base;
+    std::unique_ptr<IVec2Source> target;
+};
+
 class Vec2RotationCueSource :
     public IRotationCueSource
 {
 public:
-    Vec2RotationCueSource(std::unique_ptr<IVec2Source> cue);
+    Vec2RotationCueSource(
+        Vec2RotationCueProperty property);
     
     ~Vec2RotationCueSource();
 
     RotationCue get() const override;
+    
 private:
-    std::unique_ptr<IVec2Source> _cue;
+    Vec2RotationCueProperty _property;
 };
 
 #endif // !THEMOLLUSK_VECTOR2_ROTATION_CUE_SOURCE_H

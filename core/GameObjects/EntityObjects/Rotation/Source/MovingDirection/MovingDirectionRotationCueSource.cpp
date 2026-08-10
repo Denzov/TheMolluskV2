@@ -1,27 +1,22 @@
 #include "MovingDirectionRotationCueSource.h"
 
 #include "GameObjects/Vec2Source/IVec2Source.h"
+#include "Math/Constants.h"
 
-#include <raymath.h>
-
-MovingDirectionRotationCueSource::MovingDirectionRotationCueSource
-    (std::unique_ptr<IVec2Source> base) :
-        _base(std::move(base)) {}
+MovingDirectionRotationCueSource::MovingDirectionRotationCueSource(
+    MovingDirectionRotationCueProperty property):
+            _property(std::move(property)) {}
 
 MovingDirectionRotationCueSource::~MovingDirectionRotationCueSource() = default;
 
 RotationCue MovingDirectionRotationCueSource::get() const {
-    const Math::Vec2 current = _base->get();
-    const Math::Vec2 velocity = current - _prev_base;
+    const Math::Vec2 diff = _property.base->get() - _prev_base;
+    _prev_base = _property.base->get();
 
-    const float velocity_sq_len = velocity.lengthSq();
+    const float diff_len_sq = diff.lengthSq();
 
-    if (velocity_sq_len < EPSILON) return {_prev_target, true};
+    if(diff_len_sq >= Math::EPSILON)
+        _angle = diff.angle();
 
-    const Math::Vec2 target = current + velocity;
-
-    _prev_base = current;
-    _prev_target = target;
-
-    return {target, true};
+    return {_angle, true};
 }

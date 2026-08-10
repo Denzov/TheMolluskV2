@@ -1,15 +1,14 @@
 #ifndef THEMOLLUSK_INSTA_ROTATION_MODEL_H
 #define THEMOLLUSK_INSTA_ROTATION_MODEL_H
 
-#include "../IRotationModel.h"
+#include "../RotationModelBase.h"
 
 class InstaRotationModel :
-    public IRotationModel
+    public RotationModelBase
 {
 public:
-    float process(const RotationCue cue, 
-                  const Math::Vec2 base, 
-                  const float rot, const float dt) override;
+    InstaRotationModel();
+    void process(RotationCue cue, const float dt) override;
 };
 
 #endif // !THEMOLLUSK_INSTA_ROTATION_MODEL_H

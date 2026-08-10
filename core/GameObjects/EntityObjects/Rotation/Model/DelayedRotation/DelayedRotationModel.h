@@ -1,22 +1,21 @@
 #ifndef THEMOLLUSK_DELAYED_ROTATION_MODEL_H
 #define THEMOLLUSK_DELAYED_ROTATION_MODEL_H
 
-#include "../IRotationModel.h"
+#include "../RotationModelBase.h"
 
 struct DelayedRotationProperty{
     const float w;
 };
 
 class DelayedRotationModel :
-    public IRotationModel
+    public RotationModelBase
 {
 public:
-    DelayedRotationModel(DelayedRotationProperty propery) : 
-        _property(propery){}
+    DelayedRotationModel(
+        float rotation, 
+        DelayedRotationProperty property);
 
-    float process(const RotationCue cue, 
-                  const Math::Vec2 base, 
-                  const float rot, const float dt) override;
+    void process(RotationCue cue, const float dt) override;
 
 private:
     const DelayedRotationProperty _property;

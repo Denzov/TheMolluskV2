@@ -37,7 +37,7 @@ MovingCue KeyboardMovingCueSource::get() const {
     
     const float angle = std::atan2(v.y, v.x);
 
-    return {.angle = angle, .is_moving = true};
+    return {.direction_angle = angle, .is_moving = true};
 }
 
 void KeyboardMovingCueSource::setLayout(Layout layout){

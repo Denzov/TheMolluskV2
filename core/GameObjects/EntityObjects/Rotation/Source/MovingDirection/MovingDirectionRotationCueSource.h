@@ -4,6 +4,7 @@
 #include "../IRotationCueSource.h"
 
 #include <memory>
+#include "Math/Vec2.h"
 
 class IVec2Source;
 

@@ -4,8 +4,6 @@
 #include "MCameraCommand.h"
 
 #include <queue>
-#include <raymath.h>
-
 
 struct MCameraExecutor{
     Camera2D& camera;

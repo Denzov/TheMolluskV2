@@ -1,5 +1,5 @@
-#ifndef THEMOLLUSK_I_MOVING_MODEL_H
-#define THEMOLLUSK_I_MOVING_MODEL_H
+#ifndef THEMOLLUSK_MOVING_MODEL_BASE_H
+#define THEMOLLUSK_MOVING_MODEL_BASE_H
 
 #include "Math/Vec2.h"
 #include "../MovingCue.h"
@@ -20,4 +20,4 @@ protected:
     Math::Vec2 _position;
 };
 
-#endif // !THEMOLLUSK_I_MOVING_MODEL_H
+#endif // !THEMOLLUSK_MOVING_MODEL_BASE_H

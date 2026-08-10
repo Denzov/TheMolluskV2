@@ -1,7 +1,6 @@
 #include "EntityBase.h"
 
 #include <raylib.h>
-#include <raymath.h>
 
 #include "GameSystem/GameContext.h"
 

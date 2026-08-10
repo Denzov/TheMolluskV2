@@ -1,17 +1,13 @@
 #ifndef THEMOLLUSK_I_ENTITY_H
 #define THEMOLLUSK_I_ENTITY_H
 
-#include <memory>
 #include <vector>
-
-#include "Math/Vec2.h"
+#include <memory>
 
 #include "GameObjects/Effect/ActiveEffect.h"
 #include "CollisionSystem/ShapeCluster.h"
 
 #include "EntityManager/EntityHandle.h"
-
-#include <raylib.h>
 
 class EntityManager;
 class EntitySystem;

@@ -11,6 +11,7 @@ check_ipo_supported(RESULT ipo_supported OUTPUT ipo_error)
 if(ipo_supported)
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE)
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO TRUE)
+    message("LTO SUPPORTED")
 else()
     message(WARNING "LTO ${ipo_error}")
 endif()
@@ -24,6 +25,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
 endif()
 
 add_executable(TheMollusk ${SOURCES})
+
 
 target_include_directories(TheMollusk PUBLIC core core/GameObjects/EntityObjects)
 

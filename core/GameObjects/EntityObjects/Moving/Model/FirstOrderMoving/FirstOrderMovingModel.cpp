@@ -9,12 +9,11 @@ FirstOrderMovingModel::FirstOrderMovingModel(
         _property(property) {}
 
 void FirstOrderMovingModel::process(MovingCue cue, const float dt) {
-    if(!cue.is_moving) return;
-
-    const Math::Vec2 target_velocity = {
-        std::cos(cue.direction_angle) * _property.desired_velocity,
-        std::sin(cue.direction_angle) * _property.desired_velocity
-    };
+    const Math::Vec2 target_velocity = (cue.is_moving)?
+        Math::Vec2{
+            std::cos(cue.direction_angle) * _property.desired_velocity,
+            std::sin(cue.direction_angle) * _property.desired_velocity} : 
+        Math::Vec2{0, 0};
 
     const float alpha = 1.f - std::exp(-dt / _property.T);
 

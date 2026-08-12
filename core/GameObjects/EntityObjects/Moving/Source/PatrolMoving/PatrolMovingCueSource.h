@@ -8,23 +8,26 @@
 
 class IVec2Source;
 
+struct PatrolWaypoint{
+    std::unique_ptr<IVec2Source> source;
+    float reach_radius;
+};
+
 class PatrolMovingCueSource : 
     public IMovingCueSource 
 {
 public:
     PatrolMovingCueSource(
-        const float reach_radius,
-        std::unique_ptr<IVec2Source> self_pos, 
-        std::vector<std::unique_ptr<IVec2Source>> waypoints);
+        std::unique_ptr<IVec2Source> base, 
+        std::vector<PatrolWaypoint> waypoints);
 
     ~PatrolMovingCueSource();
 
     MovingCue get() const override;
 
 private:
-    const float _reach_radius;
-    std::unique_ptr<IVec2Source> _self_pos;
-    std::vector<std::unique_ptr<IVec2Source>> _waypoints;
+    std::unique_ptr<IVec2Source> _base;
+    std::vector<PatrolWaypoint> _waypoints;
 
     mutable size_t _cur_point_idx = 0;
 };

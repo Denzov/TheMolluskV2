@@ -102,7 +102,8 @@ void EntityBase::_effect_update(const float dt){
     }
 
     std::erase_if(_effects, [](const ActiveEffect& effect){ 
-        return effect.elapsed > effect.duration; });
+        return effect.elapsed > effect.duration; 
+    });
 }
 
 void EntityBase::_move_update(const float dt){

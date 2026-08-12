@@ -4,12 +4,15 @@
 #include <cmath>
 #include <memory>
 
+#include "GameSystem/GameContext.h"
 #include "GameObjects/EntityObjects/Type/LivingEntity/LivingEntity.h"
 
 #include "GameObjects/Vec2Source/Entity/EntityVec2Source.h"
 #include "GameObjects/Vec2Source/Point/PointVec2Source.h"
 #include "GameObjects/Vec2Source/Mouse/MouseVec2Source.h"
 
+#include "Moving/Source/TargetMoving/TargetMovingCueSource.h"
+#include "Moving/Trajectory/Line/LineTrajectory.h"
 #include "Moving/Source/PatrolMoving/PatrolMovingCueSource.h"
 #include "Moving/Model/FirstOrderMoving/FirstOrderMovingModel.h"
 
@@ -36,30 +39,36 @@ public:
             .anchor = {0, 0}
         });
 
-        setMovingCueSource(std::make_unique<PatrolMovingCueSource>(
-            300,
-            std::make_unique<EntityVec2Source>(
-                context,
-                getHandle()),
-            make_unique_vector<IVec2Source>(
-                std::make_unique<PointVec2Source>(
-                    Math::Vec2{0, 10000}),
-                std::make_unique<PointVec2Source>(
-                    Math::Vec2{0, 30000}),
-                std::make_unique<PointVec2Source>(
-                    Math::Vec2{10000, 30000}),
-                std::make_unique<PointVec2Source>(
-                    Math::Vec2{10000, 15000}),
-                std::make_unique<PointVec2Source>(
-                    Math::Vec2{20000, 15000}),
-                std::make_unique<PointVec2Source>(
-                    Math::Vec2{20000, 30000}),
-                std::make_unique<PointVec2Source>(
-                    Math::Vec2{30000, 30000}),
-                std::make_unique<PointVec2Source>(
-                    Math::Vec2{30000, 10000}),
-                std::make_unique<PointVec2Source>(
-                    Math::Vec2{15000, -10000})
+        setMovingModel(
+			std::make_unique<FirstOrderMovingModel>(
+				// Math::Vec2{
+	            //     .x = (float)GetRandomValue(-20000, 20000) / 100.f + 
+		        //         GetScreenToWorld2D(GetMousePosition(), context.camera.getData()).x, 
+	            //     .y = (float)GetRandomValue(-20000, 20000) / 100.f + 
+		        //         GetScreenToWorld2D(GetMousePosition(), context.camera.getData()).y
+                // },
+                Math::Vec2{
+                    .x = 0, 
+                    .y = 0
+                },
+				FirstOrderMovingProperty
+				{
+					.desired_velocity = 3000,
+					.T = 0.6f
+				}
+			)
+		);
+        setMovingCueSource(std::make_unique<TargetMovingCueSource>(
+            std::make_unique<LineTrajectory>(
+                LineTrajectoryProperty{
+                    .reach_radius = 250,
+                    .base = std::make_unique<EntityVec2Source>(
+                        context,
+                        getHandle()
+                    ),
+                    .target = std::make_unique<PointVec2Source>(
+                        Math::Vec2{0, 10000})
+                }
             )
         ));
          

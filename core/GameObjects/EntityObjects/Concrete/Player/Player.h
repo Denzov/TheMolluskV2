@@ -1,7 +1,7 @@
 #ifndef THEMOLLUSK_PLAYER_H
 #define THEMOLLUSK_PLAYER_H
 
-#include "../../EntityType/LivingEntity.h"
+#include "Type/LivingEntity/LivingEntity.h"
 
 class Player :
     public LivingEntity

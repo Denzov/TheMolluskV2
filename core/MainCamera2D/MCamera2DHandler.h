@@ -11,7 +11,7 @@ public:
     void addCommand(MCameraCommand cmd);
     void process();
 
-    Camera2D getData();
+    Camera2D getData() const;
 
 private:
     Camera2D _camera{

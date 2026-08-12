@@ -14,6 +14,6 @@ void MCamera2DHandler::process(){
     processCamera(_camera, _commands);
 }
 
-Camera2D MCamera2DHandler::getData(){
+Camera2D MCamera2DHandler::getData() const {
     return _camera;
 }

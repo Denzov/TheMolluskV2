@@ -20,7 +20,7 @@ public:
     Math::Vec2 get() const override;
 
 private:
-    mutable Math::Vec2 _last_source_pos = {};
+    mutable Math::Vec2 _source_pos = {};
     const GameContext& _context;
     const EntityHandle _source;
 };

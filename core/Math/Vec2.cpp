@@ -12,23 +12,10 @@ namespace Math{
         };
     }
 
-    Vec2 Vec2::operator+(const float other) const {
-        return {
-            .x = x + other, 
-            .y = y + other
-        };
-    }
-
     Vec2& Vec2::operator+=(const Vec2& other) {
         x += other.x;
         y += other.y;
         return *this;
-    }
-
-    Vec2& Vec2::operator+=(const float other) {
-        x += other;
-        y += other;
-        return *this; 
     }
 
     Vec2 Vec2::operator-(const Vec2& other) const {
@@ -38,23 +25,10 @@ namespace Math{
         };
     }
 
-    Vec2 Vec2::operator-(const float other) const {
-        return {
-            .x = x - other, 
-            .y = y - other
-        };
-    }
-
     Vec2& Vec2::operator-=(const Vec2& other) {
         x -= other.x;
         y -= other.y;
         return *this;
-    }
-
-    Vec2& Vec2::operator-=(const float other) {
-        x -= other;
-        y -= other;
-        return *this; 
     }
 
     Vec2 Vec2::operator*(const Vec2& other) const {

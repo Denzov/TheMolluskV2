@@ -12,4 +12,13 @@ inline std::vector<std::unique_ptr<T>> make_unique_vector(Args&&... args) {
     return vec;
 }
 
+template<typename T, typename... Args>
+std::vector<T> make_vector(Args&&... args)
+{
+    std::vector<T> vec;
+    vec.reserve(sizeof...(Args));
+    (vec.emplace_back(std::forward<Args>(args)), ...);
+    return vec;
+}
+
 #endif // !THEMOLLUSK_COMMO_H

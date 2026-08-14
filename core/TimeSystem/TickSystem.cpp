@@ -5,7 +5,6 @@
 #include <algorithm>
 #include <stdint.h>
 
-
 bool TickSystem::consumeTick() {
     if(_accumulator < TICK_PERIOD){
         return false;

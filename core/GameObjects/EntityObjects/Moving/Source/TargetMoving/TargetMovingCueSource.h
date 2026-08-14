@@ -6,21 +6,21 @@
 #include <memory>
 
 class IVec2Source;
-class TrajectoryBase;
+class ITrajectory;
 
 class TargetMovingCueSource : 
     public IMovingCueSource
 {
 public:
     TargetMovingCueSource(
-        std::unique_ptr<TrajectoryBase> trajectory);
+        std::unique_ptr<ITrajectory> trajectory);
 
     ~TargetMovingCueSource();
 
     MovingCue get() const override;
 
 private:
-    std::unique_ptr<TrajectoryBase> _trajectory;
+    std::unique_ptr<ITrajectory> _trajectory;
 };
 
 #endif // !THEMOLLUSK_TARGET_MOVING_CUE_SOURCE_H

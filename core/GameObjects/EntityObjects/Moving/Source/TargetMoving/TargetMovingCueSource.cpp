@@ -1,9 +1,9 @@
 #include "TargetMovingCueSource.h"
 
-#include "../../Trajectory/Base/TrajectoryBase.h"
+#include "../../Trajectory/ITrajectory.h"
 
 TargetMovingCueSource::TargetMovingCueSource(
-        std::unique_ptr<TrajectoryBase> trajectory) : 
+        std::unique_ptr<ITrajectory> trajectory) : 
             _trajectory(std::move(trajectory)){}
 
 TargetMovingCueSource::~TargetMovingCueSource() = default;

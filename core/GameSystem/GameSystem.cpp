@@ -93,6 +93,54 @@ void GameSystem::process(){
 		);
 	}
 
+	if(IsKeyPressed(KEY_A)){
+		_entmanager.forEach([](EntityBase& e){
+			e.setMovingModel(
+				std::make_unique<DirectMovingModel>(
+					e.getMovingModel().getPosition(),
+					DirectMovingPropery{
+						.velocity = (float)GetRandomValue(1000, 9000)
+					}
+				)
+			);
+		});
+	}
+
+	if(IsKeyPressed(KEY_S)){
+		_entmanager.forEach([](EntityBase& e){
+			e.setMovingModel(
+				std::make_unique<FirstOrderMovingModel>(
+					e.getMovingModel().getPosition(),
+					FirstOrderMovingProperty
+					{
+						.desired_velocity = (float)GetRandomValue(4000, 7000),
+					.T = (float)GetRandomValue(1, 750) / 1000.f
+					}
+				)	
+			);
+		});
+	}
+
+	if(IsKeyDown(KEY_R)){
+		std::vector<EntityHandle> dead;
+
+		_entmanager.forEach([&](EntityBase& e){        
+			Math::Vec2 pos = e.getMovingModel().getPosition();
+
+			Vector2 mouse_rb = GetScreenToWorld2D(GetMousePosition(), _main_camera.getData());
+			Math::Vec2 mouse = {mouse_rb.x, mouse_rb.y};
+
+			if(Math::distance(pos, mouse) < 1000){
+				dead.push_back(e.getHandle());
+			}
+		});
+
+		for(auto d : dead)
+			_entmanager.destroyEntity(d);
+	}
+
+	static int cnt = 0;
+
 	if(IsKeyDown(KEY_SPACE)){
 		EntityHandle handle = _entmanager.spawnEntity<Body>(_context);
 		

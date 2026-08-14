@@ -12,7 +12,11 @@
 #include "GameObjects/Vec2Source/Mouse/MouseVec2Source.h"
 
 #include "Moving/Source/TargetMoving/TargetMovingCueSource.h"
-#include "Moving/Trajectory/Line/LineTrajectory.h"
+#include "Moving/Trajectory/Mere/MereTrajectory.h"
+#include "Moving/Trajectory/Function/LineFunction.h"
+#include "Moving/Trajectory/Function/CubicFunction.h"
+#include "Moving/Trajectory/Function/SquareFunction.h"
+#include "Moving/Trajectory/Tricky/TrickyTrajectory.h"
 #include "Moving/Source/PatrolMoving/PatrolMovingCueSource.h"
 #include "Moving/Model/FirstOrderMoving/FirstOrderMovingModel.h"
 
@@ -42,32 +46,40 @@ public:
         setMovingModel(
 			std::make_unique<FirstOrderMovingModel>(
 				// Math::Vec2{
-	            //     .x = (float)GetRandomValue(-20000, 20000) / 100.f + 
+	            //     .x = (float)GetRandomValue(-15000, 15000) / 100.f + 
 		        //         GetScreenToWorld2D(GetMousePosition(), context.camera.getData()).x, 
-	            //     .y = (float)GetRandomValue(-20000, 20000) / 100.f + 
+	            //     .y = (float)GetRandomValue(-15000, 15000) / 100.f +
 		        //         GetScreenToWorld2D(GetMousePosition(), context.camera.getData()).y
                 // },
                 Math::Vec2{
-                    .x = 0, 
-                    .y = 0
+                    .x = (float)GetRandomValue(-15000, 15000) / 100.f, 
+                    .y = (float)GetRandomValue(-15000, 15000) / 100.f
                 },
 				FirstOrderMovingProperty
 				{
-					.desired_velocity = 3000,
-					.T = 0.6f
+					.desired_velocity = (float)GetRandomValue(4000, 7000),
+					.T = (float)GetRandomValue(1, 2500) / 1000.f
 				}
 			)
 		);
         setMovingCueSource(std::make_unique<TargetMovingCueSource>(
-            std::make_unique<LineTrajectory>(
-                LineTrajectoryProperty{
-                    .reach_radius = 250,
+            std::make_unique<TrickyTrajectory>(
+                TrickyTrajectoryProperty{
+                    .reach_radius = 500,
+                    .skin_threshold_ratio = 0.5,
                     .base = std::make_unique<EntityVec2Source>(
                         context,
-                        getHandle()
-                    ),
-                    .target = std::make_unique<PointVec2Source>(
-                        Math::Vec2{0, 10000})
+                        getHandle()),
+                    .start = std::make_unique<PointVec2Source>(
+                        getMovingModel().getPosition()),
+                    .end = std::make_unique<MouseVec2Source>(
+                        context),
+                    .updater = std::make_unique<CubicFunction>(
+                        CubicFunctionProperty{
+                            .anchor = Math::Vec2{
+                                0.7, 10.f}
+                        }
+                    )
                 }
             )
         ));
@@ -75,10 +87,10 @@ public:
         setRotationCueSource(std::make_unique<MovingDirectionRotationCueSource>(
             MovingDirectionRotationCueProperty{
                 .base = std::make_unique<EntityVec2Source>(
-                    context,
+                    context, 
                     getHandle()
                 )
-            }   
+            }
         ));
         setRotationModel(std::make_unique<RegRotationModel>(
             0, 
@@ -103,10 +115,10 @@ public:
 
         const float rot = getRotationModel().getRotation();
         const Math::Vec2 rot_vec = {.x = std::cos(rot), .y = std::sin(rot)};
-        const Math::Vec2 scale_rot_vec = rot_vec * 100;
+        const Math::Vec2 scale_rot_vec = rot_vec * 130;
         const Math::Vec2 b_add = {scale_rot_vec.x + pos.x, scale_rot_vec.y + pos.y};
 
-        DrawLineEx(toRaylib(pos), toRaylib(b_add), 10, RED);
+        DrawLineEx(toRaylib(pos), toRaylib(b_add), 20, RED);
     }
 
     void update(const GameContext& constext) override{

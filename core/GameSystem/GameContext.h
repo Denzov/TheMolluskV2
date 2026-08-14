@@ -1,22 +1,19 @@
 #ifndef THEMOLLUSK_GAME_CONTEXT_H
 #define THEMOLLUSK_GAME_CONTEXT_H
 
+#include "MainWindow/MWindowHandler.h"
 #include "MainCamera2D/MCamera2DHandler.h"
 #include "TimeSystem/TickSystem.h"
 #include "EntityManager/EntityManager.h"
 
-struct GameContext{
-    MCamera2DHandler& camera;
-    TickSystem& tick;
-    EntityManager& entmanager;
+#include "FrameData.h"
 
-    GameContext(
-        MCamera2DHandler& camera, 
-        TickSystem& tick,
-        EntityManager& entmanager): 
-            camera(camera), 
-            tick(tick),
-            entmanager(entmanager){}
+struct GameContext{
+	MWindowHandler window;
+    MCamera2DHandler camera;
+    TickSystem tick;
+    EntityManager entmanager;
+    FrameData frame_data;
 };
 
 #endif // !THEMOLLUSK_GAME_CONTEXT_H

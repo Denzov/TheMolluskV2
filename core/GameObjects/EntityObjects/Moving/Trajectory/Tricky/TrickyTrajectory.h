@@ -38,11 +38,14 @@ private:
 
     static constexpr float _normalized_inc = 0.02;
 
-    float _t = 0;
+    
+    const Math::Vec2 _base_offset;
     
     Math::Vec2 _target = {};
     Math::Vec2 _end_snapshot = {};
     
+    float _t = 0;
+
     float _world_scale = 0;
     float _rot_sin_product = 0;
     float _rot_cos_product = 0;

@@ -8,6 +8,7 @@
 
 TrickyTrajectory::TrickyTrajectory(
     TrickyTrajectoryProperty property):
+        _base_offset(property.base->get()),
         _target(property.base->get()),
         _property(std::move(property)){}
 
@@ -57,7 +58,7 @@ void TrickyTrajectory::consume(){
         };
 
         const Math::Vec2 world_point = 
-            rot * _world_scale + start_pos;
+            rot * _world_scale + _base_offset;
 
         _target = world_point;
     }

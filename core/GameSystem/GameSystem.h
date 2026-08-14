@@ -1,13 +1,7 @@
 #ifndef THEMOLLUSK_APP_H
 #define THEMOLLUSK_APP_H
 
-#include "EntityManager/EntityManager.h"
 #include "EntitySystem/EntitySystem.h"
-
-#include "TimeSystem/TickSystem.h"
-
-#include "MainWindow/MWindowHandler.h"
-#include "MainCamera2D/MCamera2DHandler.h"
 
 #include "GameContext.h"
 
@@ -24,18 +18,10 @@ private:
 	void simulate();	
 
 private:
-	TickSystem _tick_system;
-
-	MWindowHandler _main_window;
-	MCamera2DHandler _main_camera;
-
-	EntityManager _entmanager;
 	EntitySystem _entsystem;
 
-	GameContext _context{
-		_main_camera, 
-		_tick_system,
-		_entmanager};
+	GameContext _context;
+
 };
 
 #endif // !THEMOLLUSK_APP_H

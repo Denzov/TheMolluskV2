@@ -77,7 +77,7 @@ public:
                     .updater = std::make_unique<CubicFunction>(
                         CubicFunctionProperty{
                             .anchor = Math::Vec2{
-                                0.7, 10.f}
+                                0.5f, 5.f}
                         }
                     )
                 }

@@ -24,7 +24,7 @@ public:
     }
 
 private:
-    CubicFunctionProperty _property;
+    const CubicFunctionProperty _property;
 };
 
 #endif // !THEMOLLUSK_CUBIC_FUNCTION_H

@@ -16,9 +16,12 @@
 #include "Moving/Trajectory/Function/LineFunction.h"
 #include "Moving/Trajectory/Function/CubicFunction.h"
 #include "Moving/Trajectory/Function/SquareFunction.h"
+#include "Moving/Trajectory/Function/LoopFunction.h"
 #include "Moving/Trajectory/Tricky/TrickyTrajectory.h"
 #include "Moving/Source/PatrolMoving/PatrolMovingCueSource.h"
 #include "Moving/Model/FirstOrderMoving/FirstOrderMovingModel.h"
+#include "Moving/Model/DirectMoving/DirectMovingModel.h"
+
 
 #include "Rotation/Source/MovingDirection/MovingDirectionRotationCueSource.h"
 #include "Rotation/Source/Vec2Rotation/Vec2RotationCueSource.h"
@@ -44,24 +47,25 @@ public:
         });
 
         setMovingModel(
-			std::make_unique<FirstOrderMovingModel>(
-				// Math::Vec2{
-	            //     .x = (float)GetRandomValue(-15000, 15000) / 100.f + 
-		        //         GetScreenToWorld2D(GetMousePosition(), context.camera.getData()).x, 
-	            //     .y = (float)GetRandomValue(-15000, 15000) / 100.f +
-		        //         GetScreenToWorld2D(GetMousePosition(), context.camera.getData()).y
+            std::make_unique<FirstOrderMovingModel>(
+                // Math::Vec2{
+                //     .x = (float)GetRandomValue(-15000, 15000) / 100.f + 
+                //         GetScreenToWorld2D(GetMousePosition(), context.camera.getData()).x, 
+                //     .y = (float)GetRandomValue(-15000, 15000) / 100.f +
+                //         GetScreenToWorld2D(GetMousePosition(), context.camera.getData()).y
                 // },
                 Math::Vec2{
                     .x = (float)GetRandomValue(-15000, 15000) / 100.f, 
                     .y = (float)GetRandomValue(-15000, 15000) / 100.f
                 },
-				FirstOrderMovingProperty
-				{
-					.desired_velocity = (float)GetRandomValue(4000, 7000),
-					.T = (float)GetRandomValue(1, 2500) / 1000.f
-				}
-			)
-		);
+                FirstOrderMovingProperty
+                {
+                    .desired_velocity = (float)GetRandomValue(2000, 20000),
+                    .T = (float)GetRandomValue(3000, 6000) / 1000.f
+                }
+            )
+        );
+
         setMovingCueSource(std::make_unique<TargetMovingCueSource>(
             std::make_unique<TrickyTrajectory>(
                 TrickyTrajectoryProperty{
@@ -74,11 +78,7 @@ public:
                         getMovingModel().getPosition()),
                     .end = std::make_unique<MouseVec2Source>(
                         context),
-                    .updater = std::make_unique<CubicFunction>(
-                        CubicFunctionProperty{
-                            .anchor = Math::Vec2{
-                                0.5f, 5.f}
-                        }
+                    .updater = std::make_unique<LineFunction>(
                     )
                 }
             )

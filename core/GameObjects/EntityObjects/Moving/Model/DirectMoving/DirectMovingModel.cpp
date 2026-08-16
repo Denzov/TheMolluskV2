@@ -3,7 +3,7 @@
 #include <cmath>
 
 DirectMovingModel::DirectMovingModel(
-    Math::Vec2 position, DirectMovingPropery property):
+    Math::Vec2 position, DirectMovingProperty property):
         MovingModelBase(position),
         _property(property) {}
 

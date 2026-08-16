@@ -22,7 +22,7 @@ public:
     }
 
 private:
-    SquareFunctionProperty _property;
+    const SquareFunctionProperty _property;
 };
 
 #endif // !THEMOLLUSK_SQUARE_FUNCTION_H

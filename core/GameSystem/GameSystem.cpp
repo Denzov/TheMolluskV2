@@ -22,11 +22,16 @@ void GameSystem::draw()
 	BeginMode2D(_context.camera.getData());
 
 	ClearBackground(BLANK);
+
 	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{0, 0}, BLUE);
+	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{0, 10000}, BLUE);
 
 	_entsystem.draw(_context.entmanager);
 
-	EndMode2D();
+	EndMode2D();	
+
+	DrawFPS(10, 100);
+
 	EndDrawing();
 }
 
@@ -104,8 +109,6 @@ void GameSystem::process(){
 		for(auto d : dead)
 			_context.entmanager.destroyEntity(d);
 	}
-
-	static int cnt = 0;
 
 	if(IsKeyDown(KEY_SPACE)){
 		EntityHandle handle = _context.entmanager.spawnEntity<Body>(_context);

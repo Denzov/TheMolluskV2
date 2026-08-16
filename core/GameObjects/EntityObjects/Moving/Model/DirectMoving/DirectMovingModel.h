@@ -3,7 +3,7 @@
 
 #include "../MovingModelBase.h"
 
-struct DirectMovingPropery{
+struct DirectMovingProperty{
     const float velocity;
 };
 
@@ -12,12 +12,12 @@ class DirectMovingModel :
 {
 public:
     DirectMovingModel(
-        Math::Vec2 position, DirectMovingPropery property);
+        Math::Vec2 position, DirectMovingProperty property);
 
     void process(MovingCue cue, const float dt) override;
 
 private:
-    DirectMovingPropery _property;
+    DirectMovingProperty _property;
 };
 
 #endif // !THEMOLLUSK_DIRECT_MOVING_MODEL_H

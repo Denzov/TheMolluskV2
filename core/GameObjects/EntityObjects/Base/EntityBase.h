@@ -31,11 +31,11 @@ public:
     
     EntityHandle getHandle() const;
 
-    Shape::Cluster& getShapeCluster();
-    const Shape::Cluster& getShapeCluster() const;
+    Shape::Cluster& getCollider();
+    const Shape::Cluster& getCollider() const;
 
-    void setShapeCluster(Shape::Cluster&&);
-    void addNodeToCluster(Shape::ClusterNode);
+    void setCollider(Shape::Cluster&&);
+    void addNodeToCollider(Shape::ClusterNode);
 
     void addEffect(ActiveEffect effect);
 
@@ -61,7 +61,7 @@ private:
     void _rotation_update(const float dt);
 
 private:
-    Shape::Cluster _shape_cluster;
+    Shape::Cluster _collider;
 
     std::vector<ActiveEffect> _effects;
         

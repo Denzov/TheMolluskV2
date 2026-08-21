@@ -22,12 +22,13 @@ namespace Shape{
     ClusterNode Cluster::_get_rebuilt_bounds(){
         float left   =  std::numeric_limits<float>::infinity();
         float top    =  std::numeric_limits<float>::infinity();
-        float right  = -std::numeric_limits<float>::infinity();;
-        float bottom = -std::numeric_limits<float>::infinity();;
+        float right  = -std::numeric_limits<float>::infinity();
+        float bottom = -std::numeric_limits<float>::infinity();
 
         for(const auto& node : _nodes){
             const Shape::AABB bounds = getShapeBounds(node.shape);
             const Math::Vec2 pos = node.anchor;
+            
             left   = std::min(left, pos.x - bounds.width / 2);
             top    = std::min(top, pos.y - bounds.height / 2);
             right  = std::max(right, pos.x + bounds.width / 2);

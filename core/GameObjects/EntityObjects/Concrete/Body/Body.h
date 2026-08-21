@@ -11,14 +11,12 @@
 #include "GameObjects/Vec2Source/Point/PointVec2Source.h"
 #include "GameObjects/Vec2Source/Mouse/MouseVec2Source.h"
 
-#include "Moving/Source/TargetMoving/TargetMovingCueSource.h"
-#include "Moving/Trajectory/Mere/MereTrajectory.h"
+#include "Moving/Source/TargetMoving/TrickyTargetMovingCueSource.h"
 #include "Moving/Trajectory/Function/LineFunction.h"
 #include "Moving/Trajectory/Function/CubicFunction.h"
 #include "Moving/Trajectory/Function/SquareFunction.h"
 #include "Moving/Trajectory/Function/LoopFunction.h"
-#include "Moving/Trajectory/Tricky/TrickyTrajectory.h"
-#include "Moving/Source/PatrolMoving/PatrolMovingCueSource.h"
+#include "Moving/Source/PatrolMoving/TrickyPatrolMovingCueSource.h"
 #include "Moving/Model/FirstOrderMoving/FirstOrderMovingModel.h"
 #include "Moving/Model/DirectMoving/DirectMovingModel.h"
 
@@ -35,11 +33,11 @@ class Body :
     public LivingEntity
 {
 public:
-    void init(const GameContext& context) override{
+    void init(const GameContext& context) override {
         setMaxHp(100);
         takeHp(100);
 
-        getShapeCluster().add(Shape::ClusterNode{
+        getCollider().add(Shape::ClusterNode{
             .shape = Shape::Circle{
                 .radius = 30
             },
@@ -48,40 +46,52 @@ public:
 
         setMovingModel(
             std::make_unique<FirstOrderMovingModel>(
-                // Math::Vec2{
-                //     .x = (float)GetRandomValue(-15000, 15000) / 100.f + 
-                //         GetScreenToWorld2D(GetMousePosition(), context.camera.getData()).x, 
-                //     .y = (float)GetRandomValue(-15000, 15000) / 100.f +
-                //         GetScreenToWorld2D(GetMousePosition(), context.camera.getData()).y
-                // },
                 Math::Vec2{
                     .x = (float)GetRandomValue(-15000, 15000) / 100.f, 
                     .y = (float)GetRandomValue(-15000, 15000) / 100.f
                 },
                 FirstOrderMovingProperty
                 {
-                    .desired_velocity = (float)GetRandomValue(2000, 20000),
-                    .T = (float)GetRandomValue(3000, 6000) / 1000.f
+                    .desired_velocity = (float)GetRandomValue(3000, 5000),
+                    .T = (float)GetRandomValue(200, 400) / 1000.f
                 }
             )
         );
 
-        setMovingCueSource(std::make_unique<TargetMovingCueSource>(
-            std::make_unique<TrickyTrajectory>(
-                TrickyTrajectoryProperty{
-                    .reach_radius = 500,
-                    .skin_threshold_ratio = 0.5,
-                    .base = std::make_unique<EntityVec2Source>(
-                        context,
-                        getHandle()),
-                    .start = std::make_unique<PointVec2Source>(
-                        getMovingModel().getPosition()),
-                    .end = std::make_unique<MouseVec2Source>(
-                        context),
-                    .updater = std::make_unique<LineFunction>(
-                    )
-                }
-            )
+        setMovingCueSource(std::make_unique<TrickyPatrolMovingCueSource>(
+            TrickyPatrolMovingCueProperty{
+                .waypoints = make_vector<PatrolWaypoint>(
+                    PatrolWaypoint{
+                        .source = std::make_unique<PointVec2Source>(
+                            Math::Vec2{0, 0}),
+                        .reach_radius = 1000
+                    },
+                    PatrolWaypoint{
+                        .source = std::make_unique<PointVec2Source>(
+                            Math::Vec2{5000, std::sqrt(3.f) / 2 * 10000.f}),
+                        .reach_radius = 1000
+                    },
+                    PatrolWaypoint{
+                        .source = std::make_unique<PointVec2Source>(
+                            Math::Vec2{10000, 0}),
+                        .reach_radius = 1000
+                    }
+                ),
+                .trajectory = Trajectory(
+                    TrajectoryProperty{
+                        .reach_radius = 300.f,
+                        .skin_threshold_ratio = 0.5f,
+                        .base = std::make_unique<EntityVec2Source>(
+                            context,
+                            getHandle()),
+                        .updater = std::make_unique<SquareFunction>(
+                            SquareFunctionProperty{
+                                .amplitude = -0.5f
+                            }
+                        )
+                    }
+                )
+            }   
         ));
          
         setRotationCueSource(std::make_unique<MovingDirectionRotationCueSource>(
@@ -107,7 +117,7 @@ public:
 
     void draw() const override{
         const Math::Vec2 pos = getMovingModel().getPosition();
-        const Shape::Cluster& form = getShapeCluster();
+        const Shape::Cluster& form = getCollider();
 
         for(const auto& node : form.getNodes()){
             Shape::draw(node.shape, pos + node.anchor, RED);

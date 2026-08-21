@@ -47,20 +47,20 @@ EntityHandle EntityBase::getHandle() const {
     return _handle;
 }
 
-Shape::Cluster& EntityBase::getShapeCluster(){ 
-    return _shape_cluster; 
+Shape::Cluster& EntityBase::getCollider(){ 
+    return _collider; 
 }
 
-const Shape::Cluster& EntityBase::getShapeCluster() const { 
-    return _shape_cluster; 
+const Shape::Cluster& EntityBase::getCollider() const { 
+    return _collider; 
 }
 
-void EntityBase::setShapeCluster(Shape::Cluster&& cluster){
-    _shape_cluster = std::move(cluster);
+void EntityBase::setCollider(Shape::Cluster&& cluster){
+    _collider = std::move(cluster);
 }
 
-void EntityBase::addNodeToCluster(Shape::ClusterNode node){
-    _shape_cluster.add(node);
+void EntityBase::addNodeToCollider(Shape::ClusterNode node){
+    _collider.add(node);
 }
 
 void EntityBase::addEffect(ActiveEffect effect) {

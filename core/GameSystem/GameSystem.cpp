@@ -24,7 +24,8 @@ void GameSystem::draw()
 	ClearBackground(BLANK);
 
 	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{0, 0}, BLUE);
-	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{0, 10000}, BLUE);
+	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{5000, std::sqrt(3.f) / 2 * 10000}, BLUE);
+	Shape::draw(Shape::Circle{.radius=300}, Math::Vec2{10000, 0}, BLUE);
 
 	_entsystem.draw(_context.entmanager);
 

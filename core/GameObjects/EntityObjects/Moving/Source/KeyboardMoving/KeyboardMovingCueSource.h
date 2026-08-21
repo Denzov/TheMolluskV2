@@ -15,10 +15,9 @@ public:
     };
 
     KeyboardMovingCueSource();
+    KeyboardMovingCueSource(Layout layout);
     
     MovingCue get() const override;
-
-    void setLayout(Layout layout);
 
 private:
     Layout _layout;

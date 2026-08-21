@@ -16,8 +16,8 @@ public:
 
     Math::Vec2 calculate(const float t) {
         return {
-            t+5.f*t*(1.f-t)*(1.f-2.f * t),
-            20.f*t*(1.f-t)*(0.25f-t)*(0.75f-t)
+            t+5.f*t*(t-1.f)*(2.f*t-1.f) * _property.anchor.x,
+            4.f*t*(t-1.f) * _property.anchor.y
         };
     }
 
